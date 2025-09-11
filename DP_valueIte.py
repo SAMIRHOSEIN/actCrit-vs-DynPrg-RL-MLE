@@ -52,9 +52,14 @@ def finite_horizon_value_iteration(P, R, gamma, H):
       V_fun: (H+1, S)   Value function (at each time and state)
       Policy: (H, S)    Policy: best action at each time and state
     """
+
+    # I need this because later on when I want to verify my code I need to get number of action and state inside the function
+    na = P.shape[0]
+    ncs = P.shape[1]
+
     # Initialize value and policy arrays
-    V_fun = np.zeros((H+1, S), dtype=np.float64)  # H+1 because we need to store values from 0 to H
-    Policy = np.zeros((H, S), dtype=np.int64)
+    V_fun = np.zeros((H+1, ncs), dtype=np.float64)  # H+1 because we need to store values from 0 to H
+    Policy = np.zeros((H, ncs), dtype=np.int64)
 
     # Loop over each time step, backwards (last to first)
     for t in range(H-1, -1, -1): # starts at last time step(H-1, e.g. 199 if H=200) and stop before reaching -1 so include 0 and counts backward by 1
@@ -79,10 +84,12 @@ def finite_horizon_value_iteration(P, R, gamma, H):
             Policy[t, s] = best_action
     return V_fun, Policy
 
+# %%
+# Run DP value iteration
 best_value, best_policy = finite_horizon_value_iteration(P, R, gamma, ELE_DP_HORIZON)
 
 # %%
-#--------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------
 # 3) Visualize DP results (values & policy over time)
 fig, ax = plt.subplots(1,1, figsize=(7,4))
 for s in range(ncs):
@@ -103,4 +110,22 @@ ax.set_ylabel('Action ID')
 ax.legend()
 plt.grid()
 plt.show()
+# %%
+#--------------------------------------------------------------------------------------------------------------------------------------------------------
+# Verification of my code with simple example
+if __name__ == "__main__":
+    # 2 states, 2 actions
+    P_toy = np.zeros((2, 2, 2))
+    P_toy[0] = [[0.8, 0.2], [0.0, 1.0]]
+    P_toy[1] = [[0.5, 0.5], [0.2, 0.8]]
+    R_toy = np.array([[5, 1], [10, -1]])
+    gamma = 0.9
+    H = 2
+
+    V, Pi = finite_horizon_value_iteration(P_toy, R_toy, gamma, H)
+
+    print("Compare the following results with hand-calculated values:")
+    print("Test V:\n", V)
+    print("Test Policy:\n", Pi)
+
 # %%
