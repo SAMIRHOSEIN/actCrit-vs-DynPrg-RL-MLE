@@ -112,7 +112,8 @@ plt.grid()
 plt.show()
 # %%
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
-# Verification of my code with simple example
+# 4)Verification of my code with simple example
+print("Verification of my code with simple example:")
 if __name__ == "__main__":
     # 2 states, 2 actions
     P_toy = np.zeros((2, 2, 2))
