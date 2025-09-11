@@ -79,7 +79,28 @@ def finite_horizon_value_iteration(P, R, gamma, H):
             Policy[t, s] = best_action
     return V_fun, Policy
 
-V, Pi = finite_horizon_value_iteration(P, R, gamma, ELE_DP_HORIZON)
+best_value, best_policy = finite_horizon_value_iteration(P, R, gamma, ELE_DP_HORIZON)
 
 # %%
+#--------------------------------------------------------------------------------------------------------------------------------------------------------
+# 3) Visualize DP results (values & policy over time)
+fig, ax = plt.subplots(1,1, figsize=(7,4))
+for s in range(ncs):
+    ax.plot(best_value[:, s], label=f'CS{s+1}')
+ax.set_title('DP Value function(end -> start)')
+ax.set_xlabel('Time')
+ax.set_ylabel('Value')
+ax.legend()
+plt.grid()
+plt.show()
 
+fig, ax = plt.subplots(1,1, figsize=(7,4))
+for s in range(ncs):
+    ax.plot(best_policy[:, s], label=f'CS{s+1}')
+ax.set_title('DP Greedy Policy(end -> start)')
+ax.set_xlabel('Time')
+ax.set_ylabel('Action ID')
+ax.legend()
+plt.grid()
+plt.show()
+# %%
