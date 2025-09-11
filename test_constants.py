@@ -116,3 +116,21 @@ ELE_ACTOR_RANDOM_STATE = 'off'
 
 ELE_ACTOR_EXPLORE_TYPE = ExplorationType.RANDOM
 # endregion ==============================================================
+
+
+
+# region: constants for DP_valueIte.py ==================================
+ELE_DP_HORIZON = 75
+# ELE_DP_N_EPISODES = 1 
+ELE_DP_MAX_COST = unit_costs.max()
+
+ELE_DP_RESET_PROB = np.array([1.0, 0.0, 0.0, 0.0, 0.0])
+ELE_DP_DIRICHLET_ALPHA = None
+ELE_DP_RANDOM_STATE = 'off'
+# ELE_DP_RESET_PROB = None
+# ELE_DP_DIRICHLET_ALPHA = 0.5*np.ones(NCS)
+# ELE_DP_RANDOM_STATE = 24
+
+# ELE_DP_EXPLORE_TYPE = ExplorationType.RANDOM
+# endregion ==============================================================
+
