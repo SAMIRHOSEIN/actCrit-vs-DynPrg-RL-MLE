@@ -73,3 +73,6 @@
 [0912/121653.920:ERROR:crashpad_client_win.cc(869)] not connected
 [0912/121653.997:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
 [0912/121655.604:ERROR:crashpad_client_win.cc(869)] not connected
+[0912/133928.767:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[0912/133932.174:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[0912/133937.447:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)

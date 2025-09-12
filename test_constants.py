@@ -124,14 +124,14 @@ ELE_DP_ACTOR_VERSION = '20250910-204144' # my model with 75 horizon
 
 ELE_DP_HORIZON = 75
 ELE_DP_N_EPISODES = 1 # In DP we always consider 1 episode
-ELE_DP_MAX_COST = unit_costs.max()
+ELE_DP_MAX_COST = 1 
 
 
 ELE_DP_INC_STEP = True
-if ELE_DP_INC_STEP:
-    ELE_DP_INPUT_DIM = NCS + 1
-else:
-    ELE_DP_INPUT_DIM = NCS
+# if ELE_DP_INC_STEP:
+#     ELE_DP_INPUT_DIM = NCS + 1
+# else:
+#     ELE_DP_INPUT_DIM = NCS
 
 
 ELE_DP_RESET_PROB = np.array([1.0, 0.0, 0.0, 0.0, 0.0])

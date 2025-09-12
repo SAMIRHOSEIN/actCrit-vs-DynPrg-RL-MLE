@@ -195,7 +195,6 @@ def action_policy_dp(obs, t_idx, DPtable, ncs):
     # Greedy DP action
     return int(DPtable[t_idx, s])
 
-
 if __name__ == '__main__':
     import importlib
     import test_constants
@@ -225,7 +224,6 @@ if __name__ == '__main__':
     # gather experience
     logs = defaultdict(list)
     eval_str = ""
-
 
     with tqdm(total=n_episodes*horizon) as pbar:
         with set_exploration_type(explore_type), torch.no_grad():
@@ -298,7 +296,4 @@ if __name__ == '__main__':
     unique, counts = np.unique(all_actions, return_counts=True)
     action_distribution = {id2name.get(a, a): c for a, c in zip(unique, counts)}
     print(action_distribution)
-
-
-
 # %%
