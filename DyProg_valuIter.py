@@ -168,52 +168,9 @@ ax.legend()
 plt.grid()
 plt.show()
 
-# %%
+# %% 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
-# # 8) Compare with PPO
-
-# def simulate_dp_policy(P, R, gamma, policy, H, initial_state=0, seed=None):
-#     """
-#     Simulate a single trajectory using the precomputed DP policy.
-#     - P: (A, S, S)   transitions
-#     - R: (A, S)      immediate reward
-#     - policy: (H, S) best action at (t, s)
-#     - H: horizon
-#     - initial_state: starting state index (int)
-#     Returns:
-#         actions_taken: [a_0, a_1, ..., a_{H-1}]
-#         rewards: [r_0, r_1, ..., r_{H-1}]
-#         states:  [s_0, s_1, ..., s_H]
-#     """
-#     S = P.shape[1]
-#     rng = np.random.default_rng(seed)
-#     actions_taken = []
-#     rewards = []
-#     states = [initial_state]
-
-#     s = initial_state
-#     for t in range(H):
-#         a = int(policy[t, s])
-#         actions_taken.append(a)
-#         r = R[a, s]
-#         rewards.append(r)
-#         # Sample next state using transition probabilities
-#         s_next = rng.choice(S, p=P[a, s])
-#         states.append(s_next)
-#         s = s_next
-
-#     return actions_taken, rewards, states
-
-# s0 = int(np.argmax(reset_prob))  # e.g., 0 for [1,0,0,0,0]
-
-# actions, rewards, states = simulate_dp_policy(P, R, gamma, best_policy, horizon, initial_state=s0, seed=42)
-# print("Actions taken:", actions)
-# print("Rewards:", rewards)
-# print("States visited:", states)
-# print("Total reward:", np.sum(rewards))
-# print("Average reward per step:", np.mean(rewards))
-
-# %%
+# 8) Define policy from DP table and evaluate in the PPO env
 import numpy as np
 import torch
 
@@ -223,29 +180,27 @@ from tqdm import tqdm
 from collections import defaultdict
 from torchrl.envs.utils import set_exploration_type
 
-
-
-
 # DP action policy
-def action_policy_dp(obs, horizon=1, DPtable=np.array([])):
-    state_dist, t = obs[:-1], obs[-1]*horizon 
-
+def action_policy_dp(obs, t_idx, DPtable, ncs):
+    """
+    Pick DP action for the current observation and time index.
+    - obs: observation, shape (ncs,) not (ncs+1,)
+    - t_idx: current time index
+    - DPtable: (H, ncs) best_action[t, s]
+    """
     # choose the CS based on the most probable CS
-    cs = state_dist.argmax()
+    state_dis = obs[:ncs]
+    s = int(np.argmax(state_dis))  
 
-    # look up the best action from DP
-    action = DPtable[int(cs-1), int(t-1)]
-
-    return action
-
-
+    # Greedy DP action
+    return int(DPtable[t_idx, s])
 
 
 if __name__ == '__main__':
     import importlib
     import test_constants
     importlib.reload(test_constants)
-    
+
     # load constants
     reset_prob = test_constants.ELE_DP_RESET_PROB
     horizon = test_constants.ELE_DP_HORIZON
@@ -255,11 +210,13 @@ if __name__ == '__main__':
     dirichlet_alpha = test_constants.ELE_DP_DIRICHLET_ALPHA
     random_state = test_constants.ELE_DP_RANDOM_STATE
     explore_type = test_constants.ELE_DP_EXPLORE_TYPE
+    include_step = test_constants.ELE_DP_INC_STEP
 
     # recreate env
     env = create_element_env(
         horizon,
         max_cost=max_cost,
+        include_step_count=include_step,
         reset_prob=reset_prob,
         dirichlet_alpha=dirichlet_alpha,
         random_state=random_state
@@ -269,22 +226,46 @@ if __name__ == '__main__':
     logs = defaultdict(list)
     eval_str = ""
 
+
     with tqdm(total=n_episodes*horizon) as pbar:
         with set_exploration_type(explore_type), torch.no_grad():
             for _ in range(n_episodes):
-                # excute manual rollout and policies
-                observation = np.zeros((horizon, reset_prob.shape[0]))
-                action = np.zeros((horizon,1))
-                reward = np.zeros((horizon,1))
-                td = env.reset()
-                for i in range(horizon):
-                    td["action"] = torch.tensor(action_policy_dp(reset_prob, i, DPtable=test_constants.ELE_DP_TABLE))
-                    res = env.step(td)
-                    observation[i] = res["observation"].cpu().numpy()
-                    action[i] = res["action"].cpu().numpy()
-                    reward[i] = res["next", "reward"].cpu().numpy()
-                    td["observation"] = res["next", "observation"]
 
+
+                td = env.reset()
+                # figure observation length at runtime (ncs + 1 if include_step_count)
+                obs_len = int(td["observation"].numel())
+                print(f"Observation length: {obs_len}")
+                print(f"include_step_count: {include_step}")
+                observation = np.zeros((horizon, obs_len), dtype=np.float32)
+                action      = np.zeros((horizon, 1),   dtype=np.int64)
+                reward      = np.zeros((horizon, 1),   dtype=np.float32)
+
+
+                # show initial obs/time
+                init_obs = td["observation"]
+                if include_step:
+                    init_time_idx = int(init_obs[-1].item() * horizon)
+                    print("Initial time index:", init_time_idx)
+
+                print("Initial observation:", init_obs)
+
+
+                # rollout
+                for i in range(init_time_idx, horizon):
+                    curr_obs = td["observation"]
+
+                    a = action_policy_dp(curr_obs, i, best_policy, S)
+                    td["action"] = torch.tensor(a, dtype=torch.int64)
+
+                    res = env.step(td)
+
+                    observation[i] = res["observation"].cpu().numpy()
+                    action[i]   = res["action"].cpu().numpy()
+                    reward[i]   = res["next", "reward"].cpu().numpy()
+                    td["observation"] = res["next", "observation"]
+                    
+                    
                 # log rollout data
                 logs["observation"].append(observation)
                 logs["action"].append(action)
@@ -301,3 +282,23 @@ if __name__ == '__main__':
     print(f"Initial state: {logs['observation'][0][0]}")
     print(f"Final state: {logs['observation'][0][-1]}")
     print(f"Average ep reward: {np.mean(logs['ep reward']): 4.4f}")
+    
+    # Define the list of arrays
+    all_actions = logs["action"]
+    all_actions = np.concatenate(all_actions)
+
+
+    id2name = {
+        0: "Do nothing",
+        1: "Maintenance",
+        2: "Repair",
+        3: "Rehabilitation",
+        4: "Replacement"
+    }
+    unique, counts = np.unique(all_actions, return_counts=True)
+    action_distribution = {id2name.get(a, a): c for a, c in zip(unique, counts)}
+    print(action_distribution)
+
+
+
+# %%
