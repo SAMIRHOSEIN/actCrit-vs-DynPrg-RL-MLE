@@ -1,43 +1,9 @@
 # %%
-# 0) Imports & reproducibility
+# 1) Imports
 # DP(value iteration) vs PPO — Aligned Inputs
-# This notebook aligns Dynamic Programming (finite-horizon value iteration) with our PPO environment so both share:
-# - the same state/action spaces (ncs, na),
-# - the same transition matrices (action_model),
-# - the same reward/cost definition (unit_costs, cs_pfs, failure_cost),
-# - the same discount factor gamma and horizon.
-
-# Source of truth: element/problem_setup.py and element/rl_env.py.
 import numpy as np
 import matplotlib.pyplot as plt
-from element.problem_setup import (ncs, na, gamma, action_model, unit_costs, failure_cost, cs_pfs)
-from test_constants import (ELE_DP_MAX_COST, ELE_DP_HORIZON)
-from element.utility_func import cost_util
-# %%
-#--------------------------------------------------------------------------------------------------------------------------------------------------------
-# 1) Build DP model directly from the PPO env parameters
-# We construct:
-# - P with shape (A, S, S) using action_model[a] (rows: next state, cols: current state), consistent with `env` where next = A[a].T @ state` ⇒ column-wise transitions.
-# - R with shape (A, S) using the same cost definition used in the env step:
-#   # cost = unit_costs + failure_cost * cs_pfs
-#   and reward via `cost_util(cost, min_cost=0, max_cost=unit_costs.max())`.
-#Build P and R from env constants
-A, S = na, ncs 
 
-# Note: action_model[a][s', s] = P(s'|s,a)
-P = np.array([action_model[a] for a in range(A)])  # (A, S, S)
-
-# Rewards (A, S): immediate reward at pure state s under action a
-ma_cost = ELE_DP_MAX_COST
-R = np.zeros((A, S), dtype=np.float64)
-
-for a in range(A):
-    for s in range(S):
-        direct_cost = unit_costs[a,s]
-        # print(f"Action {a}, State {s}, Direct cost: {direct_cost}")
-        fail_risk = cs_pfs[s] * failure_cost
-        cost = direct_cost + fail_risk
-        R[a,s] = cost_util(cost, min_cost=0, max_cost=ma_cost)
 # %%
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
 # 2) Finite-horizon value iteration (vectorized, shape: P (A,S,S'), R (A,S))
@@ -85,34 +51,8 @@ def finite_horizon_value_iteration(P, R, gamma, H):
     return V_fun, Policy
 
 # %%
-# Run DP value iteration
-best_value, best_policy = finite_horizon_value_iteration(P, R, gamma, ELE_DP_HORIZON)
-
-# %%
-#-----------------------------------------------------------------------------------------------------------------------------------
-# 3) Visualize DP results (values & policy over time)
-fig, ax = plt.subplots(1,1, figsize=(7,4))
-for s in range(ncs):
-    ax.plot(best_value[:, s], label=f'CS{s+1}')
-ax.set_title('DP Value function(end -> start)')
-ax.set_xlabel('Time')
-ax.set_ylabel('Value')
-ax.legend()
-plt.grid()
-plt.show()
-
-fig, ax = plt.subplots(1,1, figsize=(7,4))
-for s in range(ncs):
-    ax.plot(best_policy[:, s], label=f'CS{s+1}')
-ax.set_title('DP Greedy Policy(end -> start)')
-ax.set_xlabel('Time')
-ax.set_ylabel('Action ID')
-ax.legend()
-plt.grid()
-plt.show()
-# %%
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
-# 4)Verification of my code with simple example
+# 3)Verification of my code with simple example
 print("Verification of my code with simple example:")
 if __name__ == "__main__":
     # 2 states, 2 actions
@@ -125,11 +65,239 @@ if __name__ == "__main__":
 
     V, Pi = finite_horizon_value_iteration(P_toy, R_toy, gamma, H)
 
+
+    # i want to show structured tableof this:
+    print("The output of my hand calculation:")
+    print("| t | state | V[t,state] | best action (policy) |\n"
+          "| - | ----- | ----------- | ------------------- |\n"
+            "| 2 | 0     | 0           | -                   |\n"
+            "| 2 | 1     | 0           | -                   |\n"
+            "| 1 | 0     | 10          | 1                   |\n"
+            "| 1 | 1     | 1           | 0                   |\n"
+            "| 0 | 0     | 14.95       | 1                   |\n"
+            "| 0 | 1     | 1.9         | 0                   |\n")
+
+
     print("Compare the following results with hand-calculated values:")
     print("Test V:\n", V)
     print("Test Policy:\n", Pi)
+    print("Shape of V = (Horizon+1, State) =", V.shape)
+    print("Shape of Policy = (Horizon, State) =", Pi.shape)
 
 # %%
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
-# 5) Compare with PPO
+# 4) Align DP with PPO environment              
+# This notebook aligns Dynamic Programming (finite-horizon value iteration) with our PPO environment so both share:
+# - the same state/action spaces (ncs, na),
+# - the same transition matrices (action_model),
+# - the same reward/cost definition (unit_costs, cs_pfs, failure_cost),
+# - the same discount factor gamma and horizon.
+
+# Source of truth: element/problem_setup.py and element/rl_env.py.
+import os
+import element.problem_setup
+import test_constants
+from element.utility_func import cost_util
+from element.rl_env import SingleElement
+# Initialize environment to access its parameters
+# load constants
+A = element.problem_setup.na  # number of actions
+S = element.problem_setup.ncs  # number of  state
+gamma = element.problem_setup.gamma
+action_model = element.problem_setup.action_model
+unit_costs = element.problem_setup.unit_costs
+failure_cost = element.problem_setup.failure_cost
+cs_pfs = element.problem_setup.cs_pfs
+
+
+max_cost_ = test_constants.ELE_DP_MAX_COST
+horizon = test_constants.ELE_DP_HORIZON
+reset_prob = test_constants.ELE_DP_RESET_PROB
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------
+# 5) Build DP model directly from the PPO env parameters
+# We construct:
+# - P with shape (A, S, S) using action_model[a] (rows: next state, cols: current state), consistent with `env` where next = A[a].T @ state` ⇒ column-wise transitions.
+# - R with shape (A, S) using the same cost definition used in the env step:
+#   # cost = unit_costs + failure_cost * cs_pfs
+#   and reward via `cost_util(cost, min_cost=0, max_cost=unit_costs.max())`.
+#Build P and R from env constants
+
+
+# Note: action_model[a][s', s] = P(s'|s,a)
+P = np.array([action_model[a] for a in range(A)])  # (A, S, S)
+
+# Rewards (A, S): immediate reward at pure state s under action a
+ma_cost = max_cost_
+R = np.zeros((A, S), dtype=np.float64)
+
+for a in range(A):
+    for s in range(S):
+        direct_cost = unit_costs[a,s]
+        # print(f"Action {a}, State {s}, Direct cost: {direct_cost}")
+        fail_risk = cs_pfs[s] * failure_cost
+        cost = direct_cost + fail_risk
+        R[a,s] = cost_util(cost, min_cost=0, max_cost=ma_cost)
+
 # %%
+#--------------------------------------------------------------------------------------------------------------------------------------------------------
+# 6)Run DP value iteration
+best_value, best_policy = finite_horizon_value_iteration(P, R, gamma, horizon)
+print("Shape of V = (Horizon+1, State) =", best_value.shape)
+print("Shape of Policy = (Horizon, State) =", best_policy.shape)
+# %%
+#-----------------------------------------------------------------------------------------------------------------------------------
+# 7) Visualize DP results (values & policy over time)
+fig, ax = plt.subplots(1,1, figsize=(7,4))
+for s in range(S):
+    ax.plot(best_value[:, s], label=f'CS{s+1}')
+ax.set_title('DP Value function(end -> start)')
+ax.set_xlabel('Time')
+ax.set_ylabel('Value')
+ax.legend()
+plt.grid()
+plt.show()
+
+fig, ax = plt.subplots(1,1, figsize=(7,4))
+for s in range(S):
+    ax.plot(best_policy[:, s], label=f'CS{s+1}')
+ax.set_title('DP Greedy Policy(end -> start)')
+ax.set_xlabel('Time')
+ax.set_ylabel('Action ID')
+ax.legend()
+plt.grid()
+plt.show()
+
+# %%
+#--------------------------------------------------------------------------------------------------------------------------------------------------------
+# # 8) Compare with PPO
+
+# def simulate_dp_policy(P, R, gamma, policy, H, initial_state=0, seed=None):
+#     """
+#     Simulate a single trajectory using the precomputed DP policy.
+#     - P: (A, S, S)   transitions
+#     - R: (A, S)      immediate reward
+#     - policy: (H, S) best action at (t, s)
+#     - H: horizon
+#     - initial_state: starting state index (int)
+#     Returns:
+#         actions_taken: [a_0, a_1, ..., a_{H-1}]
+#         rewards: [r_0, r_1, ..., r_{H-1}]
+#         states:  [s_0, s_1, ..., s_H]
+#     """
+#     S = P.shape[1]
+#     rng = np.random.default_rng(seed)
+#     actions_taken = []
+#     rewards = []
+#     states = [initial_state]
+
+#     s = initial_state
+#     for t in range(H):
+#         a = int(policy[t, s])
+#         actions_taken.append(a)
+#         r = R[a, s]
+#         rewards.append(r)
+#         # Sample next state using transition probabilities
+#         s_next = rng.choice(S, p=P[a, s])
+#         states.append(s_next)
+#         s = s_next
+
+#     return actions_taken, rewards, states
+
+# s0 = int(np.argmax(reset_prob))  # e.g., 0 for [1,0,0,0,0]
+
+# actions, rewards, states = simulate_dp_policy(P, R, gamma, best_policy, horizon, initial_state=s0, seed=42)
+# print("Actions taken:", actions)
+# print("Rewards:", rewards)
+# print("States visited:", states)
+# print("Total reward:", np.sum(rewards))
+# print("Average reward per step:", np.mean(rewards))
+
+# %%
+import numpy as np
+import torch
+
+from torchrl_bridge import create_element_env
+
+from tqdm import tqdm
+from collections import defaultdict
+from torchrl.envs.utils import set_exploration_type
+
+
+
+
+# DP action policy
+def action_policy_dp(obs, horizon=1, DPtable=np.array([])):
+    state_dist, t = obs[:-1], obs[-1]*horizon 
+
+    # choose the CS based on the most probable CS
+    cs = state_dist.argmax()
+
+    # look up the best action from DP
+    action = DPtable[int(cs-1), int(t-1)]
+
+    return action
+
+
+
+
+if __name__ == '__main__':
+    import importlib
+    import test_constants
+    importlib.reload(test_constants)
+    
+    # load constants
+    reset_prob = test_constants.ELE_DP_RESET_PROB
+    horizon = test_constants.ELE_DP_HORIZON
+    n_episodes = test_constants.ELE_DP_N_EPISODES
+    max_cost = test_constants.ELE_DP_MAX_COST
+    reset_prob = test_constants.ELE_DP_RESET_PROB
+    dirichlet_alpha = test_constants.ELE_DP_DIRICHLET_ALPHA
+    random_state = test_constants.ELE_DP_RANDOM_STATE
+    explore_type = test_constants.ELE_DP_EXPLORE_TYPE
+
+    # recreate env
+    env = create_element_env(
+        horizon,
+        max_cost=max_cost,
+        reset_prob=reset_prob,
+        dirichlet_alpha=dirichlet_alpha,
+        random_state=random_state
+    )
+
+    # gather experience
+    logs = defaultdict(list)
+    eval_str = ""
+
+    with tqdm(total=n_episodes*horizon) as pbar:
+        with set_exploration_type(explore_type), torch.no_grad():
+            for _ in range(n_episodes):
+                # excute manual rollout and policies
+                observation = np.zeros((horizon, reset_prob.shape[0]))
+                action = np.zeros((horizon,1))
+                reward = np.zeros((horizon,1))
+                td = env.reset()
+                for i in range(horizon):
+                    td["action"] = torch.tensor(action_policy_dp(reset_prob, i, DPtable=test_constants.ELE_DP_TABLE))
+                    res = env.step(td)
+                    observation[i] = res["observation"].cpu().numpy()
+                    action[i] = res["action"].cpu().numpy()
+                    reward[i] = res["next", "reward"].cpu().numpy()
+                    td["observation"] = res["next", "observation"]
+
+                # log rollout data
+                logs["observation"].append(observation)
+                logs["action"].append(action)
+                logs["reward"].append(reward)
+                logs["ep reward"].append(reward.sum().item())
+
+                eval_str = (
+                    f"ep reward: {logs['ep reward'][-1]: 4.4f} "
+                    f"(init: {logs['ep reward'][0]: 4.4f}), "
+                )
+                pbar.set_description(eval_str)
+                pbar.update(horizon)
+    
+    print(f"Initial state: {logs['observation'][0][0]}")
+    print(f"Final state: {logs['observation'][0][-1]}")
+    print(f"Average ep reward: {np.mean(logs['ep reward']): 4.4f}")
