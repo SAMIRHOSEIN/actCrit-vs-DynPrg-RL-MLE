@@ -1,4 +1,5 @@
 # %%
+# Important: In DP, we need to just choose one condition state (CS) at each time step, not a distribution over CSs shows the sate of the system..
 # 1) Imports
 # DP(value iteration) vs PPO — Aligned Inputs
 import numpy as np
@@ -112,7 +113,6 @@ cs_pfs = element.problem_setup.cs_pfs
 
 max_cost_ = test_constants.ELE_DP_MAX_COST
 horizon = test_constants.ELE_DP_HORIZON
-reset_prob = test_constants.ELE_DP_RESET_PROB
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
 # 5) Build DP model directly from the PPO env parameters
@@ -201,7 +201,6 @@ if __name__ == '__main__':
     importlib.reload(test_constants)
 
     # load constants
-    reset_prob = test_constants.ELE_DP_RESET_PROB
     horizon = test_constants.ELE_DP_HORIZON
     n_episodes = test_constants.ELE_DP_N_EPISODES
     max_cost = test_constants.ELE_DP_MAX_COST
