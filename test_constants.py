@@ -44,7 +44,7 @@ ELE_CUSTOM_EXPLORE_TYPE = ExplorationType.RANDOM
 
 # region: constants for ele_ppo_training.py ==================================
 # env parameters
-ELE_PPO_HORIZON = 75
+ELE_PPO_HORIZON = 5 #75
 ELE_PPO_INC_STEP = True
 ELE_PPO_MAX_COST = unit_costs.max()
 
@@ -103,9 +103,9 @@ ELE_PPO_EVAL_EXPLORE_TYPE = ExplorationType.DETERMINISTIC
 # region: constants for ele_exp_actor.py ====================================
 # ELE_ACTOR_VERSION = '20250505-192030'   #David's model
 # ELE_ACTOR_VERSION = '20250910-202015' # my model with 5 horizon
-ELE_ACTOR_VERSION = '20250910-204144' # my model with 75 horizon
+ELE_ACTOR_VERSION = '20250917-102249' # my model with 75 horizon
 
-ELE_ACTOR_HORIZON = 75
+ELE_ACTOR_HORIZON = 5 #75
 # ELE_ACTOR_N_HORIZON = 1
 ELE_ACTOR_N_EPISODES = 1 # modified to avoid confusion
 ELE_ACTOR_MAX_COST = 1.0
@@ -114,15 +114,15 @@ ELE_ACTOR_RESET_PROB = np.array([1.0, 0.0, 0.0, 0.0, 0.0])
 ELE_ACTOR_DIRICHLET_ALPHA = None
 ELE_ACTOR_RANDOM_STATE = 'off'
 
-ELE_ACTOR_EXPLORE_TYPE = ExplorationType.RANDOM
+ELE_ACTOR_EXPLORE_TYPE = ExplorationType.DETERMINISTIC
 # endregion ==============================================================
 
 
 
-# region: constants for DP_valueIte.py ==================================
-ELE_DP_ACTOR_VERSION = '20250910-204144' # my model with 75 horizon
+# region: constants for DPvsPPO.py ==================================
+ELE_DP_ACTOR_VERSION = '20250917-102249' # my model with 75 horizon
 
-ELE_DP_HORIZON = 75
+ELE_DP_HORIZON = 5 #75
 ELE_DP_N_EPISODES = 1 # In DP we always consider 1 episode
 ELE_DP_MAX_COST = 1 
 
@@ -145,3 +145,22 @@ ELE_DP_RANDOM_STATE = 'off'
 ELE_DP_EXPLORE_TYPE = ExplorationType.RANDOM
 # endregion ==============================================================
 
+# region: constants for pygad_reliability.py ==================================
+ELE_GA_SEED_FOR_PyGAD = 0
+ELE_GA_POP = 80                                             # Population size
+ELE_GA_GENS = 200                                           # Number of generations
+ELE_GA_LB_BETA, ELE_GA_UB_BETA = 0.0, 8.0                   # typical β range (pf ~ 0.5 down to ~1e-15)
+ELE_GA_MUTATION_PERCENT_GENES = 50                          # mutate 50% of genes per solution
+ELE_GA_CROSSOVER_TYPE = "single_point"                      # single point means Only one point is used to split and recombine the genes
+ELE_GA_PARENT_SELECTION = "sss"                             # steady-state selection
+ELE_GA_KEEP_PARENTS = 2                                     # number of parents to keep in the next generation    
+ELE_GA_MAX_COST = unit_costs.max()
+
+# Initial distribution control (reset-style)
+ELE_GA_RESET_PROB = None
+ELE_GA_DIRICHLET_ALPHA = 0.5*np.ones(NCS)
+ELE_GA_RANDOM_STATE = 42
+# ELE_GA_RESET_PROB = np.array([1.0, 0.0, 0.0, 0.0, 0.0])
+# ELE_GA_DIRICHLET_ALPHA = None
+# ELE_GA_RANDOM_STATE = 'off'
+# endregion ==============================================================
