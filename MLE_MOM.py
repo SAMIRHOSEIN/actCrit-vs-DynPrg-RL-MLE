@@ -1,142 +1,19 @@
-#%%
-import numpy as np
-from scipy.special import psi, polygamma  # psi = digamma, polygamma(1, x) = trigamma
-
-def fit_dirichlet_mle(P, tol=1e-6, max_iter=100):
-    """
-    P: N x K array, each row a probability vector (no zeros! add small epsilon if needed).
-    Returns: fitted alpha vector (K,)
-    """
-    N, K = P.shape
-
-    # Compute sufficient statistics
-    logp_mean = np.mean(np.log(P), axis=0)  # shape (K,)
-    
-    # Method-of-moments initial guess
-    mean = np.mean(P, axis=0) #for each column, mean of each condition states
-    var = np.var(P, axis=0) #for each column
-    alpha0_init = np.median((mean * (1 - mean)) / (var + 1e-8) - 1) # calculate the median of all columns(this is one scalar)
-    alpha0_init = max(alpha0_init, 1e-2)
-    alpha = mean * alpha0_init  # initial guess of alpha for each column(each condition state) - This gives a single starting vector α(0) for the whole dataset.
-    
-    for it in range(max_iter):
-        alpha0 = np.sum(alpha)
-        g = N * (psi(alpha0) - psi(alpha) + logp_mean)  # gradient
-        H = -N * polygamma(1, alpha)  # Hessian diagonal
-        z = N * polygamma(1, alpha0)  # for Sherman-Morrison
-
-        # Newton update with Sherman-Morrison (solves H*delta = g)
-        invH = 1 / H
-        b = np.sum(g * invH)
-        c = b / (1/z + np.sum(invH))
-        delta = (g - c) * invH
-
-        # Line search for positivity
-        step = 1.0
-        while np.any(alpha - step * delta <= 0):
-            step *= 0.5
-            if step < 1e-8:
-                break
-        alpha_new = alpha - step * delta
-
-        # Convergence check
-        if np.linalg.norm(alpha_new - alpha) < tol:
-            break
-        alpha = alpha_new
-
-    return alpha
-
-
-# Example with random Dirichlet data
-np.random.seed(42)
-P = np.random.dirichlet([2, 0.5, 0.5, 0.1], size=100)  # simulate some "realistic" sparse data
-
-# Add epsilon if you have zeros
-P = np.clip(P, 1e-6, 1.0)
-P = (P.T / P.sum(axis=1)).T
-
-alpha_hat = fit_dirichlet_mle(P)
-print("Fitted alpha:", alpha_hat)
-print("Mean (alpha/sum):", alpha_hat / np.sum(alpha_hat))
-
-
-
-
-
-
-
-
-
 # %%
-# import numpy as np
-# from scipy.optimize import minimize
-# from scipy.special import gammaln
-
-# def dirichlet_log_likelihood(alpha, X):
-#     """
-#     Compute the negative log-likelihood of the data X given alpha.
-#     We return the negative because we will use a minimizer.
-#     """
-#     alpha = np.array(alpha)
-#     # Sum of alphas
-#     alpha_0 = np.sum(alpha)
-    
-#     # Log-likelihood for the entire dataset
-#     # Term 1: N * [ln Γ(α0) - Σ ln Γ(αk)]
-#     term1 = len(X) * (gammaln(alpha_0) - np.sum(gammaln(alpha)))
-    
-#     # Term 2: Σ_i Σ_k (αk - 1) * ln(x_ik)
-#     term2 = np.sum((alpha - 1) * np.sum(np.log(X), axis=0))
-    
-#     log_likelihood = term1 + term2
-#     return -log_likelihood # Return negative for minimization
-
-# # Your prepared data (N x 4)
-# # X = ... # Load and preprocess your CS_PERCENT data here
-
-# # Initial guess for alpha. A common, robust starting point is the
-# # method-of-moments estimator: alpha_k = (mean_k * (1 - mean_k) / var_k) - 1
-# # But a simple uniform start often works fine.
-# initial_alpha = np.array([1.0, 1.0, 1.0, 1.0])
-
-# # Bounds: Alpha values must be > 0.
-# bounds = [(1e-6, None) for _ in range(4)]
-
-# # Perform the optimization
-# result = minimize(
-#     fun=dirichlet_log_likelihood,
-#     x0=initial_alpha,
-#     args=(X,),
-#     method='L-BFGS-B', # A good choice for bounded problems
-#     bounds=bounds,
-#     options={'disp': True}
-# )
-
-# if result.success:
-#     estimated_alpha = result.x
-#     print("Estimated Alpha:", estimated_alpha)
-# else:
-#     print("Optimization failed:", result.message)
-#     # Fallback: Use method of moments or a default
-#     estimated_alpha = np.mean(X, axis=0) * 10 # A simple, arbitrary fallback
-
-
-
-
-# %%
+# Final version to find the best match for alpha
 import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
-from scipy.special import gammaln, psi  # psi = digamma
+from scipy.special import gammaln,psi # gammaln = log gamma function, psi = digamma (derivative of log gamma function)
 
 def prepare_prob_rows(X, eps=1e-8):
     """Ensure each row is strictly positive and sums to 1."""
     X = np.asarray(X, dtype=float)
     if X.ndim != 2:
         raise ValueError("X must be a 2D array (N, K).")
-    X = np.clip(X, eps, None) # avoid zeros
-    X /= X.sum(axis=1, keepdims=True) # renormalize each row for rows whose CS percentages don’t sum to 1
+    X = np.clip(X, eps, None) # Ensures all entries are at least eps to avoid zeros due to log(0)
+    X /= X.sum(axis=1, keepdims=True) # Renormalize each row for rows whose CS percentages don’t sum to 1 (sum of rows in original data may not be exactly 1)
     return X
+
 
 def dirichlet_nll_and_grad(alpha, S, N):
     """
@@ -154,13 +31,18 @@ def dirichlet_nll_and_grad(alpha, S, N):
     grad : (K,) array
     """
     alpha = np.asarray(alpha, dtype=float)
+
+    # If, during optimization, the algorithm tries any α value that's zero or negative, the log-likelihood and its gradient are undefined or invalid (would cause math errors or return NaNs/Infs).
+    # By returning np.inf for the objective (negative log-likelihood) and a vector of NaNs for the gradient, we force the optimizer to stay within the valid region (α_k>0).
     if np.any(alpha <= 0):
         return np.inf, np.full_like(alpha, np.nan)
 
     a0 = alpha.sum()
+
     # log-likelihood
     ll = N * (gammaln(a0) - np.sum(gammaln(alpha))) + np.dot(alpha - 1.0, S)
-    # gradient of log-likelihood
+    # gradient of log-likelihood, why we defined it?
+    # Optimization algorithms (like L-BFGS-B) use the gradient (the derivative with respect to alpha) to find the minimum much faster and more accurately.
     g = N * (psi(a0) - psi(alpha)) + S # Passing the analytic gradient to the optimizer makes it faster and more reliable(cause we use method="L-BFGS-B").
     # return negative for minimizer
     return -ll, -g
@@ -195,21 +77,30 @@ def method_of_moments_init(X, var_min=1e-12, alpha0_min=1e-2, alpha0_max=1e6):
         alpha0 = float(np.median(cand))
         alpha0 = float(np.clip(alpha0, alpha0_min, alpha0_max))
 
-    alpha = mu * alpha0   # This gives initial alpha for the whole dataset and for each condition state.
+    alpha = mu * alpha0   # This gives initial alpha for the whole dataset and for each condition state(alpha is multiplication of mean and median).
     # Ensure strictly positive alphas, even if some mu are 0/1
-    alpha = np.clip(alpha, 1e-3, None)
+    alpha = np.clip(alpha, 1e-3, None) 
     return alpha
+
 
 
 
 def fit_dirichlet_mle_lbfgsb(X, x0=None, tol=1e-8, maxiter=1000, verbose=True):
     """
     Fit Dirichlet(alpha) by MLE using L-BFGS-B with analytic gradient.
+    we use L-BFGS-B because it handles bound constraints (alpha_k > 0, cause dirichlet is defined for positive value) and is efficient for large problems.
+    1) Prepare the data: ensure each row is a valid probability vector.
+    2) Compute sufficient statistics: precompute sum of log(X) for efficiency.
+    3) Initialize alpha: use method-of-moments if no initial guess is provided.
+    4) Define the objective function: negative log-likelihood and its gradient.
+    5) Optimize using L-BFGS-B: minimize the negative log-likelihood with bounds on alpha.
+    6) check convergence and return results.
+    7) Returns: estimated alpha and optimization result object.
     """
     X = prepare_prob_rows(X) # ensure valid input
     N, K = X.shape
 
-    # sufficient statistics
+    # sufficient statistics - precompute for efficiency
     S = np.sum(np.log(X), axis=0)
 
     if x0 is None:
@@ -231,11 +122,11 @@ def fit_dirichlet_mle_lbfgsb(X, x0=None, tol=1e-8, maxiter=1000, verbose=True):
     return alpha_hat, res
 
 
+
 # np.random.seed(42)
 # X = np.random.dirichlet([2, 0.5, 0.5, 0.1], size=100)  # simulate some "realistic" sparse data
 
 file_path = './Datainfobridge/NBEExport_September_18_2025_12_51_19.txt'
-
 # Try to read as CSV (if it fails, try with sep="\t" for tab-delimited)
 try:
     df = pd.read_csv(file_path)
@@ -249,4 +140,5 @@ X = df[cols].values
 alpha_hat, res = fit_dirichlet_mle_lbfgsb(X)
 print("Estimated alpha:", alpha_hat)
 print("Mean (alpha/sum):", alpha_hat / alpha_hat.sum())
+
 # %%
