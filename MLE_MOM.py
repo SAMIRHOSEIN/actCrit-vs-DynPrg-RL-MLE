@@ -68,57 +68,57 @@ print("Mean (alpha/sum):", alpha_hat / np.sum(alpha_hat))
 
 
 # %%
-import numpy as np
-from scipy.optimize import minimize
-from scipy.special import gammaln
+# import numpy as np
+# from scipy.optimize import minimize
+# from scipy.special import gammaln
 
-def dirichlet_log_likelihood(alpha, X):
-    """
-    Compute the negative log-likelihood of the data X given alpha.
-    We return the negative because we will use a minimizer.
-    """
-    alpha = np.array(alpha)
-    # Sum of alphas
-    alpha_0 = np.sum(alpha)
+# def dirichlet_log_likelihood(alpha, X):
+#     """
+#     Compute the negative log-likelihood of the data X given alpha.
+#     We return the negative because we will use a minimizer.
+#     """
+#     alpha = np.array(alpha)
+#     # Sum of alphas
+#     alpha_0 = np.sum(alpha)
     
-    # Log-likelihood for the entire dataset
-    # Term 1: N * [ln Γ(α0) - Σ ln Γ(αk)]
-    term1 = len(X) * (gammaln(alpha_0) - np.sum(gammaln(alpha)))
+#     # Log-likelihood for the entire dataset
+#     # Term 1: N * [ln Γ(α0) - Σ ln Γ(αk)]
+#     term1 = len(X) * (gammaln(alpha_0) - np.sum(gammaln(alpha)))
     
-    # Term 2: Σ_i Σ_k (αk - 1) * ln(x_ik)
-    term2 = np.sum((alpha - 1) * np.sum(np.log(X), axis=0))
+#     # Term 2: Σ_i Σ_k (αk - 1) * ln(x_ik)
+#     term2 = np.sum((alpha - 1) * np.sum(np.log(X), axis=0))
     
-    log_likelihood = term1 + term2
-    return -log_likelihood # Return negative for minimization
+#     log_likelihood = term1 + term2
+#     return -log_likelihood # Return negative for minimization
 
-# Your prepared data (N x 4)
-# X = ... # Load and preprocess your CS_PERCENT data here
+# # Your prepared data (N x 4)
+# # X = ... # Load and preprocess your CS_PERCENT data here
 
-# Initial guess for alpha. A common, robust starting point is the
-# method-of-moments estimator: alpha_k = (mean_k * (1 - mean_k) / var_k) - 1
-# But a simple uniform start often works fine.
-initial_alpha = np.array([1.0, 1.0, 1.0, 1.0])
+# # Initial guess for alpha. A common, robust starting point is the
+# # method-of-moments estimator: alpha_k = (mean_k * (1 - mean_k) / var_k) - 1
+# # But a simple uniform start often works fine.
+# initial_alpha = np.array([1.0, 1.0, 1.0, 1.0])
 
-# Bounds: Alpha values must be > 0.
-bounds = [(1e-6, None) for _ in range(4)]
+# # Bounds: Alpha values must be > 0.
+# bounds = [(1e-6, None) for _ in range(4)]
 
-# Perform the optimization
-result = minimize(
-    fun=dirichlet_log_likelihood,
-    x0=initial_alpha,
-    args=(X,),
-    method='L-BFGS-B', # A good choice for bounded problems
-    bounds=bounds,
-    options={'disp': True}
-)
+# # Perform the optimization
+# result = minimize(
+#     fun=dirichlet_log_likelihood,
+#     x0=initial_alpha,
+#     args=(X,),
+#     method='L-BFGS-B', # A good choice for bounded problems
+#     bounds=bounds,
+#     options={'disp': True}
+# )
 
-if result.success:
-    estimated_alpha = result.x
-    print("Estimated Alpha:", estimated_alpha)
-else:
-    print("Optimization failed:", result.message)
-    # Fallback: Use method of moments or a default
-    estimated_alpha = np.mean(X, axis=0) * 10 # A simple, arbitrary fallback
+# if result.success:
+#     estimated_alpha = result.x
+#     print("Estimated Alpha:", estimated_alpha)
+# else:
+#     print("Optimization failed:", result.message)
+#     # Fallback: Use method of moments or a default
+#     estimated_alpha = np.mean(X, axis=0) * 10 # A simple, arbitrary fallback
 
 
 
@@ -234,7 +234,7 @@ def fit_dirichlet_mle_lbfgsb(X, x0=None, tol=1e-8, maxiter=1000, verbose=True):
 # np.random.seed(42)
 # X = np.random.dirichlet([2, 0.5, 0.5, 0.1], size=100)  # simulate some "realistic" sparse data
 
-file_path = 'G:/My Drive/PSU/Projects/PhD/WeeklyMeetings_Tasks/22_12102024_Soft_decision_tree/actCrit-vs-DynPrg-RL/AlphaForDrichlet/NBEExport_September_18_2025_12_51_19.txt'
+file_path = './Datainfobridge/NBEExport_September_18_2025_12_51_19.txt'
 
 # Try to read as CSV (if it fails, try with sep="\t" for tab-delimited)
 try:
