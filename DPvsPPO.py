@@ -3,6 +3,16 @@
 # 1) Imports
 # DP(value iteration) vs PPO — Aligned Inputs
 import numpy as np
+
+import numpy as np
+import torch
+
+from torchrl_bridge import create_element_env
+
+from tqdm import tqdm
+from collections import defaultdict
+from torchrl.envs.utils import set_exploration_type
+
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from matplotlib.patches import Patch
@@ -173,15 +183,6 @@ plt.show()
 # %% 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
 # 8) Define policy from DP table and evaluate in the PPO env
-import numpy as np
-import torch
-
-from torchrl_bridge import create_element_env
-
-from tqdm import tqdm
-from collections import defaultdict
-from torchrl.envs.utils import set_exploration_type
-
 # DP action policy
 def action_policy_dp(obs, t_idx, DPtable, ncs):
     """
