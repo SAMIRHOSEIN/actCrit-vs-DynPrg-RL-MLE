@@ -163,7 +163,7 @@ print("Shape of Policy = (Horizon, State) =", best_policy.shape)
 fig, ax = plt.subplots(1,1, figsize=(7,4))
 for s in range(S):
     ax.plot(best_value[:, s], label=f'CS{s+1}')
-ax.set_title('DP Value function(end -> start)')
+ax.set_title('DP Value function(start -> end )')
 ax.set_xlabel('Time')
 ax.set_ylabel('Value')
 ax.legend()
@@ -173,13 +173,14 @@ plt.show()
 fig, ax = plt.subplots(1,1, figsize=(7,4))
 for s in range(S):
     ax.plot(best_policy[:, s], label=f'CS{s+1}')
-ax.set_title('DP Greedy Policy(end -> start)')
+ax.set_title('DP Greedy Policy(start -> end)')
 ax.set_xlabel('Time')
 ax.set_ylabel('Action ID')
+ax.set_yticks(np.arange(0, 5, 1))
+ax.set_xticks(np.arange(0, horizon+1, 1))   # explicit, redundant but crystal-clear
 ax.legend()
 plt.grid()
 plt.show()
-
 # %% 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
 # 8) Define policy from DP table and evaluate in the PPO env
@@ -298,7 +299,7 @@ if __name__ == '__main__':
     unique, counts = np.unique(all_actions, return_counts=True)
     action_distribution = {id2name.get(a, a): c for a, c in zip(unique, counts)}
     print(action_distribution)
-# %%
+
 #%%
 # action distribution summary
 all_actions = np.concatenate(logs["action"])
