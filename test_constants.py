@@ -62,12 +62,21 @@ ELE_PPO_RANDOM_STATE = 'off'
 
 actor_model = 'st'  # 'st', 'nn' soft tree or neural network
 
-# soft tree parameters
-depth_soft = 8 #5
-beta_soft = 1.0
-batchnorm_soft = False
 
-# network parameters
+if actor_model == 'st':
+    # soft tree parameters
+    depth_soft = 8 #5
+    beta_soft = 20.0 #20.0
+    batchnorm_soft = False
+
+    # --- Regularization on soft-tree actor (routing weights only) ---
+    ELE_PPO_REG_TYPE = "none"     # options: "none", "l1", "l2", "groupl1"
+    ELE_PPO_REG_LAMBDA = 1e-4     
+
+
+
+
+# network parameters(for neural network or soft tree  actor)
 ELE_PPO_TORCH_SEED = 0
 if ELE_PPO_INC_STEP:
     ELE_PPO_INPUT_DIM = NCS + 1
@@ -144,12 +153,15 @@ ELE_PPO_EVAL_EXPLORE_TYPE = ExplorationType.DETERMINISTIC # This must be determi
 # ELE_ACTOR_VERSION = '20251001-134624_nn' # my model with 1 horizon with reset prob [1,0,0,0,0] - neural network with 2 layers and 32 cells
 # ELE_ACTOR_VERSION = '20251001-135623_st' # my model with 1 horizon with reset prob [1,0,0,0,0] - soft tree with depth 8 and beta 1.0
 # ELE_ACTOR_VERSION = '20251001-141105_nn' # my model with 5 horizon with reset prob [1,0,0,0,0] - neural network with 2 layers and 32 cells
-ELE_ACTOR_VERSION = '20251001-142834_st' # my model with 5 horizon with reset prob [1,0,0,0,0] - soft tree with depth 8 and beta 1.0
+# ELE_ACTOR_VERSION = '20251001-142834_st' # my model with 5 horizon with reset prob [1,0,0,0,0] - soft tree with depth 8 and beta 1.0
 # ELE_ACTOR_VERSION = '20251001-150733_nn' # my model with 10 horizon with reset prob [1,0,0,0,0] - neural network with 2 layers and 32 cells
 # ELE_ACTOR_VERSION = '20251001-153504_st' # my model with 10 horizon with reset prob [1,0,0,0,0] - soft tree with depth 8 and beta 1.0
 
+# ELE_ACTOR_VERSION = '20251024-074359_st' # my model with 5 horizon with reset prob [1,0,0,0,0] - soft tree with depth 9 and beta 1.0
+ELE_ACTOR_VERSION = '20251025-180249_st' # my model with 5 horizon with reset prob [1,0,0,0,0] - soft tree with depth 8 and beta 20.0
+
 ELE_ACTOR_HORIZON = 5 #75
-# ELE_ACTOR_N_HORIZON = 1E
+# ELE_ACTOR_N_HORIZON = 1
 ELE_ACTOR_N_EPISODES = 1 # modified to avoid confusion
 ELE_ACTOR_MAX_COST = 1.0
 
@@ -338,7 +350,21 @@ ELE_GA_EXPLORE_TYPE_EVAL = ExplorationType.DETERMINISTIC
 
 
 # region: which actor model compared(leaning curve) for Plt_LC_nn_st.py ==================================
+
+# nn with 5 horizon and st with 5 horizon and depth=8 and beta=1.0
 ELE_ACTOR_VERSION_nn = '20251001-141105_nn'
 ELE_ACTOR_VERSION_st = '20251001-142834_st'
+
+# # nn with 5 horizon and st with 5 horizon and depth=9 and beta=1.0
+# ELE_ACTOR_VERSION_nn = '20251001-141105_nn'
+# ELE_ACTOR_VERSION_st = '20251024-074359_st'
+
+
+# # nn with 5 horizon and st with 5 horizon and depth=8 and beta=20.0
+# ELE_ACTOR_VERSION_nn = '20251001-141105_nn'
+# ELE_ACTOR_VERSION_st = '20251025-180249_st' # my model with 5 horizon with reset prob [1,0,0,0,0] - soft tree with depth 8 and beta 20.0
+
+
+
 WINDOW = 50  # for rolling average - integer
 # endregion ==============================================================
