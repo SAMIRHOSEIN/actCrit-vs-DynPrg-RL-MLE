@@ -1,5 +1,5 @@
 # %%
-# Final version to find the best match for alpha
+# imports
 import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
@@ -8,34 +8,31 @@ import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
 from matplotlib.colors import Normalize
 from matplotlib import cm
-
-
-# inputs
+########################################################
+# 0) inputs
+########################################################
 N_samples = 1000  # large so we see enough of the rare last state
 
 # p_hat from the code (empirical mean from X_real)
 # - n controls how “smooth” or “noisy” your synthetic samples are.
 #       - If n is small--------------->    n=1     ---------------> one-hot vector
 #       - If n is moderate-------------->  n=100  -------------->   smooth percentages, similar to real data
-#       - If n is huge --------------- >   n=1000  -------------->  almost exactly equal to p_hat (too smooth)(too smooth, no variability)
+#       - If n is huge --------------- >   n=1000  --------------->  almost exactly equal to p_hat (too smooth)(too smooth, no variability)
 # Also, The real dataset expresses condition states as proportions with two‐decimal accuracy(for example: 85 is 0.85), so n=100 is a good match.
+# In addition, I chose N_cells = 100 because one bridge deck can be interpreted as 100 virtual units, allowing me to approximate percentages with reasonable variability while keeping the variance consistent with real data.
 N_cells = 100
 
 
 file_path = './Datainfobridge/NBEExport_September_18_2025_12_51_19.txt'
 cols = ["CS_PERCENT_1", "CS_PERCENT_2", "CS_PERCENT_3", "CS_PERCENT_4"] # the name of columns in the data file
+df = pd.read_csv(file_path)
 
-rng = np.random.default_rng(43)  # reproducible random numbers
+# labels for covariance matrix and plots
+cs_labels = ["CS1", "CS2", "CS3", "CS4"]
 
+rng = np.random.default_rng(42)  # reproducible random numbers
 
-# Try to read as CSV (if it fails, try with sep="\t" for tab-delimited)
-try:
-    df = pd.read_csv(file_path)
-except Exception:
-    df = pd.read_csv(file_path, sep="\t")
-
-
-# clean NaNs immediately
+# clean NaNs
 df = df.dropna(subset=cols).copy()
 print(f"Number of bridges after dropping missing CS percentages: {len(df)}")
 
@@ -43,7 +40,9 @@ X = df[cols].values  # use this X for BOTH Dirichlet and Multinomial
 
 
 
-
+# Inputs for sanity check of dirichlet and multinomial
+alpha_true = np.array([2.0, 5.0, 3.0, 1.0])  # some asymmetric Dirichlet
+N_bridges = 5000   # number of synthetic "bridges"
 
 ########################################################
 # 1) Estimate Dirichlet parameters by MLE with L-BFGS-B
@@ -51,10 +50,8 @@ X = df[cols].values  # use this X for BOTH Dirichlet and Multinomial
 def prepare_prob_rows(X, eps=1e-8):
     """Ensure each row is strictly positive and sums to 1."""
     X = np.asarray(X, dtype=float)
-    if X.ndim != 2:
-        raise ValueError("X must be a 2D array (N, K).")
-    X = np.clip(X, eps, None) # Ensures all entries are at least eps to avoid zeros due to log(0)
-    X /= X.sum(axis=1, keepdims=True) # Renormalize each row for rows whose CS percentages don’t sum to 1 (sum of rows in original data may not be exactly 1)
+    X = np.clip(X, eps, None)           # Ensures all entries are at least eps to avoid zeros due to log(0)
+    X /= X.sum(axis=1, keepdims=True)   # Renormalize each row for rows whose CS percentages don’t sum to 1 (sum of rows in original data may not be exactly 1)
     return X
 
 
@@ -84,7 +81,7 @@ def dirichlet_nll_and_grad(alpha, S, N):
 
     # log-likelihood
     ll = N * (gammaln(a0) - np.sum(gammaln(alpha))) + np.dot(alpha - 1.0, S)
-    # gradient of log-likelihood, why we defined it?
+    # why we defined gradient of log-likelihood and why do we need this?
     # Optimization algorithms (like L-BFGS-B) use the gradient (the derivative with respect to alpha) to find the minimum much faster and more accurately.
     g = N * (psi(a0) - psi(alpha)) + S # Passing the analytic gradient to the optimizer makes it faster and more reliable(cause we use method="L-BFGS-B").
     # return negative for minimizer
@@ -175,8 +172,6 @@ print("Mean (alpha/sum):", alpha_hat / alpha_hat.sum())
 #########################################################################
 # 2) Estimate multinomial parameters 
 #########################################################################
-
-# ---------- 1) Utilities ----------
 def fit_multinomial_from_cs(X):
     """
     Estimate a global multinomial parameter vector p from CS_PERCENT columns.
@@ -191,81 +186,111 @@ def fit_multinomial_from_cs(X):
     p_hat : (K,) array
         Estimated probability of each condition state.
     """
-    X = prepare_prob_rows(X)       # convert percentages to probabilities
-    p_hat = X.mean(axis=0)         # average across bridges
-    p_hat /= p_hat.sum()           # just to be extra safe
+    X = prepare_prob_rows(X)       
+    p_hat = X.mean(axis=0)         
     return p_hat
 
-
-# ---------- 2) Load the real data and fit multinomial ----------
+# Load the real data and fit multinomial
 X = df[cols].values   # shape (N, 4)
-
 p_hat = fit_multinomial_from_cs(X)
 print("Estimated multinomial parameters p_hat:", p_hat)
 print("Check sum(p_hat):", p_hat.sum())
 
 # %%
-#################################################################
-# 3) Compare real data vs Dirichlet vs Multinomial (mean / std / plots)
-#################################################################
 
+###########################################################
+# 3) SANITY CHECK: Dirichlet + Multinomial on synthetic data
+###########################################################
 
-# 1) Prepare real data as probability rows
+def sanity_check_dirichlet_multinomial(alpha_true, N_bridges_test=5000, N_cells=100):
+    """
+    1) Pick a known Dirichlet parameter alpha_true.
+    2) Sample many compositions from Dirichlet(alpha_true).
+       - Fit Dirichlet with my MLE code and check that alpha_hat ≈ alpha_true.
+    3) Use p_true = alpha_true / sum(alpha_true) as the "true" multinomial p.
+        - Note: I consider p_true = alpha_true / sum(alpha_true) because in Dirichlet, the mean of each component is given by alpha_k / sum(alpha).
+       - Sample multinomial counts, convert to percentages.
+       - Fit multinomial with my code and check that p_hat ≈ p_true.
+    4) For Dirichlet, compare theoretical vs empirical variance/covariance.
+    """
+
+    # 1) Define ground-truth parameters
+    alpha0_true = alpha_true.sum()
+    p_true = alpha_true / alpha0_true           # mean of Dirichlet(the mean of each component is given by alpha_k / sum(alpha)) for multinominal check
+
+    # 2) Generate Dirichlet synthetic data 
+    X_dir_synth = rng.dirichlet(alpha_true, size=N_bridges_test)
+
+    # Fit Dirichlet using my MLE code
+    alpha_hat_test, _ = fit_dirichlet_mle_lbfgsb(X_dir_synth, verbose=False)
+
+    print("==============================================")
+    print("DIRICHLET SANITY CHECK (parameter recovery)")
+    print("==============================================")
+    print("alpha_true :", alpha_true)
+    print("alpha_hat  :", alpha_hat_test)
+    print("||alpha_hat - alpha_true||_2 =",
+          np.linalg.norm(alpha_hat_test - alpha_true))
+
+    # 3) Generate Multinomial synthetic data 
+    counts = rng.multinomial(N_cells, p_true, size=N_bridges_test)
+    X_multi_synth = counts / N_cells  # convert to fractions
+
+    p_hat_multi = fit_multinomial_from_cs(X_multi_synth)
+
+    print("\n==============================================")
+    print("MULTINOMIAL SANITY CHECK (parameter recovery)")
+    print("==============================================")
+    print("p_true      :", p_true)
+    print("p_hat_multi :", p_hat_multi)
+    print("||p_hat_multi - p_true||_2 =",
+          np.linalg.norm(p_hat_multi - p_true))
+
+# Call this once to run the sanity check:
+sanity_check_dirichlet_multinomial(alpha_true, N_bridges_test=N_bridges, N_cells=N_cells)
+
+#%%
+#################################################################
+# 4) Compare real data vs Dirichlet vs Multinomial (mean / std / plots)
+#################################################################
+# preparedness
 X_real = prepare_prob_rows(X)                 # shape (N_bridges, 4)
-mean_real = X_real.mean(axis=0)
-std_real  = X_real.std(axis=0, ddof=1) # delta degrees of freedom = used to get denominator N-ddof for sample std dev
 
+# 1-real data
+mean_real = X_real.mean(axis=0)
+std_real  = X_real.std(axis=0, ddof=1) 
+print("\n==============================================")
+print("Compare Real Data vs Dirichlet vs Multinomial")
+print("==============================================")
 print("=== Real data (CS percentages) ===")
 print("Mean per CS     :", mean_real)
 print("Std dev per CS  :", std_real)
 print()
 
-# 2) Sample from Dirichlet(alpha_hat)
-K = X_real.shape[1]
-dir_samples = rng.dirichlet(alpha_hat, size=N_samples)   # shape (N_samples, 4)
-
+# 2-Sampling and computing mean and std for Dirichlet(alpha_hat)
+dir_samples = rng.dirichlet(alpha_hat, size=N_samples)  
 mean_dir = dir_samples.mean(axis=0)
 std_dir  = dir_samples.std(axis=0, ddof=1)
-
 print("=== Dirichlet model ===")
 print("alpha_hat        :", alpha_hat)
 print("Mean per CS      :", mean_dir)
 print("Std dev per CS   :", std_dir)
 print()
 
-
-
-
-
-
-
-# 3) Sample from Multinomial(p_hat) 
+# 3- Sampling and computing mean and std for Multinomial(p_hat) 
 counts = rng.multinomial(N_cells, p_hat, size=N_samples)  # shape (N_samples, 4)
-multi_frac = counts / N_cells                              # now rows sum to 1
-
-# Use multi_frac instead of multi_samples in the rest of the analysis
-multi_samples = multi_frac
-
-
-
-
-
+multi_samples = counts / N_cells                           # now rows sum to 1
 mean_multi = multi_samples.mean(axis=0)
 std_multi  = multi_samples.std(axis=0, ddof=1)
-
 print(f"=== Multinomial composition model (N_cells = {N_cells}) ===")
 print("p_hat            :", p_hat)
 print("Mean per CS      :", mean_multi)
 print("Std dev per CS   :", std_multi)
 print()
-
-
-
 # %%
 #################################################################
-# 4) Covariance comparison: Real vs Dirichlet vs Multinomial
+# 5) Covariance comparison: Real vs Dirichlet vs Multinomial
 #################################################################
-
 def covariance_matrix(X):
     """
     Compute covariance matrix for probability vectors.
@@ -274,23 +299,16 @@ def covariance_matrix(X):
     """
     return np.cov(X.T, ddof=1)   # transpose so shape = (4, N)
 
-
-# Compute covariance matrices
 cov_real = covariance_matrix(X_real)                 # (N_real, 4)
 cov_dir  = covariance_matrix(dir_samples)            # (N_samples, 4)
 cov_multi = covariance_matrix(multi_samples)         # (N_samples, 4)
-
-
 #################################################################
 # 5) Display in pandas tables for clean formatting
 #################################################################
-import pandas as pd
 
-labels = ["CS1", "CS2", "CS3", "CS4"]
-
-df_cov_real  = pd.DataFrame(cov_real,  index=labels, columns=labels)
-df_cov_dir   = pd.DataFrame(cov_dir,   index=labels, columns=labels)
-df_cov_multi = pd.DataFrame(cov_multi, index=labels, columns=labels)
+df_cov_real  = pd.DataFrame(cov_real,  index=cs_labels, columns=cs_labels)
+df_cov_dir   = pd.DataFrame(cov_dir,   index=cs_labels, columns=cs_labels)
+df_cov_multi = pd.DataFrame(cov_multi, index=cs_labels, columns=cs_labels)
 
 print("======================================================")
 print("Covariance Matrix — REAL DATA")
@@ -313,15 +331,10 @@ print()
 #%%
 ###############################################################
 # 6) Ternary contour plots for (CS1, CS2, CS3_new = CS3 + CS4)
-# Figure 1: local scale (each plot its own z-range, 1×3)
-# Figure 2: shared scale (same z-range for all, 1×3)
+# Figure 1: scatter-only plots
+# Figure 2: local scale (each plot its own z-range, 1×3)
+# Figure 3: Same scale (same z-range for all, 1×3)
 ###############################################################
-from scipy.stats import gaussian_kde
-from matplotlib.colors import Normalize
-from matplotlib import cm
-
-# ---------- 1) Compress 4 CSs -> 3 CSs (CS1, CS2, CS3_new) ----------
-
 def compress_to_three(cs4_array):
     """
     cs4_array: (N, 4) with columns [CS1, CS2, CS3, CS4]
@@ -387,36 +400,127 @@ def compute_ternary_kde_grid(X3, n_grid=120):
     ys = np.array(ys)
     z = kde(np.vstack([xs, ys]))   # density on grid
 
-    return xs, ys, z
+    return xs, ys, z, x_data, y_data
 
 # ---------- 4) Compute KDE grids for all three datasets ----------
 
-xs_real,  ys_real,  z_real  = compute_ternary_kde_grid(X3_real,  n_grid=120)
-xs_dir,   ys_dir,   z_dir   = compute_ternary_kde_grid(X3_dir,   n_grid=120)
-xs_multi, ys_multi, z_multi = compute_ternary_kde_grid(X3_multi, n_grid=120)
+xs_real,  ys_real,  z_real,  x_real,  y_real = compute_ternary_kde_grid(X3_real,  n_grid=120)
+xs_dir,   ys_dir,   z_dir,   x_dir,   y_dir   = compute_ternary_kde_grid(X3_dir,   n_grid=120)
+xs_multi, ys_multi, z_multi, x_multi, y_multi = compute_ternary_kde_grid(X3_multi, n_grid=120)
 
 # Pack them for easier looping
 datasets = [
-    ("Real Data (CS1, CS2, CS3_new)", xs_real,  ys_real,  z_real),
-    ("Dirichlet Samples",             xs_dir,   ys_dir,   z_dir),
-    (f"Multinomial Samples (N_cells = {N_cells})", xs_multi, ys_multi, z_multi),
+    ("Real Data (CS1, CS2, CS3_new)", xs_real, ys_real, z_real, x_real, y_real),
+    ("Dirichlet Samples", xs_dir,  ys_dir,  z_dir,  x_dir,  y_dir),
+    (f"Multinomial Samples (N_cells = {N_cells})", xs_multi, ys_multi, z_multi, x_multi, y_multi),
 ]
 
-# ---------- 5) Shared density bounds across all three ----------
+# --------------------------------------------------
+# compute z_min and z_max from *only these datasets cause sometines I want to compare two of three distributionns
+# --------------------------------------------------
+z_min = min(z.min() for (_, _, _, z, _, _) in datasets)
+z_max = max(z.max() for (_, _, _, z, _, _) in datasets)
 
-z_all = np.concatenate([z_real, z_dir, z_multi])
-z_min, z_max = z_all.min(), z_all.max()
-norm = Normalize(vmin=z_min, vmax=z_max)
+norm  = Normalize(vmin=z_min, vmax=z_max)
+
+print("Same scale recomputed from selected datasets:")
+print("z_min:", z_min, "   z_max:", z_max)
+
+
+
+
+# ---------- 5) Same density bounds across all three ----------
 cmap = cm.viridis
 
 print("Global density range:", z_min, z_max)
 
+
+
+
+
+
+
+
+# ==========================================
+# FIGURE 1 — Scatter-only ternary plots
+# ==========================================
+fig_scatter, axes_scatter = plt.subplots(1, 3, figsize=(18, 5), facecolor="white")
+
+for ax, (title, xs, ys, z, x_data, y_data) in zip(axes_scatter, datasets):
+    # white background for each axis
+    ax.set_facecolor("white")
+
+    # dashed triangle border
+    tri_x = [0.0, 1.0, 0.5, 0.0]
+    tri_y = [0.0, 0.0, sqrt3/2, 0.0]
+    ax.plot(tri_x, tri_y, linestyle="--", color="black", lw=1.2)
+
+    # scatter points (use a visible color, small crosses)
+    ax.scatter(
+        x_data,
+        y_data,
+        s=6,
+        color="navy",
+        alpha=0.6,
+        marker="x",
+        linewidths=0.4,
+    )
+
+    # labels at vertices
+    ax.text(-0.04, -0.04, "CS1", ha="right", va="top", fontsize=10)
+    ax.text(1.04, -0.04, "CS2", ha="left",  va="top", fontsize=10)
+    ax.text(0.5,  sqrt3/2 + 0.06, "CS3_new",
+            ha="center", va="bottom", fontsize=10)
+
+    ax.set_aspect("equal")
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_title(title, fontsize=12)
+
+fig_scatter.suptitle("Ternary KDE — Scatter", fontsize=16, y=1.05)
+# plt.tight_layout()
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ###############################################################
-# FIGURE 1 — Local scale (each plot has its OWN colorbar)
+# FIGURE 2 — Local scale (each plot has its OWN colorbar)
 ###############################################################
 fig, axes = plt.subplots(1, 3, figsize=(18, 5))
 
-for ax, (title, xs, ys, z) in zip(axes, datasets):
+for ax, (title, xs, ys, z, _, _) in zip(axes, datasets):
 
     # Local normalization for *each* plot
     zmin_local, zmax_local = z.min(), z.max()
@@ -433,6 +537,15 @@ for ax, (title, xs, ys, z) in zip(axes, datasets):
     tri_y = [0.0, 0.0, sqrt3/2, 0.0]
     ax.plot(tri_x, tri_y, "k-", lw=1.2)
 
+
+
+    ax.text(-0.04, -0.04, "CS1", ha="right", va="top", fontsize=10)
+    ax.text(1.04, -0.04, "CS2", ha="left",  va="top", fontsize=10)
+    ax.text(0.5,  sqrt3/2 + 0.06, "CS3_new",
+            ha="center", va="bottom", fontsize=10)
+
+
+
     ax.set_aspect("equal")
     ax.set_xticks([])
     ax.set_yticks([])
@@ -447,18 +560,18 @@ for ax, (title, xs, ys, z) in zip(axes, datasets):
     cbar.set_label("Local Density", fontsize=10)
 
 fig.suptitle("Ternary KDE — LOCAL Density Scale", fontsize=16, y=1.05)
-plt.tight_layout()
+# plt.tight_layout()
 plt.show()
 
 
 ###############################################################
-# FIGURE 2 — Shared scale (one colorbar for ALL)
+# FIGURE 3 — Same scale (one colorbar for ALL)
 ###############################################################
 fig, axes = plt.subplots(1, 3, figsize=(18, 5))
 
 levels_shared = np.linspace(z_min, z_max, 20)
 
-for ax, (title, xs, ys, z) in zip(axes, datasets):
+for ax, (title, xs, ys, z, _, _) in zip(axes, datasets):
 
     sc = ax.tricontourf(xs, ys, z,
                         levels=levels_shared,
@@ -469,6 +582,15 @@ for ax, (title, xs, ys, z) in zip(axes, datasets):
     tri_x = [0.0, 1.0, 0.5, 0.0]
     tri_y = [0.0, 0.0, sqrt3/2, 0.0]
     ax.plot(tri_x, tri_y, "k-", lw=1.2)
+
+
+
+    ax.text(-0.04, -0.04, "CS1", ha="right", va="top", fontsize=10)
+    ax.text(1.04, -0.04, "CS2", ha="left",  va="top", fontsize=10)
+    ax.text(0.5,  sqrt3/2 + 0.06, "CS3_new",
+            ha="center", va="bottom", fontsize=10)
+
+
 
     ax.set_aspect("equal")
     ax.set_xticks([])
@@ -484,8 +606,8 @@ cbar = fig.colorbar(
 )
 cbar.set_label("Shared Density", fontsize=12)
 
-fig.suptitle("Ternary KDE — SHARED Density Scale", fontsize=16, y=1.05)
-plt.tight_layout()
+fig.suptitle("Ternary KDE — Same Density Scale", fontsize=16, y=1.05)
+# plt.tight_layout()
 plt.show()
 
 # %%
@@ -493,14 +615,13 @@ plt.show()
 # 7) 1D marginal distributions for each condition state
 #    Real vs Dirichlet vs Multinomial — SEPARATE FIGURES
 #################################################################
-
-cs_labels = ["CS1", "CS2", "CS3", "CS4"]
-
 N_plot = min(50_000, dir_samples.shape[0], multi_samples.shape[0])
 idx_plot = rng.choice(dir_samples.shape[0], size=N_plot, replace=False)
 
 dir_plot   = dir_samples[idx_plot]
 multi_plot = multi_samples[idx_plot]
+
+K = X_real.shape[1]
 
 for k in range(K):
 
@@ -534,6 +655,126 @@ for k in range(K):
     plt.ylabel("Density")
     plt.xlim(0, 1)
     plt.legend()
-    plt.tight_layout()
+    # plt.tight_layout()
     plt.show()
+# %%
+# ============================================================
+# 8) 3D ternary KDE surfaces (LOCAL density scale)
+# ============================================================
+fig_local = plt.figure(figsize=(18, 6))
+axes_3d_local = []
+
+for i, (title, xs, ys, z, _, _) in enumerate(datasets):
+    ax = fig_local.add_subplot(1, 3, i + 1, projection="3d")
+    axes_3d_local.append(ax)
+
+    # --- local norm and levels for THIS dataset only ---
+    zmin_local, zmax_local = z.min(), z.max()
+    norm_local = Normalize(vmin=zmin_local, vmax=zmax_local)
+
+    surf = ax.plot_trisurf(
+        xs,
+        ys,
+        z,
+        cmap=cmap,
+        norm=norm_local,     # <-- LOCAL scale here
+        linewidth=0.0,
+        antialiased=True,
+    )
+
+    ax.set_title(title, fontsize=11)
+    ax.set_xlabel("x")
+    ax.set_ylabel("y")
+    ax.set_zlabel("Density")
+
+    # triangle vertices in x–y plane
+    v1 = (0.0, 0.0)          # CS1
+    v2 = (1.0, 0.0)          # CS2
+    v3 = (0.5, np.sqrt(3)/2) # CS3_new
+    z_label = zmin_local - 0.02 * (zmax_local - zmin_local)
+
+    ax.text(v1[0], v1[1], z_label, "CS1",
+            ha="center", va="top", fontsize=11)
+    ax.text(v2[0], v2[1], z_label, "CS2",
+            ha="center", va="top", fontsize=11)
+    ax.text(v3[0], v3[1], z_label, "CS3_new",
+            ha="center", va="bottom", fontsize=11)
+
+    ax.set_zlim(zmin_local, zmax_local)
+
+    # local colorbar for THIS subplot
+    cbar_local = fig_local.colorbar(
+        cm.ScalarMappable(norm=norm_local, cmap=cmap),
+        ax=ax,
+        shrink=0.75,
+        location="right",
+    )
+    cbar_local.set_label("Local Density", fontsize=10)
+
+# plt.tight_layout()
+plt.show()
+
+# ============================================================
+# 9) 3D ternary KDE surfaces (shared density scale)
+# ============================================================
+
+fig = plt.figure(figsize=(18, 6))
+axes_3d = []
+
+levels_shared = np.linspace(z_min, z_max, 20)  # same as 2D shared plot
+
+for i, (title, xs, ys, z, _, _) in enumerate(datasets):
+    ax = fig.add_subplot(1, 3, i + 1, projection="3d")
+    axes_3d.append(ax)
+
+    # 3D surface over the triangular grid
+    surf = ax.plot_trisurf(
+        xs,
+        ys,
+        z,
+        cmap=cmap,
+        norm=norm,          # <-- same density scale for all three
+        linewidth=0.0,
+        antialiased=True,
+    )
+
+    ax.set_title(title, fontsize=11)
+    ax.set_xlabel("x")
+    ax.set_ylabel("y")
+    ax.set_zlabel("Density")
+
+
+    # triangle vertices in x–y plane
+    v1 = (0.0, 0.0)          # CS1
+    v2 = (1.0, 0.0)          # CS2
+    v3 = (0.5, np.sqrt(3)/2) # CS3_new
+
+    # place labels slightly above the triangle (z = z_min)
+    z_label = z_min - 0.02*(z_max - z_min)
+
+    ax.text(v1[0], v1[1], z_label, "CS1",
+            ha="center", va="top", fontsize=11)
+
+    ax.text(v2[0], v2[1], z_label, "CS2",
+            ha="center", va="top", fontsize=11)
+
+    ax.text(v3[0], v3[1], z_label, "CS3_new",
+            ha="center", va="bottom", fontsize=11)
+
+
+    # Same z-limits for comparability
+    ax.set_zlim(z_min, z_max)
+
+# One shared colorbar for all three 3D plots
+cbar = fig.colorbar(
+    cm.ScalarMappable(norm=norm, cmap=cmap),
+    ax=axes_3d,
+    shrink=0.75,
+    location="right"
+)
+cbar.set_label("Same Density Scale", fontsize=12)
+
+# fig.suptitle("Ternary KDE — 3D Surfaces with Same Density Scale", fontsize=16, y=0.95)
+# plt.tight_layout()
+plt.show()
 # %%
