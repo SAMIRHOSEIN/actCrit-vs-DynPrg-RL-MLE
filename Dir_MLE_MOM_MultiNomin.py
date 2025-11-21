@@ -364,8 +364,27 @@ def ternary_to_cartesian(X3):
     a = X3[:, 0]  # CS1
     b = X3[:, 1]  # CS2
     c = X3[:, 2]  # CS3_new
+
     x = b + 0.5 * c
     y = (sqrt3 / 2.0) * c
+    # How can I find the above equations?: 
+    # [ x ]   =   [ 0    1    1/2 ] [ a ]
+    # [ y ]       [ 0    0   √3/2 ] [ b ]
+    #                               [ c ]
+    # where:
+    #    a = CS1 
+    #    b = CS2 
+    #    c = CS3_new 
+    #
+    # Vertices:
+    #   CS1 → (0, 0)
+    #   CS2 → (1, 0)
+    #   CS3_new → (1/2, √3/2)
+    #
+    # Result:
+    #    x = b + 0.5 * c
+    #    y = (√3/2) * c
+
     return x, y
 
 # Compute KDE grid (xs, ys, z) for one dataset
