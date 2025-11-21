@@ -197,11 +197,9 @@ print("Estimated multinomial parameters p_hat:", p_hat)
 print("Check sum(p_hat):", p_hat.sum())
 
 # %%
-
 ###########################################################
 # 3) SANITY CHECK: Dirichlet + Multinomial on synthetic data
 ###########################################################
-
 def sanity_check_dirichlet_multinomial(alpha_true, N_bridges_test=5000, N_cells=100):
     """
     1) Pick a known Dirichlet parameter alpha_true.
@@ -248,7 +246,6 @@ def sanity_check_dirichlet_multinomial(alpha_true, N_bridges_test=5000, N_cells=
 
 # Call this once to run the sanity check:
 sanity_check_dirichlet_multinomial(alpha_true, N_bridges_test=N_bridges, N_cells=N_cells)
-
 #%%
 #################################################################
 # 4) Compare real data vs Dirichlet vs Multinomial (mean / std / plots)
@@ -353,17 +350,16 @@ X3_multi = compress_to_three(multi_samples)
 
 sqrt3 = np.sqrt(3.0)
 
-# ---------- 2) Barycentric -> 2D coordinates for ternary plot ----------
-
+# Barycentric to 2D coordinates(Cartesian) for ternary plot 
 def ternary_to_cartesian(X3):
     """
     Map 3-component compositions (a,b,c), a+b+c=1,
     to 2D coordinates in an equilateral triangle.
 
-    Vertices:
-      CS1 -> (0, 0)
-      CS2 -> (1, 0)
-      CS3_new -> (0.5, sqrt(3)/2)
+    [CS1  CS2  CS3_new] = (a, b, c) -----> (x,y):
+        CS1: (1,0,0) -> (0,0)
+        CS2: (0,1,0) -> (1,0)
+        CS3_new: (0,0,1) -> (0.5, sqrt(3)/2)
     """
     a = X3[:, 0]  # CS1
     b = X3[:, 1]  # CS2
@@ -372,23 +368,24 @@ def ternary_to_cartesian(X3):
     y = (sqrt3 / 2.0) * c
     return x, y
 
-# ---------- 3) Compute KDE grid (xs, ys, z) for one dataset ----------
-
+# Compute KDE grid (xs, ys, z) for one dataset
 def compute_ternary_kde_grid(X3, n_grid=120):
     """
     X3: (N, 3), rows sum to 1
     Returns: xs, ys, z on a triangular grid.
+
     """
     X3 = X3 / X3.sum(axis=1, keepdims=True)
     x_data, y_data = ternary_to_cartesian(X3)
     data_xy = np.vstack([x_data, y_data])
 
-    kde = gaussian_kde(data_xy)
+    kde = gaussian_kde(data_xy) # probability density estimator
 
     xs, ys = [], []
     for i in range(n_grid + 1):
         for j in range(n_grid + 1 - i):
             k = n_grid - i - j
+            # Generates all points inside the triangle using barycentric coordinates
             a = i / n_grid
             b = j / n_grid
             c = k / n_grid
@@ -402,8 +399,7 @@ def compute_ternary_kde_grid(X3, n_grid=120):
 
     return xs, ys, z, x_data, y_data
 
-# ---------- 4) Compute KDE grids for all three datasets ----------
-
+# Compute KDE grids for all three datasets
 xs_real,  ys_real,  z_real,  x_real,  y_real = compute_ternary_kde_grid(X3_real,  n_grid=120)
 xs_dir,   ys_dir,   z_dir,   x_dir,   y_dir   = compute_ternary_kde_grid(X3_dir,   n_grid=120)
 xs_multi, ys_multi, z_multi, x_multi, y_multi = compute_ternary_kde_grid(X3_multi, n_grid=120)
@@ -415,31 +411,15 @@ datasets = [
     (f"Multinomial Samples (N_cells = {N_cells})", xs_multi, ys_multi, z_multi, x_multi, y_multi),
 ]
 
-# --------------------------------------------------
 # compute z_min and z_max from *only these datasets cause sometines I want to compare two of three distributionns
-# --------------------------------------------------
 z_min = min(z.min() for (_, _, _, z, _, _) in datasets)
 z_max = max(z.max() for (_, _, _, z, _, _) in datasets)
-
 norm  = Normalize(vmin=z_min, vmax=z_max)
+# print("Same scale recomputed from selected datasets:")
+# print("z_min:", z_min, "   z_max:", z_max)
 
-print("Same scale recomputed from selected datasets:")
-print("z_min:", z_min, "   z_max:", z_max)
-
-
-
-
-# ---------- 5) Same density bounds across all three ----------
+# Same density bounds across all three 
 cmap = cm.viridis
-
-print("Global density range:", z_min, z_max)
-
-
-
-
-
-
-
 
 # ==========================================
 # FIGURE 1 — Scatter-only ternary plots
@@ -482,39 +462,6 @@ fig_scatter.suptitle("Ternary KDE — Scatter", fontsize=16, y=1.05)
 plt.show()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ###############################################################
 # FIGURE 2 — Local scale (each plot has its OWN colorbar)
 ###############################################################
@@ -537,14 +484,10 @@ for ax, (title, xs, ys, z, _, _) in zip(axes, datasets):
     tri_y = [0.0, 0.0, sqrt3/2, 0.0]
     ax.plot(tri_x, tri_y, "k-", lw=1.2)
 
-
-
     ax.text(-0.04, -0.04, "CS1", ha="right", va="top", fontsize=10)
     ax.text(1.04, -0.04, "CS2", ha="left",  va="top", fontsize=10)
     ax.text(0.5,  sqrt3/2 + 0.06, "CS3_new",
             ha="center", va="bottom", fontsize=10)
-
-
 
     ax.set_aspect("equal")
     ax.set_xticks([])
@@ -562,7 +505,6 @@ for ax, (title, xs, ys, z, _, _) in zip(axes, datasets):
 fig.suptitle("Ternary KDE — LOCAL Density Scale", fontsize=16, y=1.05)
 # plt.tight_layout()
 plt.show()
-
 
 ###############################################################
 # FIGURE 3 — Same scale (one colorbar for ALL)
@@ -583,14 +525,10 @@ for ax, (title, xs, ys, z, _, _) in zip(axes, datasets):
     tri_y = [0.0, 0.0, sqrt3/2, 0.0]
     ax.plot(tri_x, tri_y, "k-", lw=1.2)
 
-
-
     ax.text(-0.04, -0.04, "CS1", ha="right", va="top", fontsize=10)
     ax.text(1.04, -0.04, "CS2", ha="left",  va="top", fontsize=10)
     ax.text(0.5,  sqrt3/2 + 0.06, "CS3_new",
             ha="center", va="bottom", fontsize=10)
-
-
 
     ax.set_aspect("equal")
     ax.set_xticks([])
@@ -658,9 +596,9 @@ for k in range(K):
     # plt.tight_layout()
     plt.show()
 # %%
-# ============================================================
+#################################################################
 # 8) 3D ternary KDE surfaces (LOCAL density scale)
-# ============================================================
+#################################################################
 fig_local = plt.figure(figsize=(18, 6))
 axes_3d_local = []
 
@@ -668,7 +606,7 @@ for i, (title, xs, ys, z, _, _) in enumerate(datasets):
     ax = fig_local.add_subplot(1, 3, i + 1, projection="3d")
     axes_3d_local.append(ax)
 
-    # --- local norm and levels for THIS dataset only ---
+    # local norm and levels for THIS dataset only
     zmin_local, zmax_local = z.min(), z.max()
     norm_local = Normalize(vmin=zmin_local, vmax=zmax_local)
 
@@ -714,9 +652,9 @@ for i, (title, xs, ys, z, _, _) in enumerate(datasets):
 # plt.tight_layout()
 plt.show()
 
-# ============================================================
+#################################################################
 # 9) 3D ternary KDE surfaces (shared density scale)
-# ============================================================
+#################################################################
 
 fig = plt.figure(figsize=(18, 6))
 axes_3d = []
@@ -733,7 +671,7 @@ for i, (title, xs, ys, z, _, _) in enumerate(datasets):
         ys,
         z,
         cmap=cmap,
-        norm=norm,          # <-- same density scale for all three
+        norm=norm,          # same density scale for all three
         linewidth=0.0,
         antialiased=True,
     )
