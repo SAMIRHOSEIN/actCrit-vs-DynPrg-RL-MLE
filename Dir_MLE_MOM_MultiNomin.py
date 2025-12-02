@@ -96,6 +96,10 @@ def method_of_moments_init(X, var_min=1e-12, alpha0_min=1e-2, alpha0_max=1e6):
     2) var_k = var of X[:,k]
     3) alpha0 ≈ median_k( mu_k*(1-mu_k)/var_k - 1 ), clipped
     4) alpha_k = mu_k * alpha0
+
+    Why these equations?
+    - proof for alpha = mu * alpha0: Mean of Dirichlet component k = E[X_k] = alpha_k / alpha0 (ref: https://www.geeksforgeeks.org/machine-learning/dirichlet-distribution/)
+    - proof for alpha0: look at the Minka's paper(http://machinelearningtext.pbworks.com/w/file/fetch/47924744/minka-dirichletEst.pdf) presents Equation (23) which is based on the relationship derived by Ronning (1989)(https://www.tandfonline.com/doi/pdf/10.1080/00949658908811178)
     """
     mu = X.mean(axis=0) # for each column, mean of each condition states
     var = X.var(axis=0, ddof=1) # for each column
@@ -425,9 +429,9 @@ xs_multi, ys_multi, z_multi, x_multi, y_multi = compute_ternary_kde_grid(X3_mult
 
 # Pack them for easier looping
 datasets = [
-    ("Real Data (CS1, CS2, CS3_new)", xs_real, ys_real, z_real, x_real, y_real),
-    ("Dirichlet Samples", xs_dir,  ys_dir,  z_dir,  x_dir,  y_dir),
-    (f"Multinomial Samples (N_cells = {N_cells})", xs_multi, ys_multi, z_multi, x_multi, y_multi),
+    (f"Real Data(Num_Data={X3_real.shape[0]})", xs_real, ys_real, z_real, x_real, y_real),
+    (f"Dirichlet Samples(Num_Samples={X3_dir.shape[0]})", xs_dir,  ys_dir,  z_dir,  x_dir,  y_dir),
+    (f"Multinomial Samples(Num_Samples={X3_multi.shape[0]})", xs_multi, ys_multi, z_multi, x_multi, y_multi),
 ]
 
 # compute z_min and z_max from *only these datasets cause sometines I want to compare two of three distributionns
@@ -474,7 +478,14 @@ for ax, (title, xs, ys, z, x_data, y_data) in zip(axes_scatter, datasets):
     ax.set_aspect("equal")
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title(title, fontsize=12)
+    ax.text(
+        0.5,                      # x-position (same as CS3_new x)
+        sqrt3/2 + 0.10,           # y-position (slightly above CS3_new)
+        title,
+        ha="center",
+        va="bottom",
+        fontsize=12
+    )
 
 fig_scatter.suptitle("Ternary KDE — Scatter", fontsize=16, y=1.05)
 # plt.tight_layout()
@@ -511,7 +522,15 @@ for ax, (title, xs, ys, z, _, _) in zip(axes, datasets):
     ax.set_aspect("equal")
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title(title, fontsize=12)
+    ax.text(
+        0.5,                      # x-position (same as CS3_new x)
+        sqrt3/2 + 0.10,           # y-position (slightly above CS3_new)
+        title,
+        ha="center",
+        va="bottom",
+        fontsize=12
+    )
+
 
     # Local colorbar for this subplot
     cbar = fig.colorbar(
@@ -552,7 +571,14 @@ for ax, (title, xs, ys, z, _, _) in zip(axes, datasets):
     ax.set_aspect("equal")
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title(title, fontsize=12)
+    ax.text(
+        0.5,                      # x-position (same as CS3_new x)
+        sqrt3/2 + 0.10,           # y-position (slightly above CS3_new)
+        title,
+        ha="center",
+        va="bottom",
+        fontsize=12
+    )
 
 # Shared colorbar on the right
 cbar = fig.colorbar(
@@ -588,7 +614,7 @@ for k in range(K):
         bins=50, range=(0, 1),
         density=True, alpha=0.6,
         color="red",
-        label="Real data"
+        label="Real data()"
     )
 
     plt.hist(
