@@ -11,7 +11,7 @@ from matplotlib import cm
 ########################################################
 # 0) inputs
 ########################################################
-N_samples = 1000  # large so we see enough of the rare last state
+N_samples = 1000000  # large so we see enough of the rare last state
 
 # p_hat from the code (empirical mean from X_real)
 # - n controls how “smooth” or “noisy” your synthetic samples are.
@@ -304,7 +304,7 @@ cov_real = covariance_matrix(X_real)                 # (N_real, 4)
 cov_dir  = covariance_matrix(dir_samples)            # (N_samples, 4)
 cov_multi = covariance_matrix(multi_samples)         # (N_samples, 4)
 #################################################################
-# 5) Display in pandas tables for clean formatting
+# Display in pandas tables for clean formatting
 #################################################################
 
 df_cov_real  = pd.DataFrame(cov_real,  index=cs_labels, columns=cs_labels)
@@ -330,12 +330,138 @@ print(df_cov_multi)
 print()
 
 #%%
+# # ###############################################################
+# # 6.1 ) Ternary contour plots for (CS1, CS2, CS3_new = CS3 + CS4)
+# # Steps:
+# # 1) Compress 4-CS real data to 3-CS.
+# # 2) Already, Fit Dirichlet and Multinomial on 4-CS data and generate 3-CS samples from these models.
+# # 3) For visualization, use gaussian_kde for real, Dirichlet samples, and Multinomial samples.
+# # Figure 1: scatter-only plots
+# # Figure 2: local scale (each plot its own z-range, 1×3)
+# # Figure 3: Same scale (same z-range for all, 1×3)
+# ###############################################################
+# def compress_to_three(cs4_array):
+#     """
+#     cs4_array: (N, 4) with columns [CS1, CS2, CS3, CS4]
+#     Returns: (N, 3) with [CS1, CS2, CS3_new = CS3 + CS4], row-normalized.
+#     """
+#     cs1 = cs4_array[:, 0]
+#     cs2 = cs4_array[:, 1]
+#     cs3_new = cs4_array[:, 2] + cs4_array[:, 3]
+#     X3 = np.stack([cs1, cs2, cs3_new], axis=1)
+#     X3 = X3 / X3.sum(axis=1, keepdims=True)
+#     return X3
+
+# X3_real  = compress_to_three(X_real)
+# X3_dir   = compress_to_three(dir_samples)
+# X3_multi = compress_to_three(multi_samples)
+
+# sqrt3 = np.sqrt(3.0)
+
+# # Barycentric to 2D coordinates(Cartesian) for ternary plot 
+# def ternary_to_cartesian(X3):
+#     """
+#     Map 3-component compositions (a,b,c), a+b+c=1,
+#     to 2D coordinates in an equilateral triangle.
+
+#     [CS1  CS2  CS3_new] = (a, b, c) -----> (x,y):
+#         CS1: (1,0,0) -> (0,0)
+#         CS2: (0,1,0) -> (1,0)
+#         CS3_new: (0,0,1) -> (0.5, sqrt(3)/2)
+#     """
+#     a = X3[:, 0]  # CS1
+#     b = X3[:, 1]  # CS2
+#     c = X3[:, 2]  # CS3_new
+
+#     x = b + 0.5 * c
+#     y = (sqrt3 / 2.0) * c
+#     # How can I find the above equations?: 
+#     # [ x ]   =   [ 0    1    1/2 ] [ a ]
+#     # [ y ]       [ 0    0   √3/2 ] [ b ]
+#     #                               [ c ]
+#     # where:
+#     #    a = CS1 
+#     #    b = CS2 
+#     #    c = CS3_new 
+#     #
+#     # Vertices:
+#     #   CS1 → (0, 0)
+#     #   CS2 → (1, 0)
+#     #   CS3_new → (1/2, √3/2)
+#     #
+#     # Result:
+#     #    x = b + 0.5 * c
+#     #    y = (√3/2) * c
+
+#     return x, y
+
+# # Compute KDE grid (xs, ys, z) for one dataset
+# def compute_ternary_kde_grid(X3, n_grid=120):
+#     """
+#     X3: (N, 3), rows sum to 1
+#     Returns: xs, ys, z on a triangular grid.
+
+#     """
+#     X3 = X3 / X3.sum(axis=1, keepdims=True)
+#     x_data, y_data = ternary_to_cartesian(X3)
+#     data_xy = np.vstack([x_data, y_data])
+
+#     kde = gaussian_kde(data_xy) # probability density estimator
+
+#     xs, ys = [], []
+#     for i in range(n_grid + 1):
+#         for j in range(n_grid + 1 - i):
+#             k = n_grid - i - j
+#             # Generates all points inside the triangle using barycentric coordinates
+#             a = i / n_grid
+#             b = j / n_grid
+#             c = k / n_grid
+#             xy = ternary_to_cartesian(np.array([[a, b, c]]))
+#             xs.append(xy[0][0])
+#             ys.append(xy[1][0])
+
+#     xs = np.array(xs)
+#     ys = np.array(ys)
+#     z = kde(np.vstack([xs, ys]))   # density on grid
+
+#     return xs, ys, z, x_data, y_data
+
+# # Compute KDE grids for all three datasets
+# xs_real,  ys_real,  z_real,  x_real,  y_real = compute_ternary_kde_grid(X3_real,  n_grid=120)
+# xs_dir,   ys_dir,   z_dir,   x_dir,   y_dir   = compute_ternary_kde_grid(X3_dir,   n_grid=120)
+# xs_multi, ys_multi, z_multi, x_multi, y_multi = compute_ternary_kde_grid(X3_multi, n_grid=120)
+
+# # Pack them for easier looping
+# datasets = [
+#     (f"Real Data(Num_Data={X3_real.shape[0]})", xs_real, ys_real, z_real, x_real, y_real),
+#     (f"Dirichlet Samples(Num_Samples={X3_dir.shape[0]})", xs_dir,  ys_dir,  z_dir,  x_dir,  y_dir),
+#     (f"Multinomial Samples(Num_Samples={X3_multi.shape[0]})", xs_multi, ys_multi, z_multi, x_multi, y_multi),
+# ]
+
+# # compute z_min and z_max from *only these datasets cause sometines I want to compare two of three distributionns
+# z_min = min(z.min() for (_, _, _, z, _, _) in datasets)
+# z_max = max(z.max() for (_, _, _, z, _, _) in datasets)
+# norm  = Normalize(vmin=z_min, vmax=z_max)
+# # print("Same scale recomputed from selected datasets:")
+# # print("z_min:", z_min, "   z_max:", z_max)
+
+# # Same density bounds across all three 
+# cmap = cm.viridis
+
+
+#%%
 ###############################################################
-# 6) Ternary contour plots for (CS1, CS2, CS3_new = CS3 + CS4)
-# Figure 1: scatter-only plots
-# Figure 2: local scale (each plot its own z-range, 1×3)
-# Figure 3: Same scale (same z-range for all, 1×3)
+# 6.2) 3-CS ternary KDE using Gaussian KDE for all datasets
+# Steps:
+# 1) Compress 4-CS real data to 3-CS.(new step compared to previous section 6.1)
+# 2) Fit Dirichlet(alpha_hat_3) and Multinomial(p_hat_3) on 3-CS data.(new step compared to previous section 6.1)
+# 3) Generate 3-CS samples from these models.(new step compared to previous section 6.1)
+# 4) For visualization, use gaussian_kde for real, Dirichlet samples, and Multinomial samples.
 ###############################################################
+
+# preparedness
+X_real = prepare_prob_rows(X)                 # shape (N_bridges, 4)
+
 def compress_to_three(cs4_array):
     """
     cs4_array: (N, 4) with columns [CS1, CS2, CS3, CS4]
@@ -348,13 +474,19 @@ def compress_to_three(cs4_array):
     X3 = X3 / X3.sum(axis=1, keepdims=True)
     return X3
 
-X3_real  = compress_to_three(X_real)
-X3_dir   = compress_to_three(dir_samples)
-X3_multi = compress_to_three(multi_samples)
+# 3-CS version of the real data (this is what we fit in ternary part)
+X3_real = compress_to_three(X_real)
+
+# Fit Dirichlet and Multinomial on the 3-CS compressed data 
+alpha_hat_3, _ = fit_dirichlet_mle_lbfgsb(X3_real)
+print("3-CS Dirichlet alpha_hat_3:", alpha_hat_3)
+print("3-CS mean (alpha/sum):", alpha_hat_3 / alpha_hat_3.sum())
+
+p_hat_3 = fit_multinomial_from_cs(X3_real)
+print("3-CS multinomial p_hat_3:", p_hat_3, "sum =", p_hat_3.sum())
 
 sqrt3 = np.sqrt(3.0)
 
-# Barycentric to 2D coordinates(Cartesian) for ternary plot 
 def ternary_to_cartesian(X3):
     """
     Map 3-component compositions (a,b,c), a+b+c=1,
@@ -371,38 +503,18 @@ def ternary_to_cartesian(X3):
 
     x = b + 0.5 * c
     y = (sqrt3 / 2.0) * c
-    # How can I find the above equations?: 
-    # [ x ]   =   [ 0    1    1/2 ] [ a ]
-    # [ y ]       [ 0    0   √3/2 ] [ b ]
-    #                               [ c ]
-    # where:
-    #    a = CS1 
-    #    b = CS2 
-    #    c = CS3_new 
-    #
-    # Vertices:
-    #   CS1 → (0, 0)
-    #   CS2 → (1, 0)
-    #   CS3_new → (1/2, √3/2)
-    #
-    # Result:
-    #    x = b + 0.5 * c
-    #    y = (√3/2) * c
-
     return x, y
 
-# Compute KDE grid (xs, ys, z) for one dataset
 def compute_ternary_kde_grid(X3, n_grid=120):
     """
     X3: (N, 3), rows sum to 1
-    Returns: xs, ys, z on a triangular grid.
-
+    Returns: xs, ys, z on a triangular grid, plus the original (x_data, y_data).
     """
     X3 = X3 / X3.sum(axis=1, keepdims=True)
     x_data, y_data = ternary_to_cartesian(X3)
     data_xy = np.vstack([x_data, y_data])
 
-    kde = gaussian_kde(data_xy) # probability density estimator
+    kde = gaussian_kde(data_xy)  # probability density estimator
 
     xs, ys = [], []
     for i in range(n_grid + 1):
@@ -422,27 +534,264 @@ def compute_ternary_kde_grid(X3, n_grid=120):
 
     return xs, ys, z, x_data, y_data
 
-# Compute KDE grids for all three datasets
-xs_real,  ys_real,  z_real,  x_real,  y_real = compute_ternary_kde_grid(X3_real,  n_grid=120)
-xs_dir,   ys_dir,   z_dir,   x_dir,   y_dir   = compute_ternary_kde_grid(X3_dir,   n_grid=120)
-xs_multi, ys_multi, z_multi, x_multi, y_multi = compute_ternary_kde_grid(X3_multi, n_grid=120)
+
+# Dirichlet samples in 3-CS space
+X3_dir_samples = rng.dirichlet(alpha_hat_3, size=N_samples)
+
+# Multinomial samples in 3-CS space (convert counts to fractions)
+counts_3 = rng.multinomial(N_cells, p_hat_3, size=N_samples)
+X3_multi_samples = counts_3 / N_cells
+
+# --- Compute KDE grids for all three datasets (REAL + two models) ---
+
+xs_real,  ys_real,  z_real,  x_real,  y_real  = compute_ternary_kde_grid(X3_real,          n_grid=120)
+xs_dir,   ys_dir,   z_dir,   x_dir,   y_dir   = compute_ternary_kde_grid(X3_dir_samples,   n_grid=120)
+xs_multi, ys_multi, z_multi, x_multi, y_multi = compute_ternary_kde_grid(X3_multi_samples, n_grid=120)
 
 # Pack them for easier looping
 datasets = [
-    (f"Real Data(Num_Data={X3_real.shape[0]})", xs_real, ys_real, z_real, x_real, y_real),
-    (f"Dirichlet Samples(Num_Samples={X3_dir.shape[0]})", xs_dir,  ys_dir,  z_dir,  x_dir,  y_dir),
-    (f"Multinomial Samples(Num_Samples={X3_multi.shape[0]})", xs_multi, ys_multi, z_multi, x_multi, y_multi),
+    (f"Real Data(Num_Data={X3_real.shape[0]})",
+     xs_real,  ys_real,  z_real,  x_real,  y_real),
+    (f"Dirichlet Samples(Num_Samples={X3_dir_samples.shape[0]})",
+     xs_dir,   ys_dir,   z_dir,   x_dir,   y_dir),
+    (f"Multinomial Samples(Num_Samples={X3_multi_samples.shape[0]})",
+     xs_multi, ys_multi, z_multi, x_multi, y_multi),
 ]
 
-# compute z_min and z_max from *only these datasets cause sometines I want to compare two of three distributionns
+# compute z_min and z_max from these datasets for shared-scale figure
 z_min = min(z.min() for (_, _, _, z, _, _) in datasets)
 z_max = max(z.max() for (_, _, _, z, _, _) in datasets)
 norm  = Normalize(vmin=z_min, vmax=z_max)
-# print("Same scale recomputed from selected datasets:")
-# print("z_min:", z_min, "   z_max:", z_max)
 
-# Same density bounds across all three 
 cmap = cm.viridis
+
+
+# #%%
+# ###############################################################
+# # New 6.3) 
+# # This is similar to 6.2, but here I use theoritical PDF for Dirichlet and PMF for Multinomial instead of guassian_kde, 
+# # and use guassian_kde only for real data.
+# ###############################################################
+
+# plot_KDT = 'scaleto1' # 'original' or 'scaleto1'
+
+# from scipy.stats import dirichlet
+# from scipy.stats import multinomial
+
+# # preparedness
+# X_real = prepare_prob_rows(X)                 # shape (N_bridges, 4)
+
+# def compress_to_three(cs4_array):
+#     """
+#     cs4_array: (N, 4) with columns [CS1, CS2, CS3, CS4]
+#     Returns: (N, 3) with [CS1, CS2, CS3_new = CS3 + CS4], row-normalized.
+#     """
+#     cs1 = cs4_array[:, 0]
+#     cs2 = cs4_array[:, 1]
+#     cs3_new = cs4_array[:, 2] + cs4_array[:, 3]
+#     X3 = np.stack([cs1, cs2, cs3_new], axis=1)
+#     X3 = X3 / X3.sum(axis=1, keepdims=True)
+#     return X3
+
+# # 3-CS version of the real data (this is what we fit in ternary part)
+# X3_real = compress_to_three(X_real)
+
+
+
+# # Fit Dirichlet on the 3-CS compressed data
+# alpha_hat_3, _ = fit_dirichlet_mle_lbfgsb(X3_real)
+# print("3-CS Dirichlet alpha_hat_3:", alpha_hat_3)
+# print("3-CS mean (alpha/sum):", alpha_hat_3 / alpha_hat_3.sum())
+
+# # Fit Multinomial on the 3-CS data
+# p_hat_3 = fit_multinomial_from_cs(X3_real)
+# print("3-CS multinomial p_hat_3:", p_hat_3, "sum =", p_hat_3.sum())
+
+
+
+# sqrt3 = np.sqrt(3.0)
+
+# # Barycentric to 2D coordinates(Cartesian) for ternary plot 
+# def ternary_to_cartesian(X3):
+#     """
+#     Map 3-component compositions (a,b,c), a+b+c=1,
+#     to 2D coordinates in an equilateral triangle.
+
+#     [CS1  CS2  CS3_new] = (a, b, c) -----> (x,y):
+#         CS1: (1,0,0) -> (0,0)
+#         CS2: (0,1,0) -> (1,0)
+#         CS3_new: (0,0,1) -> (0.5, sqrt(3)/2)
+#     """
+#     a = X3[:, 0]  # CS1
+#     b = X3[:, 1]  # CS2
+#     c = X3[:, 2]  # CS3_new
+
+#     x = b + 0.5 * c
+#     y = (sqrt3 / 2.0) * c
+#     # How can I find the above equations?: 
+#     # [ x ]   =   [ 0    1    1/2 ] [ a ]
+#     # [ y ]       [ 0    0   √3/2 ] [ b ]
+#     #                               [ c ]
+#     # where:
+#     #    a = CS1 
+#     #    b = CS2 
+#     #    c = CS3_new 
+#     #
+#     # Vertices:
+#     #   CS1 → (0, 0)
+#     #   CS2 → (1, 0)
+#     #   CS3_new → (1/2, √3/2)
+#     #
+#     # Result:
+#     #    x = b + 0.5 * c
+#     #    y = (√3/2) * c
+
+#     return x, y
+
+
+
+# # REAL DATA: KDE in 2D 
+# def compute_real_kde_grid(X3, n_grid=120):
+#     """
+#     Real data: estimate 2D density on the ternary simplex with Gaussian KDE.
+#     """
+#     X3 = X3 / X3.sum(axis=1, keepdims=True)
+#     x_data, y_data = ternary_to_cartesian(X3)
+#     data_xy = np.vstack([x_data, y_data])
+#     kde = gaussian_kde(data_xy)
+
+#     xs, ys = [], []
+#     bary = []  # store (a,b,c) too, in case you want them
+#     for i in range(n_grid + 1):
+#         for j in range(n_grid + 1 - i):
+#             k = n_grid - i - j
+#             a = i / n_grid
+#             b = j / n_grid
+#             c = k / n_grid
+#             bary.append((a, b, c))
+#             xy = ternary_to_cartesian(np.array([[a, b, c]]))
+#             xs.append(xy[0][0])
+#             ys.append(xy[1][0])
+
+#     xs = np.array(xs)
+#     ys = np.array(ys)
+#     z = kde(np.vstack([xs, ys]))
+
+#     return xs, ys, z, x_data, y_data
+
+
+
+# # DIRICHLET: analytic pdf on simplex
+# def dirichlet_pdf_grid(alpha, n_grid=120, eps=1e-12):
+#     alpha = np.asarray(alpha, dtype=float)
+
+#     xs, ys, zs = [], [], []
+
+#     for i in range(n_grid + 1):
+#         for j in range(n_grid + 1 - i):
+#             k = n_grid - i - j
+#             a = i / n_grid
+#             b = j / n_grid
+#             c = k / n_grid
+#             x_vec = np.array([a, b, c])
+#             x_vec = np.clip(x_vec, eps, 1.0)
+
+#             log_pdf = dirichlet.logpdf(x_vec, alpha)   # For drichlet due to gamma function, we use log scale for numerical stability
+#             pdf = np.exp(log_pdf)
+
+#             xy = ternary_to_cartesian(x_vec[np.newaxis, :])
+#             xs.append(xy[0][0])
+#             ys.append(xy[1][0])
+#             zs.append(pdf)
+
+#     return np.array(xs), np.array(ys), np.array(zs)
+
+
+
+# # MULTINOMIAL: theoretical pmf over compositions
+# def multinomial_pmf_grid(p, N_cells=100, n_grid=120, eps=1e-12):
+#     p = np.asarray(p, dtype=float)
+#     p = np.clip(p, eps, 1.0)
+#     p = p / p.sum()
+
+#     xs, ys, zs = [], [], []
+
+#     for i in range(n_grid + 1):
+#         for j in range(n_grid + 1 - i):
+#             k = n_grid - i - j
+#             a = i / n_grid
+#             b = j / n_grid
+#             c = k / n_grid
+#             x_vec = np.array([a, b, c])
+
+#             n = np.round(N_cells * x_vec).astype(int) # convert back to counts
+#             diff = N_cells - n.sum()
+#             if diff != 0:
+#                 idx = np.argmax(n)
+#                 n[idx] += diff
+
+#             pmf = multinomial.pmf(n, N_cells, p)     # pmf because multinomial is discrete distribution
+
+#             xy = ternary_to_cartesian(x_vec[np.newaxis, :])
+#             xs.append(xy[0][0])
+#             ys.append(xy[1][0])
+#             zs.append(pmf)
+
+#     return np.array(xs), np.array(ys), np.array(zs)
+
+
+
+# # REAL: KDE in 2D 
+# xs_real, ys_real, z_real, x_real, y_real = compute_real_kde_grid(X3_real, n_grid=120)
+
+# # DIRICHLET: analytic pdf (3-CS)
+# xs_dir, ys_dir, z_dir = dirichlet_pdf_grid(alpha_hat_3, n_grid=120)
+# X3_dir_samples = rng.dirichlet(alpha_hat_3, size=N_samples)
+# x_dir, y_dir = ternary_to_cartesian(X3_dir_samples)
+
+# # MULTINOMIAL: analytic pmf (3-CS) 
+# xs_multi, ys_multi, z_multi = multinomial_pmf_grid(p_hat_3, N_cells=N_cells, n_grid=120)
+# # for scatter, sample from multinomial with 3 categories
+# counts_3 = rng.multinomial(N_cells, p_hat_3, size=N_samples)
+# X3_multi_samples = counts_3 / N_cells
+# x_multi, y_multi = ternary_to_cartesian(X3_multi_samples)
+
+
+
+# if plot_KDT == 'original': 
+#     # Pack them for easier looping, this plot uses original z values
+#     datasets = [
+#         (f"Real Data(Num_Data={X3_real.shape[0]})", xs_real, ys_real, z_real, x_real, y_real),
+#         (f"Dirichlet Samples(Num_Samples={X3_dir_samples.shape[0]})", xs_dir,  ys_dir,  z_dir,  x_dir,  y_dir),
+#         (f"Multinomial Samples(Num_Samples={X3_multi_samples.shape[0]})", xs_multi, ys_multi, z_multi, x_multi, y_multi),
+#     ]
+
+# elif plot_KDT == 'scaleto1':
+#     # normalize each surface to [0, 1] for fair shape comparison 
+#     z_real_norm  = z_real  / z_real.max()
+#     z_dir_norm   = z_dir   / z_dir.max()
+#     z_multi_norm = z_multi / z_multi.max()
+
+
+#     datasets = [
+#         (f"Real Data(Num_Data={X3_real.shape[0]})", xs_real,  ys_real,  z_real_norm,  x_real,  y_real),
+#         (f"Dirichlet Samples(Num_Samples={X3_dir_samples.shape[0]})", xs_dir,   ys_dir,   z_dir_norm,   x_dir,   y_dir),
+#         (f"Multinomial Samples(Num_Samples={X3_multi_samples.shape[0]})", xs_multi, ys_multi, z_multi_norm, x_multi, y_multi),
+#     ]
+
+
+
+
+# # compute z_min and z_max from *only these datasets cause sometines I want to compare two of three distributionns
+# z_min = min(z.min() for (_, _, _, z, _, _) in datasets)
+# z_max = max(z.max() for (_, _, _, z, _, _) in datasets)
+# norm  = Normalize(vmin=z_min, vmax=z_max)
+# # print("Same scale recomputed from selected datasets:")
+# # print("z_min:", z_min, "   z_max:", z_max)
+
+# # Same density bounds across all three 
+# cmap = cm.viridis
+
 
 # ==========================================
 # FIGURE 1 — Scatter-only ternary plots
@@ -592,7 +941,6 @@ cbar.set_label("Shared Density", fontsize=12)
 fig.suptitle("Ternary KDE — Same Density Scale", fontsize=16, y=1.05)
 # plt.tight_layout()
 plt.show()
-
 # %%
 #################################################################
 # 7) 1D marginal distributions for each condition state
@@ -660,7 +1008,7 @@ for i, (title, xs, ys, z, _, _) in enumerate(datasets):
         ys,
         z,
         cmap=cmap,
-        norm=norm_local,     # <-- LOCAL scale here
+        norm=norm_local,     # LOCAL scale here
         linewidth=0.0,
         antialiased=True,
     )
