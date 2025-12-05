@@ -573,7 +573,7 @@ cmap = cm.viridis
 # # and use guassian_kde only for real data.
 # ###############################################################
 
-# plot_KDT = 'scaleto1' # 'original' or 'scaleto1'
+# plot_KDE = 'scaleto1' # 'original' or 'scaleto1'
 
 # from scipy.stats import dirichlet
 # from scipy.stats import multinomial
@@ -758,7 +758,7 @@ cmap = cm.viridis
 
 
 
-# if plot_KDT == 'original': 
+# if plot_KDE == 'original': 
 #     # Pack them for easier looping, this plot uses original z values
 #     datasets = [
 #         (f"Real Data(Num_Data={X3_real.shape[0]})", xs_real, ys_real, z_real, x_real, y_real),
@@ -766,7 +766,7 @@ cmap = cm.viridis
 #         (f"Multinomial Samples(Num_Samples={X3_multi_samples.shape[0]})", xs_multi, ys_multi, z_multi, x_multi, y_multi),
 #     ]
 
-# elif plot_KDT == 'scaleto1':
+# elif plot_KDE == 'scaleto1':
 #     # normalize each surface to [0, 1] for fair shape comparison 
 #     z_real_norm  = z_real  / z_real.max()
 #     z_dir_norm   = z_dir   / z_dir.max()
