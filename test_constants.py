@@ -467,15 +467,14 @@ ELE_DP_INC_STEP = True
 # else:
 #     ELE_DP_INPUT_DIM = NCS
 
-# ELE_DP_RESET_PROB = None
-# ELE_DP_DIRICHLET_ALPHA = 0.5*np.ones(NCS)
-# ELE_DP_RANDOM_STATE = 42
-ELE_DP_RESET_PROB = np.array([1.0, 0.0, 0.0, 0.0, 0.0])
-# ELE_DP_RESET_PROB = np.array([0.3, 0.7, 0.0, 0.0, 0.0])
-# ELE_DP_RESET_PROB = np.array([0.0, 0.8, 0.2, 0.0, 0.0])
-
-ELE_DP_DIRICHLET_ALPHA = None
-ELE_DP_RANDOM_STATE = 'off'
+ELE_DP_RESET_PROB = None
+ELE_DP_DIRICHLET_ALPHA = [0.15481776, 0.07666929, 0.04912562, 0.03946825] # Alpha for girder beam #0.5*np.ones(NCS)
+ELE_DP_RANDOM_STATE = 42
+# ELE_DP_RESET_PROB = np.array([1.0, 0.0, 0.0, 0.0]) #np.array([1.0, 0.0, 0.0, 0.0, 0.0])
+# # ELE_DP_RESET_PROB = np.array([0.3, 0.7, 0.0, 0.0, 0.0])
+# # ELE_DP_RESET_PROB = np.array([0.0, 0.8, 0.2, 0.0, 0.0])
+# ELE_DP_DIRICHLET_ALPHA = None
+# ELE_DP_RANDOM_STATE = 'off'
 
 ELE_DP_EXPLORE_TYPE = ExplorationType.DETERMINISTIC
 
