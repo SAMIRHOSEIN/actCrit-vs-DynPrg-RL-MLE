@@ -214,6 +214,14 @@ if __name__ == '__main__':
     explore_type = test_constants.ELE_DP_EXPLORE_TYPE
     include_step = test_constants.ELE_DP_INC_STEP
 
+
+    print("max_cost:", max_cost)
+    print(f"include_step_count: {include_step}")
+    print("explore_type:", explore_type)
+    print("reset_prob:", reset_prob)
+    print("dirichlet_alpha:", dirichlet_alpha)
+    print("random_state for env:", random_state)
+
     # recreate env
     env = create_element_env(
         horizon,
@@ -232,12 +240,10 @@ if __name__ == '__main__':
         with set_exploration_type(explore_type), torch.no_grad():
             for _ in range(n_episodes):
 
-
                 td = env.reset()
                 # figure observation length at runtime (ncs + 1 if include_step_count)
                 obs_len = int(td["observation"].numel())
                 print(f"Observation length: {obs_len}")
-                print(f"include_step_count: {include_step}")
                 observation = np.zeros((horizon, obs_len), dtype=np.float32)
                 action      = np.zeros((horizon, 1),   dtype=np.int64)
                 reward      = np.zeros((horizon, 1),   dtype=np.float32)
@@ -282,7 +288,7 @@ if __name__ == '__main__':
     
     print(f"Initial state: {logs['observation'][0][0]}")
     print(f"Final state: {logs['observation'][0][-1]}")
-    print(f"Average ep reward: {np.mean(logs['ep reward']): 4.4f}")
+    print(f"Validation Score(Average reward over all episodes(1)): {np.mean(logs['ep reward']): 4.4f}")
     
     # Define the list of arrays
     all_actions = logs["action"]

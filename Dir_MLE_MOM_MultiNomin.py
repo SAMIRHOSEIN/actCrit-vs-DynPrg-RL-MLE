@@ -761,13 +761,13 @@ cmap = cm.viridis
 
 # # DIRICHLET: analytic pdf (3-CS)
 # xs_dir, ys_dir, z_dir = dirichlet_pdf_grid(alpha_hat_3, n_grid=120)
-# X3_dir_samples = rng.dirichlet(alpha_hat_3, size=N_samples)
+# X3_dir_samples = rng.dirichlet(alpha_hat_3, size=N_samples) # we need to generate samples due to grid of KDE plot
 # x_dir, y_dir = ternary_to_cartesian(X3_dir_samples)
 
 # # MULTINOMIAL: analytic pmf (3-CS) 
-# xs_multi, ys_multi, z_multi = multinomial_pmf_grid(p_hat_3, N_cells=N_cells, n_grid=120)
+# xs_multi, ys_multi, z_multi = multinomial_pmf_grid(p_hat_3, N_cells=N_cells, n_grid=120) # we need to generate samples due to grid of KDE plot
 # # for scatter, sample from multinomial with 3 categories
-# counts_3 = rng.multinomial(N_cells, p_hat_3, size=N_samples)
+# counts_3 = rng.multinomial(N_cells, p_hat_3, size=N_samples) 
 # X3_multi_samples = counts_3 / N_cells
 # x_multi, y_multi = ternary_to_cartesian(X3_multi_samples)
 
@@ -777,7 +777,7 @@ cmap = cm.viridis
 #     # Pack them for easier looping, this plot uses original z values
 #     datasets = [
 #         (f"Real Data(Num_Data={X3_real.shape[0]})", xs_real, ys_real, z_real, x_real, y_real),
-#         (f"Dirichlet Samples(Num_Samples={X3_dir_samples.shape[0]})", xs_dir,  ys_dir,  z_dir,  x_dir,  y_dir),
+#         (f"Dirichlet Samples(Num_Samples={X3_dir_samples.shape[0]})", xs_dir,  ys_dir,  z_dir,  x_dir,  y_dir), 
 #         (f"Multinomial Samples(Num_Samples={X3_multi_samples.shape[0]})", xs_multi, ys_multi, z_multi, x_multi, y_multi),
 #     ]
 
