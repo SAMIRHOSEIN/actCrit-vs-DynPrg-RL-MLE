@@ -14,7 +14,7 @@ from matplotlib import cm
 N_samples = 1000000  # large so we see enough of the rare last state
 
 # p_hat from the code (empirical mean from X_real)
-# - n controls how “smooth” or “noisy” your synthetic samples are.
+# - n controls how “smooth” or “noisy” our synthetic samples are.
 #       - If n is small--------------->    n=1     ---------------> one-hot vector
 #       - If n is moderate-------------->  n=100  -------------->   smooth percentages, similar to real data
 #       - If n is huge --------------- >   n=1000  --------------->  almost exactly equal to p_hat (too smooth)(too smooth, no variability)
@@ -23,9 +23,25 @@ N_samples = 1000000  # large so we see enough of the rare last state
 N_cells = 100
 
 
-file_path = './Datainfobridge/NBEExport_September_18_2025_12_51_19.txt'
-cols = ["CS_PERCENT_1", "CS_PERCENT_2", "CS_PERCENT_3", "CS_PERCENT_4"] # the name of columns in the data file
-df = pd.read_csv(file_path)
+# file_path = './V1_Datainfobridge/NBEExport_September_18_2025_12_51_19.txt' # Three elements 
+file_path = './V2_Datainfobridge_SteelGirderBeam/NBEExport_December_17_2025_02_00_00.txt' # Steel Girder Beam
+
+
+
+# If I want to run the NBEExport_September_18_2025_12_51_19.txt because I changed the original file before importing it here
+# cols = ["CS_PERCENT_1", "CS_PERCENT_2", "CS_PERCENT_3", "CS_PERCENT_4"] # the name of columns in the data file
+# df = pd.read_csv(file_path)
+
+# If I want to run the NBEExport_December_17_2025_02_00_00 file without any change file( I mean this is exported files directly from infobridge)
+cols = ["CS_PERCENT_1", "CS_PERCENT_2", "CS_PERCENT_3", "CS_PERCENT_4"]
+df = pd.read_csv(
+    file_path,
+    sep=",",
+    quotechar="'",        # handle quotes if any
+    engine="c",           # usually fine; switch to "python" if we ever see weird edge cases
+    low_memory=False
+)
+
 
 # labels for covariance matrix and plots
 cs_labels = ["CS1", "CS2", "CS3", "CS4"]
@@ -37,7 +53,6 @@ df = df.dropna(subset=cols).copy()
 print(f"Number of bridges after dropping missing CS percentages: {len(df)}")
 
 X = df[cols].values  # use this X for BOTH Dirichlet and Multinomial
-
 
 
 # Inputs for sanity check of dirichlet and multinomial
