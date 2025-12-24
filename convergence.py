@@ -141,7 +141,7 @@ def plot_convergence(dp_or_ppo_stats: List[RunStat]):
     plt.fill_between(n, lo, hi, alpha=0.2, label="DP or PPO 95% CI")
     plt.xlabel("Number of evaluation episodes (N)")
     plt.ylabel("Mean episode return")
-    plt.title("DP or PPO convergence: mean ± 95% CI (stop when CI half-width ≤ "f"{CI_REL_TOL:.2%} × |mean|)")
+    plt.title("DP convergence: mean ± 95% CI (stop when CI half-width ≤ "f"{CI_REL_TOL:.2%} × |mean|)")
     plt.grid(True, alpha=0.3)
     plt.legend()
     plt.tight_layout()
@@ -167,7 +167,7 @@ def main():
 
     best = pick_best_n(dp_or_ppo_stats)
     best_status = f"(meets tol {CI_REL_TOL:.2%})" if best.meets_tol else f"(does NOT meet tol {CI_REL_TOL:.2%}; best available)"
-    print("\nBest episode count (DP or PPO):")
+    print("\nBest episode count (DP):")
     print(
         f"  N={best.n}  mean={best.mean:.4f}  CI=[{best.ci_low:.4f}, {best.ci_high:.4f}]  {best_status}"
     )
