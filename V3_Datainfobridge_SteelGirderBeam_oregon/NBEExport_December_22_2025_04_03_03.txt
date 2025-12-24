@@ -1,0 +1,68 @@
+YEAR,STATE_NAME,STRUCTURE_NUMBER,OWNER_AGENCY,ELEMENT_CATEGORY,PARENT_ELEMENT_NUMBER,PARENT_ELEMENT_NAME,ELEMENT_NUMBER,ELEMENT_NAME,ELEMENT_UNIT,TOTAL_QUANTITY,CONDITION_STATE_1,CS_PERCENT_1,CONDITION_STATE_2,CS_PERCENT_2,CONDITION_STATE_3,CS_PERCENT_3,CONDITION_STATE_4,CS_PERCENT_4,HI
+2025,'41 - Oregon',00004 000 00010,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',270,240,88,10,3,20,7,0,0,93.81
+2025,'41 - Oregon',02484A000 00014,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',224,124,55,100,44,0,0,0,0,85.27
+2025,'41 - Oregon',02485 000 00219,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1175,0,0,1175,100,0,0,0,0,67
+2025,'41 - Oregon',03849B020 00125,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2386,0,0,2147,89,239,10,0,0,63.59
+2025,'41 - Oregon',04566B068 00710,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1120,0,0,1105,98,15,1,0,0,66.54
+2025,'41 - Oregon',04698A556 00306,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',540,0,0,540,100,0,0,0,0,67
+2025,'41 - Oregon',04T01 000 00035,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',818,0,0,258,31,560,68,0,0,43.72
+2025,'41 - Oregon',04T03 000 00173,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',912,0,0,672,73,240,26,0,0,58.05
+2025,'41 - Oregon',04T06 000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1028,0,0,1028,100,0,0,0,0,67
+2025,'41 - Oregon',04T07 000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',836,0,0,352,42,484,57,0,0,47.32
+2025,'41 - Oregon',06072 220 00020,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',317,0,0,305,96,12,3,0,0,65.71
+2025,'41 - Oregon',06456 000   040,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',532,32,6,282,53,218,40,0,0,55.05
+2025,'41 - Oregon',06513 212 00069,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',185,0,0,179,96,6,3,0,0,65.9
+2025,'41 - Oregon',06683B01WX00046,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',670,25,3,245,36,400,59,0,0,47.93
+2025,'41 - Oregon',07026 059 00191,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1513,1502,99,10,0,1,0,0,0,99.74
+2025,'41 - Oregon',07039 000 00437,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',643,0,0,608,94,35,5,0,0,65.15
+2025,'41 - Oregon',07214A01W 12398,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',770,767,99,3,0,0,0,0,0,99.87
+2025,'41 - Oregon',08551 040 00672,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',282,176,62,106,37,0,0,0,0,87.6
+2025,'41 - Oregon',09685 000 00223,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',264,0,0,114,43,150,56,0,0,47.68
+2025,'41 - Oregon',09685A000000223,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',586,186,31,400,68,0,0,0,0,77.47
+2025,'41 - Oregon',09B03 000 00015,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',606,305,50,300,49,1,0,0,0,83.55
+2025,'41 - Oregon',11037A140900000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',670,0,0,664,99,6,0,0,0,66.7
+2025,'41 - Oregon',11039A140900000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',660,0,0,600,90,60,9,0,0,63.91
+2025,'41 - Oregon',11040A140900000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',775,0,0,760,98,15,1,0,0,66.34
+2025,'41 - Oregon',11041A140900000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1060,0,0,1000,94,60,5,0,0,65.08
+2025,'41 - Oregon',11086A000 00590,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',905,905,100,0,0,0,0,0,0,100
+2025,'41 - Oregon',16660 000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1780,1680,94,100,5,0,0,0,0,98.15
+2025,'41 - Oregon',17C0400A2200139,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',528,0,0,528,100,0,0,0,0,67
+2025,'41 - Oregon',17C05 A22 00071,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',528,0,0,528,100,0,0,0,0,67
+2025,'41 - Oregon',18104 000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',360,0,0,360,100,0,0,0,0,67
+2025,'41 - Oregon',18856 609300000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2730,2730,100,0,0,0,0,0,0,100
+2025,'41 - Oregon',18949 837 00020,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',471,0,0,471,100,0,0,0,0,67
+2025,'41 - Oregon',19020 000 00010,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',500,250,50,250,50,0,0,0,0,83.5
+2025,'41 - Oregon',19025 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',443,0,0,443,100,0,0,0,0,67
+2025,'41 - Oregon',19641 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',177,0,0,167,94,10,5,0,0,65.08
+2025,'41 - Oregon',19B03 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',726,0,0,726,100,0,0,0,0,67
+2025,'41 - Oregon',19C420322A00003,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',278,0,0,253,91,25,8,0,0,63.94
+2025,'41 - Oregon',20669 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2886,0,0,2886,100,0,0,0,0,67
+2025,'41 - Oregon',21624 000 00070,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',115,0,0,115,100,0,0,0,0,67
+2025,'41 - Oregon',22486 000 00010,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',92,0,0,92,100,0,0,0,0,67
+2025,'41 - Oregon',22967 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',598,598,100,0,0,0,0,0,0,100
+2025,'41 - Oregon',23031 100 00042,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',276,0,0,276,100,0,0,0,0,67
+2025,'41 - Oregon',23881 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3344,3344,100,0,0,0,0,0,0,100
+2025,'41 - Oregon',25128A0025B128A,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',120,0,0,120,100,0,0,0,0,67
+2025,'41 - Oregon',25B128000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',329,229,69,100,30,0,0,0,0,89.97
+2025,'41 - Oregon',25B15 000 00001,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2340,2340,100,0,0,0,0,0,0,100
+2025,'41 - Oregon',25B57 000      ,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',86,27,31,15,17,44,51,0,0,59.97
+2025,'41 - Oregon',26T01 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',560,0,0,560,100,0,0,0,0,67
+2025,'41 - Oregon',26T03 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1035,0,0,900,86,135,13,0,0,62.57
+2025,'41 - Oregon',26T07 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',186,0,0,184,98,2,1,0,0,66.63
+2025,'41 - Oregon',26T10 000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',688,0,0,688,100,0,0,0,0,67
+2025,'41 - Oregon',471006072 01125,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',308,208,67,100,32,0,0,0,0,89.29
+2025,'41 - Oregon',47C200000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',372,0,0,372,100,0,0,0,0,67
+2025,'41 - Oregon',49B03 000 00000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',236,0,0,236,100,0,0,0,0,67
+2025,'41 - Oregon',49B07 000      ,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',135,0,0,135,100,0,0,0,0,67
+2025,'41 - Oregon',51C01 000 00001,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',420,420,100,0,0,0,0,0,0,100
+2025,'41 - Oregon',51C03 000 00001,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',414,405,97,9,2,0,0,0,0,99.28
+2025,'41 - Oregon',51C08 000 00001,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',115,105,91,10,8,0,0,0,0,97.13
+2025,'41 - Oregon',51C21 062300001,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',330,0,0,264,80,66,20,0,0,60.2
+2025,'41 - Oregon',59C006130800011,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',205,0,0,185,90,20,9,0,0,63.68
+2025,'41 - Oregon',59C902000000002,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',192,0,0,192,100,0,0,0,0,67
+2025,'41 - Oregon',61074 000 00070,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',138,21,15,102,73,15,10,0,0,68.33
+2025,'41 - Oregon',63B011000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',114,89,78,25,21,0,0,0,0,92.76
+2025,'41 - Oregon',63B015000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',120,0,0,120,100,0,0,0,0,67
+2025,'41 - Oregon',67T006000000000,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',96,0,0,96,100,0,0,0,0,67
+2025,'41 - Oregon',E6099C015 00009,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1532,0,0,1447,94,85,5,0,0,65.11
+2025,'41 - Oregon',W6099C015 00009,'City or Municipal Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1684,0,0,1602,95,82,4,0,0,65.34

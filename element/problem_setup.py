@@ -208,6 +208,8 @@ cost_base = 10
 cs_pfs = stats.norm.cdf([-4.2, -3.5, -3.0, -2.5])  
 # # cs_pfs = stats.norm.cdf([-4.2, -3.5, -3.0, -2.0])  
 # cs_pfs = stats.norm.cdf([-4.2, -3.5, -3.0, -2.25])
+# cs_pfs = stats.norm.cdf([-4.2, -3.5, -3.0, -1.0])  
+
 
 failure_cost = cost_base**7
 

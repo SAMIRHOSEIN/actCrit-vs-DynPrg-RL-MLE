@@ -24,7 +24,8 @@ N_cells = 100
 
 
 # file_path = './V1_Datainfobridge/NBEExport_September_18_2025_12_51_19.txt' # Three elements 
-file_path = './V2_Datainfobridge_SteelGirderBeam/NBEExport_December_17_2025_02_00_00.txt' # Steel Girder Beam
+# file_path = './V2_Datainfobridge_SteelGirderBeam/NBEExport_December_17_2025_02_00_00.txt' # Steel Girder Beam not just for oregon
+file_path = './V3_Datainfobridge_SteelGirderBeam_oregon/NBEExport_December_22_2025_04_03_03.txt' # Steel Girder Beam just for oregon
 
 
 
