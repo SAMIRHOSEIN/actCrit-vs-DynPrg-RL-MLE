@@ -47,14 +47,14 @@ ELE_CUSTOM_EXPLORE_TYPE = ExplorationType.RANDOM
 
 # region: constants for ele_ppo_training.py ==================================
 # env parameters
-ELE_PPO_HORIZON = 20 #5 #20 #5 #75
+ELE_PPO_HORIZON = 5  #20 #5 #20 #5 #75
 
 ELE_PPO_INC_STEP = True
 ELE_PPO_MAX_COST = 1 #unit_costs.max()
 
 
 ELE_PPO_RESET_PROB = None
-ELE_PPO_DIRICHLET_ALPHA = [0.28965147, 0.07418968, 0.04705171, 0.04048269]  # 0.5*np.ones(NCS)
+ELE_PPO_DIRICHLET_ALPHA = [0.05594704, 0.16108377, 0.05494736, 0.03863813] # For all states: [0.15481776, 0.07666929, 0.04912562, 0.03946825] # Alpha for girder beam # [0.28965147, 0.07418968, 0.04705171, 0.04048269]:alpha for three prestressed elements  # 0.5*np.ones(NCS)
 ELE_PPO_RANDOM_STATE = 42
 # ELE_PPO_RESET_PROB = np.array([1.0, 0.0, 0.0, 0.0]) #np.array([1.0, 0.0, 0.0, 0.0, 0.0])
 # ELE_PPO_DIRICHLET_ALPHA = None
@@ -68,8 +68,8 @@ actor_model = 'st'  # 'st', 'nn' soft tree or neural network
 
 if actor_model == 'st':
     # soft tree parameters
-    depth_soft = 7 #8
-    beta_soft = 1.75 #1000 #1.75 #1.75 #10/7 #20.0
+    depth_soft = 8 #8
+    beta_soft = 1 #1 #1.75 #1000 #1.75 #1.75 #10/7 #20.0
     batchnorm_soft = False
 
     # --- Regularization on soft-tree actor (routing weights only) ---
@@ -130,8 +130,6 @@ ELE_PPO_MAX_GRAD_NORM = 1.0
 ELE_PPO_LR = 1e-3
 ELE_PPO_LR_MIN = 1e-5    # lr reduced to lr_min with total_frames // frames_per_batch
 ELE_PPO_EVAL_FREQ = 1
-
-
 
 
 
@@ -342,11 +340,28 @@ ELE_PPO_EVAL_EXPLORE_TYPE = ExplorationType.RANDOM #ExplorationType.DETERMINISTI
 # ELE_ACTOR_EXPLORE_TYPE_NN = ExplorationType.DETERMINISTIC 
 # ELE_ACTOR_EXPLORE_TYPE_ST = ExplorationType.DETERMINISTIC 
 # ELE_ACTOR_VERSION ='20251215-191317_nn'  # nn tree with 2 layers and 32 cells
-ELE_ACTOR_VERSION ='20251216-053246_st' # soft tree with  depth and 1.75 beta, d=7, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION ='20251216-053246_st' # soft tree with  depth and 1.75 beta, d=7, peobabilistic training and deterministic evaluation
 
 
 
 
+# folloiwng results are for girder beam with 4 condition states(AASHTO) for all states and new alpha for dirichlet with cfs = stats.norm.cdf([-4.2, -3.5, -3.0, -2.5])
+# ELE_ACTOR_VERSION = '20251217-150810_nn' # nn tree with 2 layers and 32 cells
+# ELE_ACTOR_VERSION = '20251217-164927_st' # soft tree with  depth and 1.75 beta, d=7, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION = '20251217-171254_st' # soft tree with  depth and 1.75 beta, d=8, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION = '20251217-174134_st' # soft tree with  depth and 1 beta, d=8, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION = '20251218-182531_st' # soft tree with  depth and 10000 beta, d=8, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION = '20251218-184848_st' # soft tree with  depth and 10 beta, d=8, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION = '20251218-195034_st' # soft tree with  depth and 100 beta, d=8, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION = '20251219-035017_st' # soft tree with  depth and 1000 beta, d=8, peobabilistic training and deterministic evaluation
+
+
+
+
+
+# folloiwng results are for girder beam with 4 condition states(AASHTO) for oregon and new alpha for dirichlet with cfs = stats.norm.cdf([-4.2, -3.5, -3.0, -2.5])
+# ELE_ACTOR_VERSION = '20251222-132849_nn' # nn tree with 2 layers and 32 cells
+ELE_ACTOR_VERSION = '20251222-134720_st' # soft tree with  depth and 1 beta, d=8, peobabilistic training and deterministic evaluation
 
 
 
@@ -404,14 +419,14 @@ ELE_PPO_FREEZE_SAVE_WIRING = True
 class_names = ["DN", "Main", "Repair", "Rehab", "Rep"] #None  # or set your own list ["DN", "M", "R", "Reh", "T"]
 
 
-ELE_ACTOR_HORIZON = 20 #20 #5 #20 #5 #75
+ELE_ACTOR_HORIZON = 5 #20 #20 #5 #20 #5 #75
 # ELE_ACTOR_N_HORIZON = 1
-ELE_ACTOR_N_EPISODES = 100000 #100 #1 # modified to avoid confusion
+ELE_ACTOR_N_EPISODES = 1 #100000 #100000 #100 #1 # modified to avoid confusion
 # Don't forger when you change the follwiong parameter we need to first run the ele_exp_actor.py and then run the plt_nn_st.py
 ELE_ACTOR_MAX_COST = 1 #unit_costs.max()
 
 ELE_ACTOR_RESET_PROB = None
-ELE_ACTOR_DIRICHLET_ALPHA = [0.28965147, 0.07418968, 0.04705171, 0.04048269] #0.5*np.ones(NCS)
+ELE_ACTOR_DIRICHLET_ALPHA = [0.05594704, 0.16108377, 0.05494736, 0.03863813] # For all states: [0.15481776, 0.07666929, 0.04912562, 0.03946825] # Alpha for girder beam # [0.28965147, 0.07418968, 0.04705171, 0.04048269]:alpha for three prestressed elements  # 0.5*np.ones(NCS)
 ELE_ACTOR_RANDOM_STATE = 42
 # ELE_ACTOR_RESET_PROB = np.array([1.0, 0.0, 0.0, 0.0]) #np.array([1.0, 0.0, 0.0, 0.0, 0.0])
 # ELE_ACTOR_RESET_PROB = np.array([0.3, 0.7, 0.0, 0.0, 0.0])
@@ -425,20 +440,27 @@ ELE_ACTOR_RANDOM_STATE = 42
 # How we sample actions when estimating μ (for freezing the soft tree), and
 # How we sample actions when we gather experience / action histograms in ele_exp_actor.py.
 # so I need to define two different exploration types:ELE_ACTOR_EXPLORE_TYPE_MU and ELE_ACTOR_EXPLORE_TYPE
-
 # What should mu-rollout use?
 # For mu estimation, we are using soft actor + ProbabilisticActor:
 # soft_prob_actor = ProbabilisticActor(... distribution_class=CategoricalDist, ...)
-# If we set exploration to DETERMINISTIC, we’re getting the muu under the greedy soft policy (argmax of logits).
+# If we set exploration to DETERMINISTIC, we’re getting the mu under the greedy soft policy (argmax of logits).
 # If we set it to RANDOM, we’re getting mu under the true stochastic soft policy (sampling from the categorical defined by logits).
-# The frozen tree is built to approximate the original stochastic soft policy’s behavior. So, for theoretical correctness and better coverage of leaves, it actually makes more sense to use RANDOM for mu:
-# We visit leaves in proportion to their probabilities.
-# We don’t ignore near-tie actions that have slightly lower probability than the argmax.
-# So for mu estimation, I use ExplorationType.RANDOM (sample from the soft policy).
+# The frozen tree is built to approximate the original stochastic soft policy’s behavior. 
 # The frozen tree itself is deterministic later, but that doesn’t mean mu must be computed with deterministic argmax. The tree uses mu to know which branches matter, and that’s naturally defined under the stochastic policy.
-ELE_ACTOR_EXPLORE_TYPE_MU = ExplorationType.RANDOM #ExplorationType.DETERMINISTIC # for mu estimation we need to sample from the soft tree 
-if ELE_ACTOR_EXPLORE_TYPE_MU == ExplorationType.RANDOM:
-    mu_random_seed = 42 
+# Conclusion: To ensure reproducible μ estimation, the environment random seed is fixed so that the initial state sampled 
+# from the Dirichlet distribution is reproducible across runs. However, the states visited in future horizons depend 
+# not only on the initial state but also on the actions taken at each step. 
+# If actions are sampled randomly, different action sequences can lead to different state trajectories 
+# and therefore different μ values, even when the initial state is identical. For this reason, 
+# `ELE_ACTOR_EXPLORE_TYPE_MU` is set to DETERMINISTIC, ensuring that the same action is selected at each horizon given the same state. 
+# This makes the entire rollout trajectory, and consequently the estimated μ, fully reproducible. 
+# Although μ could also be made reproducible with `RANDOM` exploration 
+# by explicitly seeding all action-related random number generators, doing so would affect subsequent rollouts later 
+# in `ele_exp_actor.py`, so I forgert to set random seed. To avoid unintended side effects and maintain clean separation between μ estimation and evaluation, 
+# deterministic exploration is used for μ.
+ELE_ACTOR_EXPLORE_TYPE_MU = ExplorationType.DETERMINISTIC #ExplorationType.RANDOM 
+
+
 # Conceptually: nn and soft tree produce probabilities, but that does not mean we must sample from them at evaluation time.
 # Also when I actually freeze and deploy, I usually want a stable, deterministic maintenance policy (bridge engineer doesn’t want “today we randomly choose repair instead of maintenance”).
 # Later I though to define two different ELE_ACTOR_EXPLORE_TYPE for st/nn and ft. But for a fair comparison among nn,st and ft, I do not use “RANDOM for nn/st, DETERMINISTIC for ft”. Why?
@@ -450,15 +472,15 @@ if ELE_ACTOR_EXPLORE_TYPE_MU == ExplorationType.RANDOM:
 # So we are comparing “noisy” stochastic policies vs a “clean” deterministic one.
 # That usually artificially lowers the observed performance of nn/st relative to ft. 
 # It’s like comparing “student taking the exam sober” vs “student taking the exam while periodically rolling a die to change answers.”
-ELE_ACTOR_EXPLORE_TYPE_NN = ExplorationType.DETERMINISTIC # ExplorationType.RANDOM 
-ELE_ACTOR_EXPLORE_TYPE_ST = ExplorationType.DETERMINISTIC # ExplorationType.RANDOM
+ELE_ACTOR_EXPLORE_TYPE_NN = ExplorationType.RANDOM # ExplorationType.DETERMINISTIC 
+ELE_ACTOR_EXPLORE_TYPE_ST = ExplorationType.RANDOM # ExplorationType.DETERMINISTIC 
 ELE_ACTOR_EXPLORE_TYPE_FT = ExplorationType.DETERMINISTIC # This must be deterministic to choose greedy action because the frozen tree chooses the action with max prob
 # endregion ==============================================================
 
 
 # region: constants for DPvsPPO.py ==================================
 ELE_DP_HORIZON = 5 #75
-ELE_DP_N_EPISODES = 1 # In DP we always consider 1 episode
+ELE_DP_N_EPISODES = 1 #10000 # In DP we always consider 1 episode
 ELE_DP_MAX_COST = 1.0
 
 ELE_DP_INC_STEP = True
@@ -476,9 +498,10 @@ ELE_DP_RANDOM_STATE = 42
 # ELE_DP_DIRICHLET_ALPHA = None
 # ELE_DP_RANDOM_STATE = 'off'
 
-ELE_DP_EXPLORE_TYPE = ExplorationType.DETERMINISTIC
+ELE_DP_EXPLORE_TYPE = ExplorationType.DETERMINISTIC # This must be deterministic to choose greedy action because DP policy is deterministic
 
-# endregion ==============================================================
+# endregion ================================================================
+
 
 # region: constants for pygad_reliability.py ==================================
 ELE_GA_SEED_FOR_PyGAD = 0
@@ -515,7 +538,6 @@ MUTATION_BY_REPLACEMENT=False             # benchmark = False    # nudge instead
 RANDOM_MUTATION_MIN_VAL=-1.0 #-0.10       # benchmark = -1.0
 RANDOM_MUTATION_MAX_VAL=1.0 #+0.10        # benchmark = 1.0   # small β step (+0.10)
 MUTATION_NUM_GENES = 1                    # benchmark =1 / 1 number of genes to mutate in a solution
-
 
 
 ELE_GA_MAX_COST = unit_costs.max()
@@ -717,8 +739,15 @@ ELE_GA_EXPLORE_TYPE_EVAL = ExplorationType.DETERMINISTIC
 # ELE_PPO_TRAIN_EXPLORE_TYPE = ExplorationType.RANDOM
 # ELE_ACTOR_EXPLORE_TYPE_NN = ExplorationType.DETERMINISTIC 
 # ELE_ACTOR_EXPLORE_TYPE_ST = ExplorationType.DETERMINISTIC 
-ELE_ACTOR_VERSION_nn ='20251215-191317_nn'  # nn tree with 2 layers and 32 cells
-ELE_ACTOR_VERSION_st ='20251216-053246_st' # soft tree with  depth and 1.75 beta, d=7, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION_nn ='20251215-191317_nn'  # nn tree with 2 layers and 32 cells
+# ELE_ACTOR_VERSION_st ='20251216-053246_st' # soft tree with  depth and 1.75 beta, d=7, peobabilistic training and deterministic evaluation
+
+
+
+
+# folloiwng results are for girder beam with 4 condition states(AASHTO) and new alpha for dirichlet with cfs = stats.norm.cdf([-4.2, -3.5, -3.0, -2.5])
+ELE_ACTOR_VERSION_nn = '20251217-150810_nn' # nn tree with 2 layers and 32 cells
+ELE_ACTOR_VERSION_st = '20251217-174134_st' # soft tree with  depth and 1 beta, d=8, peobabilistic training and deterministic evaluation
 
 
 
@@ -749,14 +778,25 @@ WINDOW = 50  # for rolling average - integer
 # actor_st_versions = [ELE_ACTOR_VERSION_st_1, ELE_ACTOR_VERSION_st_2, ELE_ACTOR_VERSION_st_5 ,ELE_ACTOR_VERSION_st_6]
 
 
+# ELE_ACTOR_VERSION_nn_vs_st ='20251211-194543_nn'  # nn tree with 2 layers and 32 cells , probabilistic
+# ELE_ACTOR_VERSION_st_1 ='20251212-042901_st' # soft tree with  depth and 1 beta, d=7 , probabilistic
+# ELE_ACTOR_VERSION_st_2 ='20251212-045059_st' # soft tree with  depth and 20 beta, d=7 , probabilistic
+# ELE_ACTOR_VERSION_st_3 ='20251211-203053_st' # soft tree with  depth and 1000 beta, d=7 , probabilistic
+# actor_st_versions = [ELE_ACTOR_VERSION_st_1, ELE_ACTOR_VERSION_st_2, ELE_ACTOR_VERSION_st_3]
 
 
 
-ELE_ACTOR_VERSION_nn_vs_st ='20251211-194543_nn'  # nn tree with 2 layers and 32 cells , probabilistic
-ELE_ACTOR_VERSION_st_1 ='20251212-042901_st' # soft tree with  depth and 1 beta, d=7 , probabilistic
-ELE_ACTOR_VERSION_st_2 ='20251212-045059_st' # soft tree with  depth and 20 beta, d=7 , probabilistic
-ELE_ACTOR_VERSION_st_3 ='20251211-203053_st' # soft tree with  depth and 1000 beta, d=7 , probabilistic
-actor_st_versions = [ELE_ACTOR_VERSION_st_1, ELE_ACTOR_VERSION_st_2, ELE_ACTOR_VERSION_st_3]
+
+
+# folloiwng results are for girder beam with 4 condition states(AASHTO) and new alpha for dirichlet with cfs = stats.norm.cdf([-4.2, -3.5, -3.0, -2.5])
+ELE_ACTOR_VERSION_nn_vs_st = '20251217-150810_nn' # nn tree with 2 layers and 32 cells
+ELE_ACTOR_VERSION_st_1 = '20251217-174134_st' # soft tree with  depth and 1 beta, d=8, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION_st_2 = '20251218-184848_st' # soft tree with  depth and 10 beta, d=8, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION_st_3 = '20251218-195034_st' # soft tree with  depth and 100 beta, d=8, peobabilistic training and deterministic evaluation
+# ELE_ACTOR_VERSION_st_4 = '20251219-035017_st' # soft tree with  depth and 1000 beta, d=8, peobabilistic training and deterministic evaluation
+ELE_ACTOR_VERSION_st_5 = '20251218-182531_st' # soft tree with  depth and 10000 beta, d=8, peobabilistic training and deterministic evaluation
+actor_st_versions = [ELE_ACTOR_VERSION_st_1, ELE_ACTOR_VERSION_st_5]
+
 # endregion ==============================================================
 
 

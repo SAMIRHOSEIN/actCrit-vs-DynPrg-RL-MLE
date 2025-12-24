@@ -221,6 +221,8 @@ if __name__ == '__main__':
     print("reset_prob:", reset_prob)
     print("dirichlet_alpha:", dirichlet_alpha)
     print("random_state for env:", random_state)
+    print("n_episodes:", n_episodes)
+    print("horizon:", horizon)
 
     # recreate env
     env = create_element_env(
@@ -239,11 +241,10 @@ if __name__ == '__main__':
     with tqdm(total=n_episodes*horizon) as pbar:
         with set_exploration_type(explore_type), torch.no_grad():
             for _ in range(n_episodes):
-
                 td = env.reset()
                 # figure observation length at runtime (ncs + 1 if include_step_count)
                 obs_len = int(td["observation"].numel())
-                print(f"Observation length: {obs_len}")
+                # print(f"Observation length: {obs_len}")
                 observation = np.zeros((horizon, obs_len), dtype=np.float32)
                 action      = np.zeros((horizon, 1),   dtype=np.int64)
                 reward      = np.zeros((horizon, 1),   dtype=np.float32)
@@ -253,9 +254,9 @@ if __name__ == '__main__':
                 init_obs = td["observation"]
                 if include_step:
                     init_time_idx = int(init_obs[-1].item() * horizon)
-                    print("Initial time index:", init_time_idx)
+                    # print("Initial time index:", init_time_idx)
 
-                print("Initial observation:", init_obs)
+                # print("Initial observation:", init_obs)
 
 
                 # rollout
@@ -288,7 +289,22 @@ if __name__ == '__main__':
     
     print(f"Initial state: {logs['observation'][0][0]}")
     print(f"Final state: {logs['observation'][0][-1]}")
-    print(f"Validation Score(Average reward over all episodes(1)): {np.mean(logs['ep reward']): 4.4f}")
+
+
+
+    from eval_stats import mean_and_ci
+
+    dp_stats = mean_and_ci(logs["ep reward"], z=1.96)
+
+    print(
+        f"DP evaluation (episode return for {dp_stats['n']} episodes): "
+        f"mean={dp_stats['mean']:.4f}, "
+        f"95% CI=[{dp_stats['ci_low']:.4f}, {dp_stats['ci_high']:.4f}], "
+        f"SD={dp_stats['sd']:.4f}, "
+        f"N={dp_stats['n']}"
+    )
+
+    
     
     # Define the list of arrays
     all_actions = logs["action"]
