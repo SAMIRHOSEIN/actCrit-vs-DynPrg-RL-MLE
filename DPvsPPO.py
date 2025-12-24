@@ -290,22 +290,17 @@ if __name__ == '__main__':
     print(f"Initial state: {logs['observation'][0][0]}")
     print(f"Final state: {logs['observation'][0][-1]}")
 
-
-
+    # DP evaluation summary stats for convergence analysis
     from eval_stats import mean_and_ci
-
     dp_stats = mean_and_ci(logs["ep reward"], z=1.96)
-
     print(
-        f"DP evaluation (episode return for {dp_stats['n']} episodes): "
+        f"Parameters in Validation (episode return for {dp_stats['n']} episodes): "
         f"mean={dp_stats['mean']:.4f}, "
         f"95% CI=[{dp_stats['ci_low']:.4f}, {dp_stats['ci_high']:.4f}], "
         f"SD={dp_stats['sd']:.4f}, "
         f"N={dp_stats['n']}"
     )
 
-    
-    
     # Define the list of arrays
     all_actions = logs["action"]
     all_actions = np.concatenate(all_actions)

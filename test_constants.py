@@ -480,7 +480,7 @@ ELE_ACTOR_EXPLORE_TYPE_FT = ExplorationType.DETERMINISTIC # This must be determi
 
 # region: constants for DPvsPPO.py ==================================
 ELE_DP_HORIZON = 5 #75
-ELE_DP_N_EPISODES = 1 #10000 # In DP we always consider 1 episode
+ELE_DP_N_EPISODES = 10000 # In DP we always consider 1 episode
 ELE_DP_MAX_COST = 1.0
 
 ELE_DP_INC_STEP = True
