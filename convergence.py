@@ -137,8 +137,8 @@ def plot_convergence(dp_or_ppo_stats: List[RunStat]):
     hi = np.array([s.ci_high for s in dp_or_ppo_stats], dtype=float)
 
     plt.figure()
-    plt.plot(n, mean, marker="o", linewidth=1, label="DP or PPO mean")
-    plt.fill_between(n, lo, hi, alpha=0.2, label="DP or PPO 95% CI")
+    plt.plot(n, mean, marker="o", linewidth=1, label="DP mean")
+    plt.fill_between(n, lo, hi, alpha=0.2, label="DP 95% CI")
     plt.xlabel("Number of evaluation episodes (N)")
     plt.ylabel("Mean episode return")
     plt.title("DP convergence: mean ± 95% CI (stop when CI half-width ≤ "f"{CI_REL_TOL:.2%} × |mean|)")
