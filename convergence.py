@@ -48,6 +48,14 @@ RAW_LINES = [
     "Parameters in Validation (episode return for 100000 episodes): mean=-36042.3372, 95% CI=[-36353.6719, -35731.0025], SD=50230.9603, N=100000"
 ]
 
+
+# # These are based on the previous alpha owned by city
+# "Parameters in Validation (episode return for 10 episodes): mean=-31982.6760, 95% CI=[-65041.0879, 1075.7360], SD=53336.6723, N=10",
+# "Parameters in Validation (episode return for 100 episodes): mean=-52222.7095, 95% CI=[-63892.0905, -40553.3284], SD=59537.6584, N=100",
+# "Parameters in Validation (episode return for 1000 episodes): mean=-37504.0656, 95% CI=[-40720.7094, -34287.4217], SD=51897.5564, N=1000",
+# "Parameters in Validation (episode return for 10000 episodes): mean=-35504.8808, 95% CI=[-36479.1171, -34530.6445], SD=49705.9321, N=10000",
+# "Parameters in Validation (episode return for 100000 episodes): mean=-36042.3372, 95% CI=[-36353.6719, -35731.0025], SD=50230.9603, N=100000"
+
 # =========================
 # 2) Settings
 # =========================
