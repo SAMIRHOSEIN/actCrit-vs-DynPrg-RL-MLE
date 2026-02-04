@@ -41,11 +41,11 @@ import matplotlib.pyplot as plt
 # 1) Paste the copied lines here
 # =========================
 RAW_LINES = [
-    "Parameters in Validation (episode return for 10 episodes): mean=-31982.6760, 95% CI=[-65041.0879, 1075.7360], SD=53336.6723, N=10",
-    "Parameters in Validation (episode return for 100 episodes): mean=-52222.7095, 95% CI=[-63892.0905, -40553.3284], SD=59537.6584, N=100",
-    "Parameters in Validation (episode return for 1000 episodes): mean=-37504.0656, 95% CI=[-40720.7094, -34287.4217], SD=51897.5564, N=1000",
-    "Parameters in Validation (episode return for 10000 episodes): mean=-35504.8808, 95% CI=[-36479.1171, -34530.6445], SD=49705.9321, N=10000",
-    "Parameters in Validation (episode return for 100000 episodes): mean=-36042.3372, 95% CI=[-36353.6719, -35731.0025], SD=50230.9603, N=100000"
+    "Parameters in Validation (episode return for 10 episodes): mean=-18747.6512, 95% CI=[-31762.7547, -5732.5477], SD=20998.6587, N=10",
+    "Parameters in Validation (episode return for 100 episodes): mean=-47218.2155, 95% CI=[-58403.0559, -36033.3750], SD=57065.5124, N=100",
+    "Parameters in Validation (episode return for 1000 episodes): mean=-36616.7845, 95% CI=[-39660.0593, -33573.5096], SD=49100.4086, N=1000",
+    "Parameters in Validation (episode return for 10000 episodes): mean=-34340.4963, 95% CI=[-35280.3201, -33400.6726], SD=47950.1902, N=10000",
+    "Parameters in Validation (episode return for 100000 episodes): mean=-34090.1605, 95% CI=[-34385.6009, -33794.7201], SD=47666.5583, N=100000"
 ]
 
 
@@ -55,6 +55,17 @@ RAW_LINES = [
 # "Parameters in Validation (episode return for 1000 episodes): mean=-37504.0656, 95% CI=[-40720.7094, -34287.4217], SD=51897.5564, N=1000",
 # "Parameters in Validation (episode return for 10000 episodes): mean=-35504.8808, 95% CI=[-36479.1171, -34530.6445], SD=49705.9321, N=10000",
 # "Parameters in Validation (episode return for 100000 episodes): mean=-36042.3372, 95% CI=[-36353.6719, -35731.0025], SD=50230.9603, N=100000"
+
+
+# based on the current alpha owned by state highway bridge
+# Parameters in Validation (episode return for 10 episodes): mean=-18747.6512, 95% CI=[-31762.7547, -5732.5477], SD=20998.6587, N=10
+# Parameters in Validation (episode return for 100 episodes): mean=-47218.2155, 95% CI=[-58403.0559, -36033.3750], SD=57065.5124, N=100
+# Parameters in Validation (episode return for 1000 episodes): mean=-36616.7845, 95% CI=[-39660.0593, -33573.5096], SD=49100.4086, N=1000
+# Parameters in Validation (episode return for 10000 episodes): mean=-34340.4963, 95% CI=[-35280.3201, -33400.6726], SD=47950.1902, N=10000
+# Parameters in Validation (episode return for 100000 episodes): mean=-34090.1605, 95% CI=[-34385.6009, -33794.7201], SD=47666.5583, N=100000
+
+
+
 
 # =========================
 # 2) Settings

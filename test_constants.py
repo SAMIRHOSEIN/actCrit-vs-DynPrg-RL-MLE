@@ -480,7 +480,7 @@ from torchrl.envs.utils import ExplorationType
 
 # region: constants for DPvsPPO.py ==================================
 ELE_DP_HORIZON = 5 #75
-ELE_DP_N_EPISODES = 10000 # In DP we always consider 1 episode
+ELE_DP_N_EPISODES = 10000 #10000 # In DP we always consider 1 episode
 ELE_DP_MAX_COST = 1.0
 
 ELE_DP_INC_STEP = True
