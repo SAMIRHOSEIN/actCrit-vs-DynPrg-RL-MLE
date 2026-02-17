@@ -8,6 +8,9 @@ import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
 from matplotlib.colors import Normalize
 from matplotlib import cm
+from scipy.stats import beta as beta_dist
+from scipy.stats import ks_2samp, kstest
+
 ########################################################
 # 0) inputs
 ########################################################
@@ -189,7 +192,7 @@ alpha_hat, res = fit_dirichlet_mle_lbfgsb(X)
 print("Estimated alpha:", alpha_hat)
 print("Mean (alpha/sum):", alpha_hat / alpha_hat.sum())
 
-# %%
+#%%
 #########################################################################
 # 2) Estimate multinomial parameters 
 #########################################################################
@@ -464,7 +467,6 @@ print()
 
 # # Same density bounds across all three 
 # cmap = cm.viridis
-
 
 #%%
 ###############################################################
@@ -958,6 +960,8 @@ cbar.set_label("Shared Density", fontsize=12)
 fig.suptitle("Ternary KDE — Same Density Scale", fontsize=16, y=1.05)
 # plt.tight_layout()
 plt.show()
+
+
 # %%
 #################################################################
 # 7) 1D marginal distributions for each condition state
@@ -1005,9 +1009,101 @@ for k in range(K):
     plt.legend()
     # plt.tight_layout()
     plt.show()
+
+#%%
+
+# #################################################################
+# 8) 1D marginal distributions: Real data vs Beta marginal (from Dirichlet alpha_hat)
+# #################################################################
+
+alpha0_hat = float(np.sum(alpha_hat))
+
+# avoid evaluating too close to 0 and 1 (Beta blows up there)
+x_grid = np.linspace(1e-3, 1 - 1e-3, 500)
+
+for k in range(X_real.shape[1]):
+    a = float(alpha_hat[k])
+    b = float(alpha0_hat - alpha_hat[k])
+    real_vals = X_real[:, k]
+
+    plt.figure(figsize=(6, 5))
+
+    # Real histogram
+    plt.hist(
+        real_vals,
+        bins=50,
+        range=(0, 1),
+        density=True,
+        alpha=0.6,
+        color="red",
+        label=f"Real {cs_labels[k]}"
+    )
+
+    # Beta marginal curve
+    beta_pdf = beta_dist.pdf(x_grid, a, b)
+    plt.plot(
+        x_grid,
+        beta_pdf,
+        linewidth=2.5,
+        label=f"Beta(a={a:.3g}, b={b:.3g})"
+    )
+
+
+    plt.ylabel("Density")
+
+
+    plt.title(f"Marginal of {cs_labels[k]}: Real vs Beta")
+    plt.xlabel("Fraction in this condition state")
+    plt.ylabel("Density")
+    plt.xlim(0, 1)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+
 # %%
 #################################################################
-# 8) 3D ternary KDE surfaces (LOCAL density scale)
+# 9) Statistical comparison (p-values) for marginals
+# - Two-sample KS: Real marginal vs Dirichlet-simulated marginal
+#################################################################
+def pvals_real_vs_dirichlet(X_real, alpha_hat, rng, n_sim=None, cs_labels=None):
+    X_real = np.asarray(X_real, dtype=float)
+    alpha_hat = np.asarray(alpha_hat, dtype=float)
+
+    if n_sim is None:
+        n_sim = X_real.shape[0]
+
+
+    rng = np.random.default_rng(42)
+
+    X_sim = rng.dirichlet(alpha_hat, size=n_sim)
+
+    rows = []
+    for k in range(X_real.shape[1]):
+        real_k = X_real[:, k]
+        sim_k  = X_sim[:, k]
+
+        ks = ks_2samp(real_k, sim_k, alternative="two-sided", mode="auto")
+
+        rows.append({
+            "CS": cs_labels[k] if cs_labels else f"CS{k+1}",
+            "KS_stat": float(ks.statistic),
+            "p_value": float(ks.pvalue),
+        })
+
+    return pd.DataFrame(rows)
+
+print("p-value:If the real data really came from the Dirichlet model, how likely is it to observe a KS difference this big just by random sampling. (Small p suggests mismatch.)")
+print("KS_stat: maximum difference between the two CDFs (0=identical; larger=more different).")
+df = pvals_real_vs_dirichlet(X_real, alpha_hat, rng, cs_labels=cs_labels)
+print(df)
+#%%
+
+#################################################################
+# 10) 3D ternary KDE surfaces (LOCAL density scale)
 #################################################################
 fig_local = plt.figure(figsize=(18, 6))
 axes_3d_local = []
@@ -1063,7 +1159,7 @@ for i, (title, xs, ys, z, _, _) in enumerate(datasets):
 plt.show()
 
 #################################################################
-# 9) 3D ternary KDE surfaces (shared density scale)
+# 11) 3D ternary KDE surfaces (shared density scale)
 #################################################################
 
 fig = plt.figure(figsize=(18, 6))
