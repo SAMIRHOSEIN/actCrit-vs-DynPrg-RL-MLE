@@ -1,266 +1,266 @@
-YEAR,STATE_NAME,STRUCTURE_NUMBER,OWNER_AGENCY,ELEMENT_CATEGORY,PARENT_ELEMENT_NUMBER,PARENT_ELEMENT_NAME,ELEMENT_NUMBER,ELEMENT_NAME,ELEMENT_UNIT,TOTAL_QUANTITY,CONDITION_STATE_1,CS_PERCENT_1,CONDITION_STATE_2,CS_PERCENT_2,CONDITION_STATE_3,CS_PERCENT_3,CONDITION_STATE_4,CS_PERCENT_4,HI
-2025,'41 - Oregon',00108B002 11455,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',10988,9889,89,1099,10,0,0,0,0,96.7
-2025,'41 - Oregon',00123K030 02590,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',5908,4603,77,1294,21,11,0,0,0,92.65
-2025,'41 - Oregon',00330 105 00689,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',247,243,98,0,0,4,1,0,0,98.91
-2025,'41 - Oregon',00332C002 09985,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',5800,5246,90,505,8,49,0,0,0,96.56
-2025,'41 - Oregon',00357 003 01143,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',280,264,94,12,4,4,1,0,0,97.63
-2025,'41 - Oregon',00598D244 01678,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',352,39,11,258,73,55,15,0,0,65.34
-2025,'41 - Oregon',00711 105 00478,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',146,146,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',00849A042X00043,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',8908,8887,99,20,0,1,0,0,0,99.92
-2025,'41 - Oregon',00912 009 28661,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',60,0,0,56,93,4,6,0,0,64.73
-2025,'41 - Oregon',00983 009 21227,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',504,0,0,495,98,9,1,0,0,66.39
-2025,'41 - Oregon',00990A014 02867,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',390,325,83,65,16,0,0,0,0,94.5
-2025,'41 - Oregon',01132F241 00051,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',378,378,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',01194A025 01928,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',188,0,0,76,40,112,59,0,0,46.74
-2025,'41 - Oregon',01250 191 01890,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',492,294,59,171,34,27,5,0,0,84.85
-2025,'41 - Oregon',01345C131 00749,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',520,0,0,485,93,35,6,0,0,64.71
-2025,'41 - Oregon',01377A001 30838,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',96,74,77,15,15,7,7,0,0,89.96
-2025,'41 - Oregon',01377C01EX00441,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1160,486,41,631,54,43,3,0,0,79.57
-2025,'41 - Oregon',01400 104Y00467,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',288,78,27,158,54,52,18,0,0,69.8
-2025,'41 - Oregon',01463A007 26681,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2865,1864,65,1001,34,0,0,0,0,88.47
-2025,'41 - Oregon',01519A018 03825,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',624,0,0,524,83,100,16,0,0,61.55
-2025,'41 - Oregon',01630A002 19903,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',480,411,85,68,14,1,0,0,0,95.19
-2025,'41 - Oregon',01725A212 01294,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',444,59,13,375,84,10,2,0,0,70.62
-2025,'41 - Oregon',01726 120 00038,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',219,46,21,142,64,31,14,0,0,69.12
-2025,'41 - Oregon',01756A030 00471,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',685,210,30,475,69,0,0,0,0,77.12
-2025,'41 - Oregon',01788 449 00046,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',240,180,75,35,14,25,10,0,0,88.21
-2025,'41 - Oregon',01821E009 19098,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',378,378,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',01856 201 00111,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',220,0,0,220,100,0,0,0,0,67
-2025,'41 - Oregon',01868 037 00578,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',760,478,62,17,2,265,34,0,0,75.9
-2025,'41 - Oregon',01910 053 10524,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3795,3044,80,751,19,0,0,0,0,93.47
-2025,'41 - Oregon',01940G240 00839,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',750,436,58,249,33,65,8,0,0,83.24
-2025,'41 - Oregon',01963 102 01927,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',220,160,72,60,27,0,0,0,0,91
-2025,'41 - Oregon',01964 102 01576,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',160,0,0,148,92,12,7,0,0,64.45
-2025,'41 - Oregon',01991 102 02932,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',241,222,92,19,7,0,0,0,0,97.4
-2025,'41 - Oregon',01994 068 00224,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',715,715,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',01995 231 01236,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',241,0,0,241,100,0,0,0,0,67
-2025,'41 - Oregon',02012 160 02691,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',240,0,0,240,100,0,0,0,0,67
-2025,'41 - Oregon',02019 125 00185,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',78,17,21,21,26,40,51,0,0,56.76
-2025,'41 - Oregon',02046 02WC04892,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',12560,12560,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',02063 002 04155,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1864,1431,76,421,22,12,0,0,0,92.12
-2025,'41 - Oregon',02071A018 04287,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',700,390,55,310,44,0,0,0,0,85.39
-2025,'41 - Oregon',02081 030 00003,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',950,189,19,671,70,90,9,0,0,70.34
-2025,'41 - Oregon',02163A002 00673,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1347,269,19,1078,80,0,0,0,0,73.59
-2025,'41 - Oregon',02164 047 02423,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3340,2234,66,1092,32,14,0,0,0,88.93
-2025,'41 - Oregon',02176 002 03512,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3165,1115,35,1900,60,150,4,0,0,77.01
-2025,'41 - Oregon',02176A002 03512,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1680,0,0,1580,94,100,5,0,0,64.98
-2025,'41 - Oregon',02230A070 00039,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2920,2840,97,0,0,80,2,0,0,98.16
-2025,'41 - Oregon',02237A01E 00262,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1778,0,0,1689,94,89,5,0,0,65.3
-2025,'41 - Oregon',02254A001 28311,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',5200,2739,52,2100,40,361,6,0,0,82.02
-2025,'41 - Oregon',02311 009 03953,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2408,1254,52,168,6,986,40,0,0,70.26
-2025,'41 - Oregon',02319 046 00774,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',23,23,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',02320A102 00460,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',732,0,0,732,100,0,0,0,0,67
-2025,'41 - Oregon',02322 058 01134,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',600,0,0,594,99,6,1,0,0,66.66
-2025,'41 - Oregon',02350A01EX00020,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2708,2613,96,68,2,27,0,0,0,98.5
-2025,'41 - Oregon',02380 058 00220,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',4416,1560,35,2343,53,513,11,0,0,74.71
-2025,'41 - Oregon',02398 005 10560,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',647,647,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',02444 002 06415,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',736,642,87,2,0,92,12,0,0,91.54
-2025,'41 - Oregon',02444A002 06415,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3312,2307,69,994,30,11,0,0,0,89.87
-2025,'41 - Oregon',02472 037 03205,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2360,125,5,2073,87,162,6,0,0,66.41
-2025,'41 - Oregon',02598A102 06365,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',504,168,33,312,61,24,4,0,0,76.38
-2025,'41 - Oregon',02652 027 00706,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',768,398,51,180,23,190,24,0,0,75.69
-2025,'41 - Oregon',02711 180 01181,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',204,0,0,200,98,4,1,0,0,66.33
-2025,'41 - Oregon',02733C01WX00014,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',174,0,0,60,34,114,65,0,0,44.72
-2025,'41 - Oregon',02737 073 03874,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1854,612,33,1242,66,0,0,0,0,77.89
-2025,'41 - Oregon',02793A066 05213,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1470,1230,83,160,10,80,5,0,0,92.76
-2025,'41 - Oregon',02861 415 00342,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',240,208,86,32,13,0,0,0,0,95.6
-2025,'41 - Oregon',03451A231 00630,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2560,256,10,2151,84,153,5,0,0,68.27
-2025,'41 - Oregon',04468A163 01955,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',220,110,50,110,50,0,0,0,0,83.5
-2025,'41 - Oregon',04516A001 30793,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',464,426,91,0,0,38,8,0,0,94.51
-2025,'41 - Oregon',04517 01WX00511,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',467,297,63,60,12,110,23,0,0,79.98
-2025,'41 - Oregon',04587A191 00720,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',35,0,0,25,71,10,28,0,0,57.29
-2025,'41 - Oregon',04703 339 00331,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',112,0,0,112,100,0,0,0,0,67
-2025,'41 - Oregon',04704 339 00316,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',120,0,0,120,100,0,0,0,0,67
-2025,'41 - Oregon',04845 341 04298,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',150,0,0,140,93,10,6,0,0,64.73
-2025,'41 - Oregon',05194 01W 00141,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1915,1851,96,64,3,0,0,0,0,98.9
-2025,'41 - Oregon',06498 123 00027,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',630,630,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',06600A413 00041,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',320,316,98,4,1,0,0,0,0,99.59
-2025,'41 - Oregon',06635 004 00077,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2090,736,35,1254,60,100,4,0,0,76.99
-2025,'41 - Oregon',06635Q004 00000,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',5572,5254,94,120,2,198,3,0,0,96.91
-2025,'41 - Oregon',06683A01WX00031,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2485,754,30,1225,49,506,20,0,0,70.09
-2025,'41 - Oregon',06767 026 00099,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1018,0,0,975,95,43,4,0,0,65.56
-2025,'41 - Oregon',07017 162 04984,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1740,353,20,1107,63,280,16,0,0,68.22
-2025,'41 - Oregon',07020 009 25965,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',159,0,0,124,77,35,22,0,0,59.52
-2025,'41 - Oregon',07040 01EX00020,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',704,574,81,130,18,0,0,0,0,93.91
-2025,'41 - Oregon',07176 241 00373,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',140,0,0,103,73,37,26,0,0,58.01
-2025,'41 - Oregon',07253B030 02595,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3835,1205,31,2542,66,88,2,0,0,76.59
-2025,'41 - Oregon',07575A001 28742,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1466,1211,82,255,17,0,0,0,0,94.26
-2025,'41 - Oregon',07586A001 28898,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1267,0,0,1267,100,0,0,0,0,67
-2025,'41 - Oregon',07695A001 28488,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1792,1485,82,307,17,0,0,0,0,94.35
-2025,'41 - Oregon',07758D01WC00788,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',932,0,0,912,97,20,2,0,0,66.27
-2025,'41 - Oregon',07803A001 27047,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2870,2544,88,326,11,0,0,0,0,96.25
-2025,'41 - Oregon',07855B001C26020,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',4037,4037,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',07894 018 03324,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',723,264,36,235,32,224,30,0,0,68.52
-2025,'41 - Oregon',07949A009 00000,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',4800,1326,27,3445,71,29,0,0,0,75.91
-2025,'41 - Oregon',07949D009 00000,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',600,388,64,175,29,37,6,0,0,86.24
-2025,'41 - Oregon',07949E00900254 ,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2400,1805,75,344,14,251,10,0,0,88.26
-2025,'41 - Oregon',07987 006 32531,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1400,1369,97,31,2,0,0,0,0,99.27
-2025,'41 - Oregon',07987A006 32534,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1400,1299,92,100,7,1,0,0,0,97.59
-2025,'41 - Oregon',07999 068 00226,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',460,424,92,36,7,0,0,0,0,97.42
-2025,'41 - Oregon',08003 039 05157,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1432,669,46,685,47,78,5,0,0,80.56
-2025,'41 - Oregon',08044 006C24382,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',384,19,4,355,92,10,2,0,0,67.75
-2025,'41 - Oregon',08051 015 00134,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1100,0,0,630,57,470,42,0,0,52.47
-2025,'41 - Oregon',08074 162 00592,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',376,0,0,376,100,0,0,0,0,67
-2025,'41 - Oregon',08107E006 37792,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3556,2304,64,1250,35,2,0,0,0,88.36
-2025,'41 - Oregon',08107W006 37792,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3556,2638,74,917,25,1,0,0,0,91.47
-2025,'41 - Oregon',08156 140 02346,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1516,395,26,915,60,206,13,0,0,70.98
-2025,'41 - Oregon',08302E006 31365,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',355,335,94,20,5,0,0,0,0,98.14
-2025,'41 - Oregon',08302W006 31365,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',355,335,94,20,5,0,0,0,0,98.14
-2025,'41 - Oregon',08320 039 02717,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1887,0,0,1887,100,0,0,0,0,67
-2025,'41 - Oregon',08332 001 02866,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',7024,4665,66,2359,33,0,0,0,0,88.92
-2025,'41 - Oregon',08345 004 27371,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',752,348,46,287,38,117,15,0,0,76.98
-2025,'41 - Oregon',08347 004 27506,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2580,2060,79,460,17,60,2,0,0,92.56
-2025,'41 - Oregon',08383N001 04547,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',678,313,46,365,53,0,0,0,0,82.23
-2025,'41 - Oregon',08383S001 04547,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',392,0,0,388,98,4,1,0,0,66.65
-2025,'41 - Oregon',08432 025X00024,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2300,0,0,2235,97,65,2,0,0,66.04
-2025,'41 - Oregon',08437 001 29655,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1295,0,0,1295,100,0,0,0,0,67
-2025,'41 - Oregon',08445 225 00154,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',728,0,0,728,100,0,0,0,0,67
-2025,'41 - Oregon',08470 002C02211,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',360,207,57,152,42,1,0,0,0,85.88
-2025,'41 - Oregon',08490 039 04563,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',440,0,0,440,100,0,0,0,0,67
-2025,'41 - Oregon',08510 004C27368,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',470,235,50,235,50,0,0,0,0,83.5
-2025,'41 - Oregon',08588A002 00024,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',4853,3837,79,1016,20,0,0,0,0,93.09
-2025,'41 - Oregon',08588B002 00002,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',6240,5916,94,323,5,1,0,0,0,98.28
-2025,'41 - Oregon',08588C002 00020,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',7262,6140,84,1121,15,1,0,0,0,94.9
-2025,'41 - Oregon',08588D001 30150,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3850,3622,94,227,5,1,0,0,0,98.04
-2025,'41 - Oregon',08589A001 30150,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',5268,4980,94,287,5,1,0,0,0,98.19
-2025,'41 - Oregon',08589B001 30150,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',6686,5944,88,739,11,3,0,0,0,96.32
-2025,'41 - Oregon',08589C001 30150,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',5870,5208,88,652,11,10,0,0,0,96.22
-2025,'41 - Oregon',08589D001 30150,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3264,2261,69,1002,30,1,0,0,0,89.85
-2025,'41 - Oregon',08590C001 30069,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',13984,13238,94,743,5,3,0,0,0,98.23
-2025,'41 - Oregon',08590D001 30068,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',10123,9308,91,810,8,5,0,0,0,97.33
-2025,'41 - Oregon',08591A061C00109,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',7114,6560,92,504,7,50,0,0,0,97.19
-2025,'41 - Oregon',08591B001C30046,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',5579,4421,79,1147,20,11,0,0,0,93.08
-2025,'41 - Oregon',08591C001 30010,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',7433,5171,69,2254,30,8,0,0,0,89.92
-2025,'41 - Oregon',08591D001 30012,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',5154,3435,66,1710,33,9,0,0,0,88.93
-2025,'41 - Oregon',08591E061 00053,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',346,0,0,346,100,0,0,0,0,67
-2025,'41 - Oregon',08591F061 00048,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1616,1485,91,129,7,2,0,0,0,97.28
-2025,'41 - Oregon',08603 002 08428,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',456,91,19,365,80,0,0,0,0,73.59
-2025,'41 - Oregon',08603W002 08428,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',504,50,9,454,90,0,0,0,0,70.27
-2025,'41 - Oregon',08609 002 04366,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',832,390,46,426,51,16,1,0,0,81.81
-2025,'41 - Oregon',08616 033 05586,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',264,229,86,35,13,0,0,0,0,95.63
-2025,'41 - Oregon',08638 069 00959,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2040,321,15,1501,73,218,10,0,0,68.56
-2025,'41 - Oregon',08638A069 00959,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2040,870,42,1169,57,1,0,0,0,81.06
-2025,'41 - Oregon',08662 002 06341,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1128,323,28,805,71,0,0,0,0,76.45
-2025,'41 - Oregon',08676B001C02758,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2320,2020,87,300,12,0,0,0,0,95.73
-2025,'41 - Oregon',08700A227 00196,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2072,1716,82,356,17,0,0,0,0,94.33
-2025,'41 - Oregon',08700B227 00197,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',424,318,75,106,25,0,0,0,0,91.75
-2025,'41 - Oregon',08775 002 08415,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2032,1357,66,672,33,3,0,0,0,88.99
-2025,'41 - Oregon',08776 002 08745,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2080,1130,54,900,43,50,2,0,0,84.11
-2025,'41 - Oregon',08804 002C08562,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',388,78,20,310,79,0,0,0,0,73.63
-2025,'41 - Oregon',08820 002 13791,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',9896,8730,88,1149,11,17,0,0,0,96.05
-2025,'41 - Oregon',08829 017 01841,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',400,275,68,120,30,5,1,0,0,89.26
-2025,'41 - Oregon',08830 035 02432,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',480,0,0,477,99,3,0,0,0,66.79
-2025,'41 - Oregon',08831 002 09745,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2160,1900,87,250,11,10,0,0,0,95.87
-2025,'41 - Oregon',08864A069 00706,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',4020,3342,83,677,16,1,0,0,0,94.43
-2025,'41 - Oregon',08875 035 02552,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1200,0,0,1196,99,4,0,0,0,66.89
-2025,'41 - Oregon',08876 035 02567,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',800,28,3,768,96,4,0,0,0,67.99
-2025,'41 - Oregon',08882 001 30592,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3404,1589,46,1800,52,15,0,0,0,82.25
-2025,'41 - Oregon',08883 001 30622,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',7280,5076,69,1684,23,520,7,0,0,87.58
-2025,'41 - Oregon',08884 002 16877,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',328,208,63,120,36,0,0,0,0,87.93
-2025,'41 - Oregon',08887B017 01981,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',976,476,48,450,46,50,5,0,0,81.35
-2025,'41 - Oregon',08889 030 02430,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3240,0,0,3230,99,10,0,0,0,66.9
-2025,'41 - Oregon',08923 002 09575,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',720,571,79,144,20,5,0,0,0,92.93
-2025,'41 - Oregon',08924 002 08988,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',720,432,60,288,40,0,0,0,0,86.8
-2025,'41 - Oregon',08933 002 09604,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1520,470,30,1000,65,50,3,0,0,76.09
-2025,'41 - Oregon',08935 035 03059,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1200,310,25,890,74,0,0,0,0,75.52
-2025,'41 - Oregon',08936 035 03010,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',400,55,13,345,86,0,0,0,0,71.54
-2025,'41 - Oregon',08979 012 07080,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2408,1927,80,421,17,60,2,0,0,92.56
-2025,'41 - Oregon',08981 030 02486,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',516,0,0,516,100,0,0,0,0,67
-2025,'41 - Oregon',08991 171 04488,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',146,0,0,146,100,0,0,0,0,67
-2025,'41 - Oregon',09017 026 10461,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',424,274,64,150,35,0,0,0,0,88.33
-2025,'41 - Oregon',09125 006 34784,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1395,1378,98,17,1,0,0,0,0,99.6
-2025,'41 - Oregon',09179 210 00013,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2040,915,44,1121,54,4,0,0,0,81.73
-2025,'41 - Oregon',09213 002 10902,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1032,522,50,450,43,60,5,0,0,81.72
-2025,'41 - Oregon',09213A002 10902,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1032,440,42,567,54,25,2,0,0,80.25
-2025,'41 - Oregon',09252 061 00177,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1976,1458,73,518,26,0,0,0,0,91.35
-2025,'41 - Oregon',09253 061 00172,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2106,1510,71,596,28,0,0,0,0,90.66
-2025,'41 - Oregon',09282 061 00214,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2022,1999,98,23,1,0,0,0,0,99.62
-2025,'41 - Oregon',09282A061 00212,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1468,1308,89,160,10,0,0,0,0,96.4
-2025,'41 - Oregon',09377 002 04196,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',4146,4076,98,58,1,12,0,0,0,99.34
-2025,'41 - Oregon',09382 002 04131,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',12680,9509,74,3171,25,0,0,0,0,91.75
-2025,'41 - Oregon',09403 064 00913,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',26255,20248,77,5991,22,16,0,0,0,92.43
-2025,'41 - Oregon',09403A064 01140,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2434,2139,87,290,11,5,0,0,0,95.93
-2025,'41 - Oregon',09403C064C00910,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2550,1740,68,810,31,0,0,0,0,89.52
-2025,'41 - Oregon',09403R064C00930,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',303,0,0,303,100,0,0,0,0,67
-2025,'41 - Oregon',09422 006 18724,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1160,1000,86,160,13,0,0,0,0,95.45
-2025,'41 - Oregon',09454 141 00471,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1064,958,90,106,9,0,0,0,0,96.71
-2025,'41 - Oregon',09511 006C29868,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1120,1079,96,40,3,1,0,0,0,98.76
-2025,'41 - Oregon',09520 006 20790,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3090,2940,95,150,4,0,0,0,0,98.4
-2025,'41 - Oregon',09520A006 20788,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2205,2101,95,100,4,4,0,0,0,98.38
-2025,'41 - Oregon',09524 006 21206,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1064,1044,98,20,1,0,0,0,0,99.38
-2025,'41 - Oregon',09539 006C17798,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1134,1070,94,64,5,0,0,0,0,98.14
-2025,'41 - Oregon',09540 006C18040,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1310,1270,96,40,3,0,0,0,0,98.99
-2025,'41 - Oregon',09541 333 01250,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1217,810,66,407,33,0,0,0,0,88.96
-2025,'41 - Oregon',09565 144 00669,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1476,1328,89,147,9,1,0,0,0,96.67
-2025,'41 - Oregon',09568 006C19946,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1212,1182,97,30,2,0,0,0,0,99.18
-2025,'41 - Oregon',09569 144 00722,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2151,1934,89,215,9,2,0,0,0,96.64
-2025,'41 - Oregon',09577 320 04007,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1150,1118,97,32,2,0,0,0,0,99.08
-2025,'41 - Oregon',09579 006C19854,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1064,1054,99,10,0,0,0,0,0,99.69
-2025,'41 - Oregon',09584 006C20287,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1140,1092,95,48,4,0,0,0,0,98.61
-2025,'41 - Oregon',09632 006 26185,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1662,1656,99,6,0,0,0,0,0,99.88
-2025,'41 - Oregon',09632A006 26184,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1660,1571,94,89,5,0,0,0,0,98.23
-2025,'41 - Oregon',09635 006 26492,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2934,2913,99,21,0,0,0,0,0,99.76
-2025,'41 - Oregon',09635A006 26492,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3600,3576,99,21,0,3,0,0,0,99.75
-2025,'41 - Oregon',09640 006 17113,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1060,1004,94,56,5,0,0,0,0,98.26
-2025,'41 - Oregon',09693 004 27593,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1078,1068,99,0,0,10,0,0,0,99.38
-2025,'41 - Oregon',09694 004 27713,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2691,2381,88,250,9,60,2,0,0,95.44
-2025,'41 - Oregon',09722 047C06111,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3465,3465,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',09743 001 28851,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1491,1491,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',09743A001 28851,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1582,1266,80,316,19,0,0,0,0,93.41
-2025,'41 - Oregon',09743C001C28848,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1410,605,42,805,57,0,0,0,0,81.16
-2025,'41 - Oregon',09755 006C28364,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1112,1095,98,16,1,1,0,0,0,99.46
-2025,'41 - Oregon',09804 012 00267,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1400,1348,96,52,3,0,0,0,0,98.77
-2025,'41 - Oregon',09806 031 01045,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',4805,3120,64,1685,35,0,0,0,0,88.43
-2025,'41 - Oregon',0M203 062Y01519,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',248,0,0,248,100,0,0,0,0,67
-2025,'41 - Oregon',16358 001C30298,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',223,168,75,55,24,0,0,0,0,91.86
-2025,'41 - Oregon',16535 001C30309,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',410,410,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',17363 272 00614,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2231,2231,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',18074 350 02934,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',440,439,99,0,0,1,0,0,0,99.85
-2025,'41 - Oregon',18787 019 10927,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1100,1099,99,1,0,0,0,0,0,99.97
-2025,'41 - Oregon',19142 001 10154,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2427,2427,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',19143 001 10154,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2427,2427,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',19265 026 04258,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',593,593,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',19267 025 02940,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2182,2182,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',19281 026 04381,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2250,0,0,1649,73,601,26,0,0,57.92
-2025,'41 - Oregon',19712 006 31746,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2430,2430,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',19713 006 31744,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2520,2520,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',19789 021 04386,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2231,2231,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',19865 006 25617,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1670,1670,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',19866 006 25618,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2150,2150,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',19940 004 27473,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2500,2500,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20061 001 19578,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1582,1582,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20062 001 19578,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1075,1075,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20080 006 18843,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1920,1920,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20120 018 00808,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2344,2344,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20255 341 04701,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',588,588,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20338 026 05351,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',848,848,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20584 045 03964,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',962,962,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20651 001 00000,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2500,2500,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20674 001 01496,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',800,800,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20675 001 01496,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',800,800,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20855 002 03898,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2300,2300,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20861 231 02210,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1200,1200,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',20873 028 06381,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',840,840,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',21163 231 02115,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',516,516,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',21281 160 02420,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1164,1164,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',21357 02W 09469,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',486,486,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',21358 001 01917,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1817,1817,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',21417 160 00001,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1170,1170,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',21494 047C05723,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2600,2600,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',21716 333 01186,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1550,1550,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',21869 075 00052,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2450,2450,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',21871 068 01024,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1620,1620,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',22627 045 01643,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',5515,5515,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',22688 483 04675,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3880,3880,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',23871 153 00588,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2460,2460,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',23877 010 04583,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',1944,1944,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',24025 047 04563,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',645,645,100,0,0,0,0,0,0,100
-2025,'41 - Oregon',H8588A002 00002,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2412,1002,41,1409,58,1,0,0,0,80.69
-2025,'41 - Oregon',N8588E001 30170,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',11310,6726,59,4575,40,9,0,0,0,86.6
-2025,'41 - Oregon',N8837B064 01072,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',4572,3658,80,914,19,0,0,0,0,93.4
-2025,'41 - Oregon',N8958A001 30299,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3539,1997,56,1542,43,0,0,0,0,85.62
-2025,'41 - Oregon',R8588E001 30150,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',2848,2562,89,286,10,0,0,0,0,96.69
-2025,'41 - Oregon',S8588E001 30170,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',11510,8693,75,2808,24,9,0,0,0,91.9
-2025,'41 - Oregon',S8837A064 01072,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',4064,0,0,4034,99,30,0,0,0,66.75
-2025,'41 - Oregon',S8958A001 30299,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',3933,2713,68,1219,30,1,0,0,0,89.75
-2025,'41 - Oregon',T02728 21000013,'State Highway Agency','Superstructure',,'',107,'Steel Girder/Beam','LF',8580,0,0,8580,100,0,0,0,0,67
+YEAR	STATE_NAME	STRUCTURE_NUMBER	OWNER_AGENCY	ELEMENT_CATEGORY	PARENT_ELEMENT_NUMBER	PARENT_ELEMENT_NAME	ELEMENT_NUMBER	ELEMENT_NAME	ELEMENT_UNIT	TOTAL_QUANTITY	CONDITION_STATE_1	CS_PERCENT_1	CONDITION_STATE_2	CS_PERCENT_2	CONDITION_STATE_3	CS_PERCENT_3	CONDITION_STATE_4	CS_PERCENT_4	HI	
+2025	'41 - Oregon'	00108B002 11455	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	10988	9889	89	1099	10	0	0	0	0	96.7	Zero
+2025	'41 - Oregon'	00123K030 02590	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	5908	4603	77	1294	21	11	0	0	0	92.65	Zero
+2025	'41 - Oregon'	00330 105 00689	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	247	243	98	0	0	4	1	0	0	98.91	Zero
+2025	'41 - Oregon'	00332C002 09985	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	5800	5246	90	505	8	49	0	0	0	96.56	Zero
+2025	'41 - Oregon'	00357 003 01143	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	280	264	94	12	4	4	1	0	0	97.63	Zero
+2025	'41 - Oregon'	00598D244 01678	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	352	39	11	258	73	55	15	0	0	65.34	Zero
+2025	'41 - Oregon'	00711 105 00478	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	146	146	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	00849A042X00043	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	8908	8887	99	20	0	1	0	0	0	99.92	Zero
+2025	'41 - Oregon'	00912 009 28661	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	60	0	0	56	93	4	6	0	0	64.73	Zero
+2025	'41 - Oregon'	00983 009 21227	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	504	0	0	495	98	9	1	0	0	66.39	Zero
+2025	'41 - Oregon'	00990A014 02867	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	390	325	83	65	16	0	0	0	0	94.5	Zero
+2025	'41 - Oregon'	01132F241 00051	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	378	378	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	01194A025 01928	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	188	0	0	76	40	112	59	0	0	46.74	Zero
+2025	'41 - Oregon'	01250 191 01890	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	492	294	59	171	34	27	5	0	0	84.85	Zero
+2025	'41 - Oregon'	01345C131 00749	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	520	0	0	485	93	35	6	0	0	64.71	Zero
+2025	'41 - Oregon'	01377A001 30838	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	96	74	77	15	15	7	7	0	0	89.96	Zero
+2025	'41 - Oregon'	01377C01EX00441	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1160	486	41	631	54	43	3	0	0	79.57	Zero
+2025	'41 - Oregon'	01400 104Y00467	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	288	78	27	158	54	52	18	0	0	69.8	Zero
+2025	'41 - Oregon'	01463A007 26681	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2865	1864	65	1001	34	0	0	0	0	88.47	Zero
+2025	'41 - Oregon'	01519A018 03825	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	624	0	0	524	83	100	16	0	0	61.55	Zero
+2025	'41 - Oregon'	01630A002 19903	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	480	411	85	68	14	1	0	0	0	95.19	Zero
+2025	'41 - Oregon'	01725A212 01294	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	444	59	13	375	84	10	2	0	0	70.62	Zero
+2025	'41 - Oregon'	01726 120 00038	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	219	46	21	142	64	31	14	0	0	69.12	Zero
+2025	'41 - Oregon'	01756A030 00471	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	685	210	30	475	69	0	0	0	0	77.12	Zero
+2025	'41 - Oregon'	01788 449 00046	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	240	180	75	35	14	25	10	0	0	88.21	Zero
+2025	'41 - Oregon'	01821E009 19098	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	378	378	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	01856 201 00111	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	220	0	0	220	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	01868 037 00578	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	760	478	62	17	2	265	34	0	0	75.9	Zero
+2025	'41 - Oregon'	01910 053 10524	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3795	3044	80	751	19	0	0	0	0	93.47	Zero
+2025	'41 - Oregon'	01940G240 00839	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	750	436	58	249	33	65	8	0	0	83.24	Zero
+2025	'41 - Oregon'	01963 102 01927	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	220	160	72	60	27	0	0	0	0	91	Zero
+2025	'41 - Oregon'	01964 102 01576	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	160	0	0	148	92	12	7	0	0	64.45	Zero
+2025	'41 - Oregon'	01991 102 02932	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	241	222	92	19	7	0	0	0	0	97.4	Zero
+2025	'41 - Oregon'	01994 068 00224	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	715	715	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	01995 231 01236	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	241	0	0	241	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	02012 160 02691	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	240	0	0	240	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	02019 125 00185	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	78	17	21	21	26	40	51	0	0	56.76	Zero
+2025	'41 - Oregon'	02046 02WC04892	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	12560	12560	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	02063 002 04155	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1864	1431	76	421	22	12	0	0	0	92.12	Zero
+2025	'41 - Oregon'	02071A018 04287	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	700	390	55	310	44	0	0	0	0	85.39	Zero
+2025	'41 - Oregon'	02081 030 00003	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	950	189	19	671	70	90	9	0	0	70.34	Zero
+2025	'41 - Oregon'	02163A002 00673	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1347	269	19	1078	80	0	0	0	0	73.59	Zero
+2025	'41 - Oregon'	02164 047 02423	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3340	2234	66	1092	32	14	0	0	0	88.93	Zero
+2025	'41 - Oregon'	02176 002 03512	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3165	1115	35	1900	60	150	4	0	0	77.01	Zero
+2025	'41 - Oregon'	02176A002 03512	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1680	0	0	1580	94	100	5	0	0	64.98	Zero
+2025	'41 - Oregon'	02230A070 00039	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2920	2840	97	0	0	80	2	0	0	98.16	Zero
+2025	'41 - Oregon'	02237A01E 00262	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1778	0	0	1689	94	89	5	0	0	65.3	Zero
+2025	'41 - Oregon'	02254A001 28311	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	5200	2739	52	2100	40	361	6	0	0	82.02	Zero
+2025	'41 - Oregon'	02311 009 03953	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2408	1254	52	168	6	986	40	0	0	70.26	Zero
+2025	'41 - Oregon'	02319 046 00774	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	23	23	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	02320A102 00460	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	732	0	0	732	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	02322 058 01134	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	600	0	0	594	99	6	1	0	0	66.66	Zero
+2025	'41 - Oregon'	02350A01EX00020	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2708	2613	96	68	2	27	0	0	0	98.5	Zero
+2025	'41 - Oregon'	02380 058 00220	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	4416	1560	35	2343	53	513	11	0	0	74.71	Zero
+2025	'41 - Oregon'	02398 005 10560	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	647	647	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	02444 002 06415	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	736	642	87	2	0	92	12	0	0	91.54	Zero
+2025	'41 - Oregon'	02444A002 06415	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3312	2307	69	994	30	11	0	0	0	89.87	Zero
+2025	'41 - Oregon'	02472 037 03205	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2360	125	5	2073	87	162	6	0	0	66.41	Zero
+2025	'41 - Oregon'	02598A102 06365	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	504	168	33	312	61	24	4	0	0	76.38	Zero
+2025	'41 - Oregon'	02652 027 00706	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	768	398	51	180	23	190	24	0	0	75.69	Zero
+2025	'41 - Oregon'	02711 180 01181	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	204	0	0	200	98	4	1	0	0	66.33	Zero
+2025	'41 - Oregon'	02733C01WX00014	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	174	0	0	60	34	114	65	0	0	44.72	Zero
+2025	'41 - Oregon'	02737 073 03874	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1854	612	33	1242	66	0	0	0	0	77.89	Zero
+2025	'41 - Oregon'	02793A066 05213	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1470	1230	83	160	10	80	5	0	0	92.76	Zero
+2025	'41 - Oregon'	02861 415 00342	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	240	208	86	32	13	0	0	0	0	95.6	Zero
+2025	'41 - Oregon'	03451A231 00630	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2560	256	10	2151	84	153	5	0	0	68.27	Zero
+2025	'41 - Oregon'	04468A163 01955	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	220	110	50	110	50	0	0	0	0	83.5	Zero
+2025	'41 - Oregon'	04516A001 30793	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	464	426	91	0	0	38	8	0	0	94.51	Zero
+2025	'41 - Oregon'	04517 01WX00511	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	467	297	63	60	12	110	23	0	0	79.98	Zero
+2025	'41 - Oregon'	04587A191 00720	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	35	0	0	25	71	10	28	0	0	57.29	Zero
+2025	'41 - Oregon'	04703 339 00331	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	112	0	0	112	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	04704 339 00316	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	120	0	0	120	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	04845 341 04298	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	150	0	0	140	93	10	6	0	0	64.73	Zero
+2025	'41 - Oregon'	05194 01W 00141	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1915	1851	96	64	3	0	0	0	0	98.9	Zero
+2025	'41 - Oregon'	06498 123 00027	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	630	630	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	06600A413 00041	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	320	316	98	4	1	0	0	0	0	99.59	Zero
+2025	'41 - Oregon'	06635 004 00077	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2090	736	35	1254	60	100	4	0	0	76.99	Zero
+2025	'41 - Oregon'	06635Q004 00000	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	5572	5254	94	120	2	198	3	0	0	96.91	Zero
+2025	'41 - Oregon'	06683A01WX00031	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2485	754	30	1225	49	506	20	0	0	70.09	Zero
+2025	'41 - Oregon'	06767 026 00099	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1018	0	0	975	95	43	4	0	0	65.56	Zero
+2025	'41 - Oregon'	07017 162 04984	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1740	353	20	1107	63	280	16	0	0	68.22	Zero
+2025	'41 - Oregon'	07020 009 25965	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	159	0	0	124	77	35	22	0	0	59.52	Zero
+2025	'41 - Oregon'	07040 01EX00020	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	704	574	81	130	18	0	0	0	0	93.91	Zero
+2025	'41 - Oregon'	07176 241 00373	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	140	0	0	103	73	37	26	0	0	58.01	Zero
+2025	'41 - Oregon'	07253B030 02595	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3835	1205	31	2542	66	88	2	0	0	76.59	Zero
+2025	'41 - Oregon'	07575A001 28742	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1466	1211	82	255	17	0	0	0	0	94.26	Zero
+2025	'41 - Oregon'	07586A001 28898	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1267	0	0	1267	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	07695A001 28488	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1792	1485	82	307	17	0	0	0	0	94.35	Zero
+2025	'41 - Oregon'	07758D01WC00788	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	932	0	0	912	97	20	2	0	0	66.27	Zero
+2025	'41 - Oregon'	07803A001 27047	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2870	2544	88	326	11	0	0	0	0	96.25	Zero
+2025	'41 - Oregon'	07855B001C26020	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	4037	4037	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	07894 018 03324	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	723	264	36	235	32	224	30	0	0	68.52	Zero
+2025	'41 - Oregon'	07949A009 00000	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	4800	1326	27	3445	71	29	0	0	0	75.91	Zero
+2025	'41 - Oregon'	07949D009 00000	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	600	388	64	175	29	37	6	0	0	86.24	Zero
+2025	'41 - Oregon'	07949E00900254 	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2400	1805	75	344	14	251	10	0	0	88.26	Zero
+2025	'41 - Oregon'	07987 006 32531	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1400	1369	97	31	2	0	0	0	0	99.27	Zero
+2025	'41 - Oregon'	07987A006 32534	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1400	1299	92	100	7	1	0	0	0	97.59	Zero
+2025	'41 - Oregon'	07999 068 00226	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	460	424	92	36	7	0	0	0	0	97.42	Zero
+2025	'41 - Oregon'	08003 039 05157	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1432	669	46	685	47	78	5	0	0	80.56	Zero
+2025	'41 - Oregon'	08044 006C24382	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	384	19	4	355	92	10	2	0	0	67.75	Zero
+2025	'41 - Oregon'	08051 015 00134	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1100	0	0	630	57	470	42	0	0	52.47	Zero
+2025	'41 - Oregon'	08074 162 00592	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	376	0	0	376	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	08107E006 37792	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3556	2304	64	1250	35	2	0	0	0	88.36	Zero
+2025	'41 - Oregon'	08107W006 37792	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3556	2638	74	917	25	1	0	0	0	91.47	Zero
+2025	'41 - Oregon'	08156 140 02346	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1516	395	26	915	60	206	13	0	0	70.98	Zero
+2025	'41 - Oregon'	08302E006 31365	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	355	335	94	20	5	0	0	0	0	98.14	Zero
+2025	'41 - Oregon'	08302W006 31365	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	355	335	94	20	5	0	0	0	0	98.14	Zero
+2025	'41 - Oregon'	08320 039 02717	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1887	0	0	1887	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	08332 001 02866	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	7024	4665	66	2359	33	0	0	0	0	88.92	Zero
+2025	'41 - Oregon'	08345 004 27371	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	752	348	46	287	38	117	15	0	0	76.98	Zero
+2025	'41 - Oregon'	08347 004 27506	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2580	2060	79	460	17	60	2	0	0	92.56	Zero
+2025	'41 - Oregon'	08383N001 04547	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	678	313	46	365	53	0	0	0	0	82.23	Zero
+2025	'41 - Oregon'	08383S001 04547	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	392	0	0	388	98	4	1	0	0	66.65	Zero
+2025	'41 - Oregon'	08432 025X00024	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2300	0	0	2235	97	65	2	0	0	66.04	Zero
+2025	'41 - Oregon'	08437 001 29655	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1295	0	0	1295	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	08445 225 00154	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	728	0	0	728	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	08470 002C02211	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	360	207	57	152	42	1	0	0	0	85.88	Zero
+2025	'41 - Oregon'	08490 039 04563	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	440	0	0	440	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	08510 004C27368	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	470	235	50	235	50	0	0	0	0	83.5	Zero
+2025	'41 - Oregon'	08588A002 00024	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	4853	3837	79	1016	20	0	0	0	0	93.09	Zero
+2025	'41 - Oregon'	08588B002 00002	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	6240	5916	94	323	5	1	0	0	0	98.28	Zero
+2025	'41 - Oregon'	08588C002 00020	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	7262	6140	84	1121	15	1	0	0	0	94.9	Zero
+2025	'41 - Oregon'	08588D001 30150	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3850	3622	94	227	5	1	0	0	0	98.04	Zero
+2025	'41 - Oregon'	08589A001 30150	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	5268	4980	94	287	5	1	0	0	0	98.19	Zero
+2025	'41 - Oregon'	08589B001 30150	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	6686	5944	88	739	11	3	0	0	0	96.32	Zero
+2025	'41 - Oregon'	08589C001 30150	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	5870	5208	88	652	11	10	0	0	0	96.22	Zero
+2025	'41 - Oregon'	08589D001 30150	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3264	2261	69	1002	30	1	0	0	0	89.85	Zero
+2025	'41 - Oregon'	08590C001 30069	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	13984	13238	94	743	5	3	0	0	0	98.23	Zero
+2025	'41 - Oregon'	08590D001 30068	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	10123	9308	91	810	8	5	0	0	0	97.33	Zero
+2025	'41 - Oregon'	08591A061C00109	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	7114	6560	92	504	7	50	0	0	0	97.19	Zero
+2025	'41 - Oregon'	08591B001C30046	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	5579	4421	79	1147	20	11	0	0	0	93.08	Zero
+2025	'41 - Oregon'	08591C001 30010	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	7433	5171	69	2254	30	8	0	0	0	89.92	Zero
+2025	'41 - Oregon'	08591D001 30012	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	5154	3435	66	1710	33	9	0	0	0	88.93	Zero
+2025	'41 - Oregon'	08591E061 00053	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	346	0	0	346	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	08591F061 00048	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1616	1485	91	129	7	2	0	0	0	97.28	Zero
+2025	'41 - Oregon'	08603 002 08428	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	456	91	19	365	80	0	0	0	0	73.59	Zero
+2025	'41 - Oregon'	08603W002 08428	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	504	50	9	454	90	0	0	0	0	70.27	Zero
+2025	'41 - Oregon'	08609 002 04366	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	832	390	46	426	51	16	1	0	0	81.81	Zero
+2025	'41 - Oregon'	08616 033 05586	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	264	229	86	35	13	0	0	0	0	95.63	Zero
+2025	'41 - Oregon'	08638 069 00959	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2040	321	15	1501	73	218	10	0	0	68.56	Zero
+2025	'41 - Oregon'	08638A069 00959	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2040	870	42	1169	57	1	0	0	0	81.06	Zero
+2025	'41 - Oregon'	08662 002 06341	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1128	323	28	805	71	0	0	0	0	76.45	Zero
+2025	'41 - Oregon'	08676B001C02758	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2320	2020	87	300	12	0	0	0	0	95.73	Zero
+2025	'41 - Oregon'	08700A227 00196	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2072	1716	82	356	17	0	0	0	0	94.33	Zero
+2025	'41 - Oregon'	08700B227 00197	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	424	318	75	106	25	0	0	0	0	91.75	Zero
+2025	'41 - Oregon'	08775 002 08415	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2032	1357	66	672	33	3	0	0	0	88.99	Zero
+2025	'41 - Oregon'	08776 002 08745	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2080	1130	54	900	43	50	2	0	0	84.11	Zero
+2025	'41 - Oregon'	08804 002C08562	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	388	78	20	310	79	0	0	0	0	73.63	Zero
+2025	'41 - Oregon'	08820 002 13791	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	9896	8730	88	1149	11	17	0	0	0	96.05	Zero
+2025	'41 - Oregon'	08829 017 01841	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	400	275	68	120	30	5	1	0	0	89.26	Zero
+2025	'41 - Oregon'	08830 035 02432	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	480	0	0	477	99	3	0	0	0	66.79	Zero
+2025	'41 - Oregon'	08831 002 09745	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2160	1900	87	250	11	10	0	0	0	95.87	Zero
+2025	'41 - Oregon'	08864A069 00706	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	4020	3342	83	677	16	1	0	0	0	94.43	Zero
+2025	'41 - Oregon'	08875 035 02552	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1200	0	0	1196	99	4	0	0	0	66.89	Zero
+2025	'41 - Oregon'	08876 035 02567	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	800	28	3	768	96	4	0	0	0	67.99	Zero
+2025	'41 - Oregon'	08882 001 30592	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3404	1589	46	1800	52	15	0	0	0	82.25	Zero
+2025	'41 - Oregon'	08883 001 30622	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	7280	5076	69	1684	23	520	7	0	0	87.58	Zero
+2025	'41 - Oregon'	08884 002 16877	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	328	208	63	120	36	0	0	0	0	87.93	Zero
+2025	'41 - Oregon'	08887B017 01981	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	976	476	48	450	46	50	5	0	0	81.35	Zero
+2025	'41 - Oregon'	08889 030 02430	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3240	0	0	3230	99	10	0	0	0	66.9	Zero
+2025	'41 - Oregon'	08923 002 09575	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	720	571	79	144	20	5	0	0	0	92.93	Zero
+2025	'41 - Oregon'	08924 002 08988	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	720	432	60	288	40	0	0	0	0	86.8	Zero
+2025	'41 - Oregon'	08933 002 09604	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1520	470	30	1000	65	50	3	0	0	76.09	Zero
+2025	'41 - Oregon'	08935 035 03059	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1200	310	25	890	74	0	0	0	0	75.52	Zero
+2025	'41 - Oregon'	08936 035 03010	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	400	55	13	345	86	0	0	0	0	71.54	Zero
+2025	'41 - Oregon'	08979 012 07080	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2408	1927	80	421	17	60	2	0	0	92.56	Zero
+2025	'41 - Oregon'	08981 030 02486	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	516	0	0	516	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	08991 171 04488	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	146	0	0	146	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	09017 026 10461	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	424	274	64	150	35	0	0	0	0	88.33	Zero
+2025	'41 - Oregon'	09125 006 34784	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1395	1378	98	17	1	0	0	0	0	99.6	Zero
+2025	'41 - Oregon'	09179 210 00013	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2040	915	44	1121	54	4	0	0	0	81.73	Zero
+2025	'41 - Oregon'	09213 002 10902	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1032	522	50	450	43	60	5	0	0	81.72	Zero
+2025	'41 - Oregon'	09213A002 10902	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1032	440	42	567	54	25	2	0	0	80.25	Zero
+2025	'41 - Oregon'	09252 061 00177	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1976	1458	73	518	26	0	0	0	0	91.35	Zero
+2025	'41 - Oregon'	09253 061 00172	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2106	1510	71	596	28	0	0	0	0	90.66	Zero
+2025	'41 - Oregon'	09282 061 00214	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2022	1999	98	23	1	0	0	0	0	99.62	Zero
+2025	'41 - Oregon'	09282A061 00212	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1468	1308	89	160	10	0	0	0	0	96.4	Zero
+2025	'41 - Oregon'	09377 002 04196	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	4146	4076	98	58	1	12	0	0	0	99.34	Zero
+2025	'41 - Oregon'	09382 002 04131	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	12680	9509	74	3171	25	0	0	0	0	91.75	Zero
+2025	'41 - Oregon'	09403 064 00913	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	26255	20248	77	5991	22	16	0	0	0	92.43	Zero
+2025	'41 - Oregon'	09403A064 01140	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2434	2139	87	290	11	5	0	0	0	95.93	Zero
+2025	'41 - Oregon'	09403C064C00910	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2550	1740	68	810	31	0	0	0	0	89.52	Zero
+2025	'41 - Oregon'	09403R064C00930	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	303	0	0	303	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	09422 006 18724	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1160	1000	86	160	13	0	0	0	0	95.45	Zero
+2025	'41 - Oregon'	09454 141 00471	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1064	958	90	106	9	0	0	0	0	96.71	Zero
+2025	'41 - Oregon'	09511 006C29868	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1120	1079	96	40	3	1	0	0	0	98.76	Zero
+2025	'41 - Oregon'	09520 006 20790	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3090	2940	95	150	4	0	0	0	0	98.4	Zero
+2025	'41 - Oregon'	09520A006 20788	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2205	2101	95	100	4	4	0	0	0	98.38	Zero
+2025	'41 - Oregon'	09524 006 21206	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1064	1044	98	20	1	0	0	0	0	99.38	Zero
+2025	'41 - Oregon'	09539 006C17798	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1134	1070	94	64	5	0	0	0	0	98.14	Zero
+2025	'41 - Oregon'	09540 006C18040	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1310	1270	96	40	3	0	0	0	0	98.99	Zero
+2025	'41 - Oregon'	09541 333 01250	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1217	810	66	407	33	0	0	0	0	88.96	Zero
+2025	'41 - Oregon'	09565 144 00669	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1476	1328	89	147	9	1	0	0	0	96.67	Zero
+2025	'41 - Oregon'	09568 006C19946	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1212	1182	97	30	2	0	0	0	0	99.18	Zero
+2025	'41 - Oregon'	09569 144 00722	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2151	1934	89	215	9	2	0	0	0	96.64	Zero
+2025	'41 - Oregon'	09577 320 04007	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1150	1118	97	32	2	0	0	0	0	99.08	Zero
+2025	'41 - Oregon'	09579 006C19854	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1064	1054	99	10	0	0	0	0	0	99.69	Zero
+2025	'41 - Oregon'	09584 006C20287	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1140	1092	95	48	4	0	0	0	0	98.61	Zero
+2025	'41 - Oregon'	09632 006 26185	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1662	1656	99	6	0	0	0	0	0	99.88	Zero
+2025	'41 - Oregon'	09632A006 26184	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1660	1571	94	89	5	0	0	0	0	98.23	Zero
+2025	'41 - Oregon'	09635 006 26492	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2934	2913	99	21	0	0	0	0	0	99.76	Zero
+2025	'41 - Oregon'	09635A006 26492	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3600	3576	99	21	0	3	0	0	0	99.75	Zero
+2025	'41 - Oregon'	09640 006 17113	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1060	1004	94	56	5	0	0	0	0	98.26	Zero
+2025	'41 - Oregon'	09693 004 27593	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1078	1068	99	0	0	10	0	0	0	99.38	Zero
+2025	'41 - Oregon'	09694 004 27713	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2691	2381	88	250	9	60	2	0	0	95.44	Zero
+2025	'41 - Oregon'	09722 047C06111	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3465	3465	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	09743 001 28851	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1491	1491	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	09743A001 28851	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1582	1266	80	316	19	0	0	0	0	93.41	Zero
+2025	'41 - Oregon'	09743C001C28848	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1410	605	42	805	57	0	0	0	0	81.16	Zero
+2025	'41 - Oregon'	09755 006C28364	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1112	1095	98	16	1	1	0	0	0	99.46	Zero
+2025	'41 - Oregon'	09804 012 00267	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1400	1348	96	52	3	0	0	0	0	98.77	Zero
+2025	'41 - Oregon'	09806 031 01045	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	4805	3120	64	1685	35	0	0	0	0	88.43	Zero
+2025	'41 - Oregon'	0M203 062Y01519	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	248	0	0	248	100	0	0	0	0	67	Zero
+2025	'41 - Oregon'	16358 001C30298	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	223	168	75	55	24	0	0	0	0	91.86	Zero
+2025	'41 - Oregon'	16535 001C30309	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	410	410	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	17363 272 00614	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2231	2231	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	18074 350 02934	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	440	439	99	0	0	1	0	0	0	99.85	Zero
+2025	'41 - Oregon'	18787 019 10927	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1100	1099	99	1	0	0	0	0	0	99.97	Zero
+2025	'41 - Oregon'	19142 001 10154	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2427	2427	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	19143 001 10154	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2427	2427	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	19265 026 04258	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	593	593	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	19267 025 02940	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2182	2182	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	19281 026 04381	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2250	0	0	1649	73	601	26	0	0	57.92	Zero
+2025	'41 - Oregon'	19712 006 31746	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2430	2430	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	19713 006 31744	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2520	2520	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	19789 021 04386	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2231	2231	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	19865 006 25617	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1670	1670	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	19866 006 25618	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2150	2150	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	19940 004 27473	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2500	2500	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20061 001 19578	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1582	1582	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20062 001 19578	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1075	1075	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20080 006 18843	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1920	1920	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20120 018 00808	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2344	2344	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20255 341 04701	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	588	588	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20338 026 05351	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	848	848	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20584 045 03964	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	962	962	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20651 001 00000	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2500	2500	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20674 001 01496	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	800	800	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20675 001 01496	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	800	800	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20855 002 03898	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2300	2300	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20861 231 02210	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1200	1200	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	20873 028 06381	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	840	840	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	21163 231 02115	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	516	516	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	21281 160 02420	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1164	1164	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	21357 02W 09469	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	486	486	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	21358 001 01917	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1817	1817	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	21417 160 00001	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1170	1170	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	21494 047C05723	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2600	2600	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	21716 333 01186	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1550	1550	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	21869 075 00052	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2450	2450	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	21871 068 01024	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1620	1620	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	22627 045 01643	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	5515	5515	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	22688 483 04675	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3880	3880	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	23871 153 00588	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2460	2460	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	23877 010 04583	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	1944	1944	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	24025 047 04563	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	645	645	100	0	0	0	0	0	0	100	Zero
+2025	'41 - Oregon'	H8588A002 00002	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2412	1002	41	1409	58	1	0	0	0	80.69	Zero
+2025	'41 - Oregon'	N8588E001 30170	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	11310	6726	59	4575	40	9	0	0	0	86.6	Zero
+2025	'41 - Oregon'	N8837B064 01072	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	4572	3658	80	914	19	0	0	0	0	93.4	Zero
+2025	'41 - Oregon'	N8958A001 30299	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3539	1997	56	1542	43	0	0	0	0	85.62	Zero
+2025	'41 - Oregon'	R8588E001 30150	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	2848	2562	89	286	10	0	0	0	0	96.69	Zero
+2025	'41 - Oregon'	S8588E001 30170	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	11510	8693	75	2808	24	9	0	0	0	91.9	Zero
+2025	'41 - Oregon'	S8837A064 01072	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	4064	0	0	4034	99	30	0	0	0	66.75	Zero
+2025	'41 - Oregon'	S8958A001 30299	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	3933	2713	68	1219	30	1	0	0	0	89.75	Zero
+2025	'41 - Oregon'	T02728 21000013	'State Highway Agency'	'Superstructure'		''	107	'Steel Girder/Beam'	'LF'	8580	0	0	8580	100	0	0	0	0	67	Zero

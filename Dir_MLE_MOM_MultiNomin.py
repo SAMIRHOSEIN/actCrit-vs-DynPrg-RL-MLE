@@ -1019,7 +1019,8 @@ for k in range(K):
 alpha0_hat = float(np.sum(alpha_hat))
 
 # avoid evaluating too close to 0 and 1 (Beta blows up there)
-x_grid = np.linspace(1e-3, 1 - 1e-3, 500)
+x_grid = np.linspace(0.0021, 1 - 0.0021, 500)
+# x_grid = np.linspace(1e-3, 1 - 1e-3, 500)
 
 for k in range(X_real.shape[1]):
     a = float(alpha_hat[k])
@@ -1059,11 +1060,6 @@ for k in range(X_real.shape[1]):
     plt.legend()
     plt.tight_layout()
     plt.show()
-
-
-
-
-
 # %%
 #################################################################
 # 9) Statistical comparison (p-values) for marginals
@@ -1096,8 +1092,8 @@ def pvals_real_vs_dirichlet(X_real, alpha_hat, rng, n_sim=None, cs_labels=None):
 
     return pd.DataFrame(rows)
 
-print("p-value:If the real data really came from the Dirichlet model, how likely is it to observe a KS difference this big just by random sampling. (Small p suggests mismatch.)")
 print("KS_stat: maximum difference between the two CDFs (0=identical; larger=more different).")
+print("p-value:If the real data really came from the Dirichlet model, how likely is it to observe a KS difference this big just by random sampling. (Small p suggests mismatch.)")
 df = pvals_real_vs_dirichlet(X_real, alpha_hat, rng, cs_labels=cs_labels)
 print(df)
 #%%
