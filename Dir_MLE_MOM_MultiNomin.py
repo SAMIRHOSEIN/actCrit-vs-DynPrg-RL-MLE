@@ -9,7 +9,6 @@ from scipy.stats import gaussian_kde
 from matplotlib.colors import Normalize
 from matplotlib import cm
 from scipy.stats import beta as beta_dist
-from scipy.stats import ks_2samp, kstest
 
 ########################################################
 # 0) inputs
@@ -29,7 +28,7 @@ N_cells = 100
 # file_path = './V1_Datainfobridge/NBEExport_September_18_2025_12_51_19.txt' # Three elements 
 # file_path = './V2_Datainfobridge_SteelGirderBeam/NBEExport_December_17_2025_02_00_00.txt' # Steel Girder Beam not just for oregon
 # file_path = './V3_Datainfobridge_SteelGirderBeam_oregon/NBEExport_December_22_2025_04_03_03.txt' # Steel Girder Beam just for oregon
-file_path = './V4_Datainfobridge_SteelGirderBeam_oregon_stateHighway/NBEExport_January_28_2026_12_44_36.txt' # Steel Girder Beam just for oregon owned state highway
+file_path = './V4_Datainfobridge_SteelGirderBeam_oregon_stateHighway/NBEExport_February_23_2026_03_46_08.txt' # Steel Girder Beam just for oregon owned state highway
 
 
 
@@ -323,6 +322,48 @@ def covariance_matrix(X):
 cov_real = covariance_matrix(X_real)                 # (N_real, 4)
 cov_dir  = covariance_matrix(dir_samples)            # (N_samples, 4)
 cov_multi = covariance_matrix(multi_samples)         # (N_samples, 4)
+
+
+#################################################################
+# Correlation comparison: Real vs Dirichlet vs Multinomial
+# (same idea as covariance, but scale-free)
+#################################################################
+def correlation_matrix(X):
+    """
+    Compute correlation matrix for probability vectors.
+    X is (N, 4); returns (4,4) correlation matrix.
+    """
+    return np.corrcoef(X.T)
+
+corr_real  = correlation_matrix(X_real)
+corr_dir   = correlation_matrix(dir_samples)
+corr_multi = correlation_matrix(multi_samples)
+
+df_corr_real  = pd.DataFrame(corr_real,  index=cs_labels, columns=cs_labels)
+df_corr_dir   = pd.DataFrame(corr_dir,   index=cs_labels, columns=cs_labels)
+df_corr_multi = pd.DataFrame(corr_multi, index=cs_labels, columns=cs_labels)
+
+print("======================================================")
+print("Correlation Matrix — REAL DATA")
+print("======================================================")
+print(df_corr_real)
+print("\n======================================================")
+print("Correlation Matrix — DIRICHLET")
+print("======================================================")
+print(df_corr_dir)
+print("\n======================================================")
+print("Correlation Matrix — MULTINOMIAL")
+print("======================================================")
+print(df_corr_multi)
+
+# Optional: summarize closeness to REAL via mean absolute error (off-diagonals only)
+mask_offdiag = ~np.eye(len(cs_labels), dtype=bool)
+mae_corr_dir   = np.mean(np.abs(corr_dir[mask_offdiag]   - corr_real[mask_offdiag]))
+mae_corr_multi = np.mean(np.abs(corr_multi[mask_offdiag] - corr_real[mask_offdiag]))
+print(f"\nMAE corr (Dirichlet vs Real)   : {mae_corr_dir:.6g}")
+print(f"MAE corr (Multinomial vs Real) : {mae_corr_multi:.6g}")
+
+
 #################################################################
 # Display in pandas tables for clean formatting
 #################################################################
@@ -1061,43 +1102,94 @@ for k in range(X_real.shape[1]):
     plt.tight_layout()
     plt.show()
 # %%
+# #################################################################
+# # 9) Statistical comparison (p-values) for marginals
+# # - Two-sample KS: Real marginal vs Dirichlet-simulated marginal
+# #################################################################
+
+# from scipy.stats import ks_2samp, kstest
+# def pvals_real_vs_dirichlet(X_real, alpha_hat, rng, n_sim=None, cs_labels=None):
+#     X_real = np.asarray(X_real, dtype=float)
+#     alpha_hat = np.asarray(alpha_hat, dtype=float)
+
+#     if n_sim is None:
+#         n_sim = X_real.shape[0]
+
+
+#     rng = np.random.default_rng(42)
+
+#     X_sim = rng.dirichlet(alpha_hat, size=n_sim)
+
+#     rows = []
+#     for k in range(X_real.shape[1]):
+#         real_k = X_real[:, k]
+#         sim_k  = X_sim[:, k]
+
+#         ks = ks_2samp(real_k, sim_k, alternative="two-sided", mode="auto")
+
+#         rows.append({
+#             "CS": cs_labels[k] if cs_labels else f"CS{k+1}",
+#             "KS_stat": float(ks.statistic),
+#             "p_value": float(ks.pvalue),
+#         })
+
+#     return pd.DataFrame(rows)
+
+# print("KS_stat: maximum difference between the two CDFs (0=identical; larger=more different).")
+# print("p-value:If the real data really came from the Dirichlet model, how likely is it to observe a KS difference this big just by random sampling. (Small p suggests mismatch.)")
+# df = pvals_real_vs_dirichlet(X_real, alpha_hat, rng, cs_labels=cs_labels)
+# print(df)
+
 #################################################################
-# 9) Statistical comparison (p-values) for marginals
-# - Two-sample KS: Real marginal vs Dirichlet-simulated marginal
+# 9) Goodness-of-fit (KS) for Dirichlet marginals
+# Note: Dirichlet marginal for component k is Beta(alpha_k, alpha0 - alpha_k)
 #################################################################
-def pvals_real_vs_dirichlet(X_real, alpha_hat, rng, n_sim=None, cs_labels=None):
+from scipy.stats import goodness_of_fit
+
+def gof_real_vs_dirichlet_marginals(X_real, alpha_hat, *, cs_labels=None,
+                                   n_mc_samples=3000, random_state=42):
     X_real = np.asarray(X_real, dtype=float)
     alpha_hat = np.asarray(alpha_hat, dtype=float)
 
-    if n_sim is None:
-        n_sim = X_real.shape[0]
-
-
-    rng = np.random.default_rng(42)
-
-    X_sim = rng.dirichlet(alpha_hat, size=n_sim)
-
+    alpha0 = float(np.sum(alpha_hat))
     rows = []
+
     for k in range(X_real.shape[1]):
         real_k = X_real[:, k]
-        sim_k  = X_sim[:, k]
+        a = float(alpha_hat[k])
+        b = float(alpha0 - alpha_hat[k])
 
-        ks = ks_2samp(real_k, sim_k, alternative="two-sided", mode="auto")
+        # KS goodness-of-fit against Beta(a,b) on [0,1]
+        res = goodness_of_fit(
+            beta_dist,                 # scipy.stats.beta distribution object
+            real_k,
+            known_params={"a": a, "b": b, "loc": 0.0, "scale": 1.0},
+            statistic="ks",
+            n_mc_samples=n_mc_samples,
+            random_state=random_state,
+        )
 
         rows.append({
             "CS": cs_labels[k] if cs_labels else f"CS{k+1}",
-            "KS_stat": float(ks.statistic),
-            "p_value": float(ks.pvalue),
+            "KS_stat": float(res.statistic),
+            "p_value": float(res.pvalue),
+            "beta_a": a,
+            "beta_b": b,
         })
 
     return pd.DataFrame(rows)
 
-print("KS_stat: maximum difference between the two CDFs (0=identical; larger=more different).")
-print("p-value:If the real data really came from the Dirichlet model, how likely is it to observe a KS difference this big just by random sampling. (Small p suggests mismatch.)")
-df = pvals_real_vs_dirichlet(X_real, alpha_hat, rng, cs_labels=cs_labels)
-print(df)
-#%%
 
+print("Goodness-of-fit using KS statistic for Dirichlet marginals (Beta).")
+print("KS_stat: max CDF distance between empirical marginal and fitted Beta marginal.")
+print("p_value: Monte Carlo p-value under the Beta null (small => mismatch).")
+
+df_gof = gof_real_vs_dirichlet_marginals(X_real, alpha_hat, cs_labels=cs_labels,
+                                        n_mc_samples=1000, random_state=42)
+print(df_gof)
+
+
+#%%
 #################################################################
 # 10) 3D ternary KDE surfaces (LOCAL density scale)
 #################################################################
