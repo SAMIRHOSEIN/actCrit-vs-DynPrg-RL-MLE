@@ -1052,55 +1052,59 @@ for k in range(K):
     plt.show()
 
 #%%
-
 # #################################################################
 # 8) 1D marginal distributions: Real data vs Beta marginal (from Dirichlet alpha_hat)
 # #################################################################
 
+import os
+import seaborn as sns
+
+os.makedirs("plot", exist_ok=True) # for saving plots
+
 alpha0_hat = float(np.sum(alpha_hat))
-
-# avoid evaluating too close to 0 and 1 (Beta blows up there)
 x_grid = np.linspace(0.0021, 1 - 0.0021, 500)
-# x_grid = np.linspace(1e-3, 1 - 1e-3, 500)
 
-for k in range(X_real.shape[1]):
-    a = float(alpha_hat[k])
-    b = float(alpha0_hat - alpha_hat[k])
-    real_vals = X_real[:, k]
+with sns.plotting_context("paper", font_scale=1.0):
 
-    plt.figure(figsize=(6, 5))
+    for k in range(X_real.shape[1]):
+        a = float(alpha_hat[k])
+        b = float(alpha0_hat - alpha_hat[k])
+        real_vals = X_real[:, k]
 
-    # Real histogram
-    plt.hist(
-        real_vals,
-        bins=50,
-        range=(0, 1),
-        density=True,
-        alpha=0.6,
-        color="red",
-        label=f"Real {cs_labels[k]}"
-    )
+        fig, ax = plt.subplots(figsize=(3.25, 2.5), tight_layout=True)
 
-    # Beta marginal curve
-    beta_pdf = beta_dist.pdf(x_grid, a, b)
-    plt.plot(
-        x_grid,
-        beta_pdf,
-        linewidth=2.5,
-        label=f"Beta(a={a:.3g}, b={b:.3g})"
-    )
+        ax.hist(
+            real_vals,
+            bins=50,
+            range=(0, 1),
+            density=True,
+            alpha=0.6,
+            color="C0",
+            edgecolor="k",
+            # linewidth=0.3,
+            # # label=f"Real {cs_labels[k]}"
+        )
+
+        beta_pdf = beta_dist.pdf(x_grid, a, b)
+        ax.plot(
+            x_grid,
+            beta_pdf,
+            lw=1.5,
+            color="C1",
+            label=rf"Beta($a$={a:.3g}, $b$={b:.3g})"
+        )
+
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 3) # adjust as needed for better visualization - If I want to plot in read scale comment this line.
+        ax.set_xlabel(cs_labels[k])
+        ax.set_ylabel(f"Density")
+        ax.legend(frameon=True)
+
+        fig.savefig(f"plot/beta_marginal_{cs_labels[k]}.png", dpi=300)
+        plt.show()
+        plt.close(fig)
 
 
-    plt.ylabel("Density")
-
-
-    plt.title(f"Marginal of {cs_labels[k]}: Real vs Beta")
-    plt.xlabel("Fraction in this condition state")
-    plt.ylabel("Density")
-    plt.xlim(0, 1)
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
 # %%
 # #################################################################
 # # 9) Statistical comparison (p-values) for marginals
