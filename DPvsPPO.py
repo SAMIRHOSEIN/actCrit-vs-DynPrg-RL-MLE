@@ -17,6 +17,12 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from matplotlib.patches import Patch
 
+
+
+
+import pandas as pd
+import seaborn as sns
+from scipy.stats import norm
 # %%
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
 # 2) Finite-horizon value iteration (vectorized, shape: P (A,S,S'), R (A,S))
@@ -316,6 +322,54 @@ if __name__ == '__main__':
     unique, counts = np.unique(all_actions, return_counts=True)
     action_distribution = {id2name.get(a, a): c for a, c in zip(unique, counts)}
     print(action_distribution)
+
+    # --- Plot: initial beta vs episode LCC ---
+    # logs["observation"] is a list, each element is an array with shape (T, obs_dim)
+    # first row is the initial observation (initial state)
+    obs_trajs = logs["observation"]  # list length = n_episodes
+
+    # grab initial observation per episode
+    init_obs = np.array([traj[0] for traj in obs_trajs])  # shape: (n_episodes, obs_dim)
+
+    # if step-count is included, drop the last column so we keep only the condition-state vector
+    # cs_pfs length is the number of condition states
+    init_states = init_obs[:, :len(cs_pfs)]  # shape: (n_episodes, ncs)
+
+    # state -> pf -> beta
+    init_pf = init_states @ cs_pfs  # shape: (n_episodes,)
+    init_beta = -norm.ppf(init_pf)  # shape: (n_episodes,)
+
+    # LCC = total episode cost = negative of episode reward
+    lcc_values = -np.array(logs["ep reward"])
+
+    # save data used for the scatter plot
+    plot_df = pd.DataFrame({
+        "initial_beta": init_beta,
+        "LCC": lcc_values
+    })
+
+    csv_path = os.path.join(os.getcwd(), "initial_beta_vs_LCC_DP.csv")
+    plot_df.to_csv(csv_path, index=False)
+
+    print(f"Saved plot data to: {csv_path}")
+
+    fig, ax = plt.subplots(figsize=(7, 5))
+
+    sns.scatterplot(
+        x=init_beta,
+        y=lcc_values,
+        ax=ax
+    )
+
+    ax.set_xlabel("Initial β")
+    ax.set_ylabel("LCC")
+    plt.title("Initial β vs LCC (DP)")
+
+    ax.grid(True, alpha=0.3)
+
+    plt.tight_layout()
+    plt.show()
+
 
 #%%
 # action distribution summary

@@ -1081,8 +1081,8 @@ with sns.plotting_context("paper", font_scale=1.0):
             alpha=0.6,
             color="C0",
             edgecolor="k",
-            # linewidth=0.3,
-            # # label=f"Real {cs_labels[k]}"
+            linewidth=0.3,
+            label=f"Real {cs_labels[k]}"
         )
 
         beta_pdf = beta_dist.pdf(x_grid, a, b)
