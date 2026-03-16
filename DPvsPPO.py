@@ -261,7 +261,8 @@ if __name__ == '__main__':
                 if include_step:
                     init_time_idx = int(init_obs[-1].item() * horizon)
                     # print("Initial time index:", init_time_idx)
-
+                elif include_step == False:
+                    init_time_idx = 0
                 # print("Initial observation:", init_obs)
 
 
@@ -342,10 +343,12 @@ if __name__ == '__main__':
     # LCC = total episode cost = negative of episode reward
     lcc_values = -np.array(logs["ep reward"])
 
-    # save data used for the scatter plot
+    # normalize LCC by episode length
+    LCC_norm = lcc_values / horizon
+
     plot_df = pd.DataFrame({
         "initial_beta": init_beta,
-        "LCC": lcc_values
+        "LCC_norm": LCC_norm
     })
 
     csv_path = os.path.join(os.getcwd(), "initial_beta_vs_LCC_DP.csv")
@@ -355,15 +358,11 @@ if __name__ == '__main__':
 
     fig, ax = plt.subplots(figsize=(7, 5))
 
-    sns.scatterplot(
-        x=init_beta,
-        y=lcc_values,
-        ax=ax
-    )
+    sns.scatterplot(x="initial_beta", y="LCC_norm", data=plot_df, ax=ax)
 
-    ax.set_xlabel("Initial β")
-    ax.set_ylabel("LCC")
-    plt.title("Initial β vs LCC (DP)")
+    ax.set_xlabel("β (Reliability Index)")
+    ax.set_ylabel("LCC / max_steps")
+    plt.title("Initial β vs LCC/max step (DP)")
 
     ax.grid(True, alpha=0.3)
 
