@@ -1,58 +1,57 @@
-# %%
 import numpy as np
-
-# # openai/gym imports
-# import gym
-# from gym import spaces
+import matplotlib.pyplot as plt
+from jaxtyping import Float32
 
 # gynasium imports
 import gymnasium as gym
 from gymnasium import spaces
 
-from element.problem_setup import ncs, na, cs_pfs, \
-    action_model, unit_costs, failure_cost
-from element.utility_func import cost_util
+# import element costs
+from .settings import NCS, NA
+from .settings import CS_PFS, FAILURE_COST
+from .settings import ACTION_MODEL, UNIT_COSTS
+from .cost_util import normalized_cost as cost_util
 
-
-_MAX_STEP = 100
-_DISCOUNT = 1.0
 
 class SingleElement(gym.Env):
-    metadata = {"render_modes": ["human"], "render_fps": 1}
-    pf_array = cs_pfs
+    # standard: should not change
+    metadata = {"render_modes": ["human", "ansi"], "render_fps": 1}
 
     def __init__(
-        self, state_size=ncs, action_size=na,
+        self, max_steps, discount,
+        state_size=NCS, action_size=NA,
         include_step_count=False,
-        max_step=_MAX_STEP,
         reset_prob=None,
-        dirichlet_alpha=None,
-        action_model=action_model,
-        unit_costs=unit_costs, cost_params=(None, None),
-        failure_cost=failure_cost,
-        discount=_DISCOUNT,
+        dirichlet_alpha: Float32[np.ndarray, f"{NCS}"] | None = None,
+        action_model=ACTION_MODEL,
+        unit_costs=UNIT_COSTS,
+        pf_array=CS_PFS,
+        failure_cost=FAILURE_COST,
         render_mode=None,
-        random_state: int | str | None = None,
+        render_kwargs: dict | None = None,
+        cost_kwargs: dict | None = None,
+        seed: int | None = None,
     ):
+        super().__init__()
         # store env parameters
         self.state_size = state_size
         self.action_size = action_size
-        self.max_step = max_step
+        self.max_steps = max_steps
         self.include_step_count = include_step_count
 
         self.discount = discount
+        self.pf_array = pf_array
         self.failure_cost = failure_cost
         self.action_model, self.unit_costs = action_model, unit_costs
-        if cost_params[0] is None:
-            self.min_cost = 0
+        if cost_kwargs is None:
+            self.cost_kwargs = {}
         else:
-            self.min_cost = cost_params[0]
-        assert cost_params[1] is not None, "Must provide maximum cost in cost_params"
-        self.max_cost = cost_params[1]
+            self.cost_kwargs = cost_kwargs
 
+        # reset parameters
         if reset_prob is None:
             assert dirichlet_alpha is not None, "Must provide dirichlet_alpha if no reset_prob"
-            assert random_state != 'off', "Must provide random_state if no reset_prob"
+            assert dirichlet_alpha.shape == (self.state_size,), "dirichlet_alpha must be of shape (state_size,)"
             self.reset_prob = None
             self.dirichlet_alpha = dirichlet_alpha
         else:
@@ -70,16 +69,25 @@ class SingleElement(gym.Env):
         assert render_mode is None or render_mode in self.metadata["render_modes"]
         self.render_mode = render_mode
 
-        self.random_state = random_state
-        if random_state != 'off':
-            super().reset(seed=self.random_state)
+        self._seed = seed
+        self._first_rest = True
 
-        # initialize hidden state and parameters
-        self.reset()
+        # plotting parameters
+        self.fig, self.ax, self.colors = None, None, None
+        self.render_kwargs = {} if render_kwargs is None else render_kwargs
+        # We'll use a list of colors for the different state components
     
-    def reset(self, options=None):
+    def reset(self, seed: int | None = None, options: dict | None = None):
+        # set seed
+        if seed is not None:
+            super().reset(seed=seed)
+        elif self._first_rest:
+            # only initialize if needed
+            super().reset(seed=self._seed)
+            self._first_rest = False
+
         self._time = 0
-        if self.random_state == 'off':
+        if self.reset_prob is not None:
             self._state = self.reset_prob
         else:
             state = self.np_random.dirichlet(
@@ -87,9 +95,8 @@ class SingleElement(gym.Env):
             )
             self._state = state.astype(np.float32)
 
-
         if self.include_step_count:
-            observation = np.append(self._state, self._time/self.max_step)
+            observation = np.append(self._state, self._time/self.max_steps)
         else:
             observation = self._state
         info = {"cs": self._state, "time": self._time}
@@ -106,10 +113,9 @@ class SingleElement(gym.Env):
         dir_cost = self.unit_costs[int(action)] @ self._state
         fail_risk = (self.pf_array @ self._state) * self.failure_cost
         cost = dir_cost + fail_risk
-        reward = cost_util(cost, min_cost=self.min_cost, max_cost=self.max_cost)
+        reward = cost_util(cost, **self.cost_kwargs)
         discount_factor = self.discount**self._time
-        reward = np.float32(discount_factor * reward)
-
+        reward = (discount_factor*reward).astype(np.float32)
 
         # update hidden state
         self._state = state
@@ -117,12 +123,12 @@ class SingleElement(gym.Env):
 
         # update observation
         if self.include_step_count:
-            observation = np.append(state, self._time/self.max_step)
+            observation = np.append(state, self._time/self.max_steps)
         else:
             observation = state
 
         # check if done
-        if self._time >= self.max_step:
+        if self._time > self.max_steps:
             done = True
             _, info = self.reset()
         else:
@@ -137,84 +143,46 @@ class SingleElement(gym.Env):
         return observation, reward, terminated, done, info
 
     def render(self):
-        print(f"Step {self._time}: CS = {self._state}")
+        if self.render_mode == "human":
+            self._render_gui()
+
+        elif self.render_mode == "ansi":
+            print(f"Step {self._time}: CS = {self._state}")
 
     def close(self):
         pass
 
+    def _render_gui(self):
+        if self.fig is None:
+            plt.ion()
+            self.fig, self.ax = plt.subplots(1, 1, tight_layout=True, **self.render_kwargs)
+            self.colors = plt.cm.viridis(np.linspace(0, 1, self.state_size))
+            self.ax.set_xlim(-0.8, self.max_steps+0.8)
+            self.ax.set_ylim(0, 1.05)
+            self.ax.set_xlabel("Time")
+            self.ax.set_ylabel("CS distribution")
+            # setup colorbar
+            norm = plt.Normalize(vmin=0, vmax=self.state_size - 1)
+            mappable = plt.cm.ScalarMappable(norm=norm, cmap='viridis')
+            cbar = self.fig.colorbar(
+                mappable, 
+                ax=self.ax, 
+                ticks=range(self.state_size),
+                boundaries=np.arange(-0.5, self.state_size, 1) # Centers ticks in color blocks
+            )
+            cbar.set_ticklabels([f'CS{i+1}' for i in range(self.state_size)])
+            plt.show(block=False)
 
-if __name__ == '__main__':
-    from element.problem_setup import ncs, na, gamma
-    from element.problem_setup import action_model, unit_costs
-    import matplotlib.pyplot as plt
-    plt.ion()
+        # Draw the stacked bar for the current time step
+        bottom = 0
+        for i in range(self.state_size):
+            val = self._state[i]
+            self.ax.bar(
+                self._time, val, bottom=bottom,
+                color=self.colors[i], width=0.8,
+            )
+            bottom += val
 
-    horizon = 200
-
-    max_step = horizon
-    max_cost = unit_costs.max()
-    state_prob = np.zeros((ncs,))
-    state_prob[0] = 1
-
-
-
-    bridge= SingleElement(
-        state_size=ncs, action_size=na,
-        max_step=max_step,
-        reset_prob=state_prob,
-        action_model=action_model,
-        unit_costs=unit_costs, 
-        cost_params=(None, max_cost),
-        discount=gamma,
-        random_state='off',
-    )
-
-    # test env
-    # test policy:
-     # --------------------------------------------------------
-    # 5- the followng piolicy is not aligned with the code 
-    # if CS4 is greater than 30% or CS5 is greater than 5%, rehabilitate
-    # elif CS4 is greater than 10%, repair
-    # else do nothing
-    states_log = []
-    action_log = []
-    reward_log = []
-
-    states, _ = bridge.reset()
-    for t in range(max_step):
-        if states[3] > 0.3 or states[4] > 0.05:
-            action = 3
-        elif states[3] > 0.1:
-            action = 2
-        else:
-            action = 0
-        next_states, reward, terminated, done, info = \
-            bridge.step(action)
-        states_log.append(states)
-        action_log.append(action)
-        reward_log.append(reward)
-        states = next_states
-
-
-    for i in range(ncs):
-        fig, ax = plt.subplots(1,1) 
-        t = range(max_step)
-        cs = [s[i] for s in states_log]
-        ax.plot(t, cs)
-        ax.set_title(f'Condition State {i+1} over Time')
-        ax.set_xlabel('Time Step')
-        ax.set_ylabel(f'CS {i+1}(Prob)')
-    
-    fig, ax = plt.subplots(1,1)
-    t = range(max_step)
-    ax.plot(t, action_log, 'o-')
-    ax.set_xlabel('Time Step')
-    ax.set_ylabel('Action Taken')
-
-    fig, ax = plt.subplots(1,1)
-    t = range(max_step)
-    ax.plot(t, reward_log, '^-')
-    ax.set_xlabel('Time Step')
-    ax.set_ylabel('Reward')
-
-# %%
+        # Update the display
+        self.fig.canvas.draw()
+        self.fig.canvas.flush_events()
