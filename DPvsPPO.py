@@ -182,7 +182,7 @@ if __name__ == '__main__':
 
     # Inputs
     GAMMA = 1 / 1.03
-    horizon = 5 #200
+    horizon = 200
 
     # evaluation settings formerly in test_constants.py
     normalizer = 1.0
@@ -197,7 +197,7 @@ if __name__ == '__main__':
 
     # True  -> finite-horizon DP, policy[t, s]
     # False -> stationary DP, policy[s]
-    ELE_DP_INC_STEP = True
+    ELE_DP_INC_STEP = False
 
 
 
@@ -353,31 +353,58 @@ if __name__ == '__main__':
     # LCC = total episode cost = negative of episode reward
     lcc_values = -np.array(logs["eval_reward"])
 
-    # normalize LCC by episode length
-    LCC_norm = lcc_values / horizon
 
-    plot_df = pd.DataFrame({
-        "initial_beta": init_beta,
-        "LCC_norm": LCC_norm
-    })
 
-    csv_path = os.path.join(os.getcwd(), "initial_beta_vs_LCC_DP.csv")
-    plot_df.to_csv(csv_path, index=False)
+    if GAMMA == 1:
+        # normalize LCC by episode length
+        LCC_norm = lcc_values / horizon
+        plot_df = pd.DataFrame({
+            "initial_beta": init_beta,
+            "LCC_norm": LCC_norm
+        })
 
-    print(f"Saved plot data to: {csv_path}")
+        csv_path = os.path.join(os.getcwd(), "initial_beta_vs_LCC_DP.csv")
+        plot_df.to_csv(csv_path, index=False)
 
-    fig, ax = plt.subplots(figsize=(7, 5))
+        print(f"Saved plot data to: {csv_path}")
 
-    sns.scatterplot(x="initial_beta", y="LCC_norm", data=plot_df, ax=ax)
+        fig, ax = plt.subplots(figsize=(7, 5))
 
-    ax.set_xlabel("β (Reliability Index)")
-    ax.set_ylabel("LCC / max_steps")
-    plt.title("Initial β vs LCC/max step (DP)")
+        sns.scatterplot(x="initial_beta", y="LCC_norm", data=plot_df, ax=ax)
 
-    ax.grid(True, alpha=0.3)
+        ax.set_xlabel("β (Reliability Index)")
+        ax.set_ylabel("LCC / max_steps")
+        plt.title("Initial β vs LCC/max step (DP)")
 
-    plt.tight_layout()
-    plt.show()
+        ax.grid(True, alpha=0.3)
+
+        plt.tight_layout()
+        plt.show()
+
+    else:
+        
+        plot_df = pd.DataFrame({
+            "initial_beta": init_beta,
+            "lcc_values": lcc_values
+        })
+
+        csv_path = os.path.join(os.getcwd(), "initial_beta_vs_LCC_DP.csv")
+        plot_df.to_csv(csv_path, index=False)
+
+        print(f"Saved plot data to: {csv_path}")
+
+        fig, ax = plt.subplots(figsize=(7, 5))
+
+        sns.scatterplot(x="initial_beta", y="lcc_values", data=plot_df, ax=ax)
+
+        ax.set_xlabel("β (Reliability Index)")
+        ax.set_ylabel("LCC")
+        plt.title("Initial β vs LCC(DP)")
+
+        ax.grid(True, alpha=0.3)
+
+        plt.tight_layout()
+        plt.show()
 
 
 
