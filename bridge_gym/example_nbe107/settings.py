@@ -15,6 +15,7 @@ The variables are based on the following assumptions:
 import numpy as np
 import scipy.stats as stats
 
+
 __all__ = [
     "NCS", "NA",
     "CS_PFS", "FAILURE_COST",

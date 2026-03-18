@@ -16,9 +16,9 @@ from scipy.stats import norm
 from tensordict.nn import TensorDictModule
 from torchrl.envs import GymWrapper
 
-from element.cost_util import normalized_cost
-from element.rl_env import SingleElement
-from element.settings import ACTION_MODEL, CS_PFS, FAILURE_COST, NA, NCS, UNIT_COSTS
+from bridge_gym.example_nbe107.cost_util import normalized_cost
+from bridge_gym.example_nbe107.rl_env import SingleElement
+from bridge_gym.example_nbe107.settings import ACTION_MODEL, CS_PFS, FAILURE_COST, NA, NCS, UNIT_COSTS
 from softtree_ppo.training import PPOTrainer
 # %%
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ if __name__ == '__main__':
 
     # Inputs
     GAMMA = 1 / 1.03
-    horizon = 200
+    horizon = 5 #200
 
     # evaluation settings formerly in test_constants.py
     normalizer = 1.0
@@ -197,7 +197,7 @@ if __name__ == '__main__':
 
     # True  -> finite-horizon DP, policy[t, s]
     # False -> stationary DP, policy[s]
-    ELE_DP_INC_STEP = False
+    ELE_DP_INC_STEP = True
 
 
 
