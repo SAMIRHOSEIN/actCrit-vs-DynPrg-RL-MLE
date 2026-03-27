@@ -186,7 +186,7 @@ if __name__ == '__main__':
 
     # evaluation settings formerly in test_constants.py
     normalizer = 1.0
-    ELE_DP_N_EPISODES = 10000
+    ELE_DP_N_EPISODES = 1000 #10000
 
     ELE_DP_RESET_PROB = None
     ELE_DP_DIRICHLET_ALPHA = np.array([0.14964171, 0.11136174, 0.05003725, 0.03926025])
