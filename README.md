@@ -49,24 +49,24 @@ decide **when and how** to intervene — *do nothing*, *maintain*, *repair*,
 (LCC)**: the discounted sum of intervention costs plus the expected cost of
 failure.
 
-This project treats that decision problem as a **Markov Decision Process (MDP)**
-and pursues the paper's central goal:
+This project treats that decision problem as a **Markov Decision Process (MDP)**.
+It is the companion code for the paper above and focuses on **two concrete
+goals**:
 
-> Learn a near-optimal life-cycle policy with **actor-critic RL (PPO)**, then
-> distill it into a **small, human-readable oblique decision tree** that an
-> engineer can audit and drop into a bridge-management system — while
-> benchmarking it against a dynamic-programming (condition-based) policy and a
-> genetic-algorithm (reliability-based) policy.
+> **Goal 1 — Model the initial condition.** Fit **Dirichlet** and **Multinomial**
+> models to real bridge-element inspection data, compare both against the data
+> (in 1-D, 2-D, and 3-D), pick the better-fitting distribution, and use its
+> parameters (the Dirichlet concentration vector **α**) as the environment's
+> initial condition-state distribution.
+>
+> **Goal 2 — Compare DP with PPO.** Solve the maintenance MDP with **Dynamic
+> Programming** (value iteration — the exact optimum) and evaluate it in the
+> **same environment** used to train **PPO actor-critic RL**, so the two
+> approaches are compared on identical dynamics, costs, and initial conditions.
 
-To keep the study realistic, the *initial* condition of an element is not
-assumed; it is **estimated from real FHWA InfoBridge inspection data** (Oregon
-state-highway steel-girder bridges) by fitting Dirichlet and Multinomial models
-via Maximum Likelihood and the Method of Moments.
-
-> **Scope of this repository.** This code covers the dynamic-programming
-> baseline, the Gymnasium/TorchRL environment, the soft-/oblique-tree machinery,
-> the PPO trainer, and the data-fitting pipeline. It is one part of the broader
-> framework described in the paper.
+The inspection data are **real FHWA InfoBridge records** for Oregon
+state-highway steel-girder bridges; the distributions are fit via Maximum
+Likelihood (L-BFGS-B with analytic gradients) and the Method of Moments.
 
 ## What this repository does
 
@@ -208,40 +208,59 @@ surrogate loss, optional entropy bonus, and L1/L2/group-L1 actor regularization.
 A soft-tree variant additionally anneals the routing temperature (β) during
 training so the policy sharpens toward hard, interpretable splits.
 
-**Interpretable policies.** A trained soft decision tree is pruned and converted
-into a compact **oblique decision tree** whose splits are linear rules on the
-condition-state vector — small enough to read and audit. In the full study the
-resulting policy is benchmarked against neural-network PPO, dynamic programming
-(condition-based), and a PyGAD genetic-algorithm (reliability-based) baseline,
-and the soft-tree approach is additionally validated on the CartPole control
-benchmark, whose discrete action space mirrors the bridge-management problem.
+**Interpretable policies.** The PPO actor can be a differentiable soft decision
+tree, which is pruned and converted into a compact **oblique decision tree**
+whose splits are linear rules on the condition-state vector — small enough to
+read and audit.
 
 **Data modeling (MLE / MoM).** The Dirichlet fit uses L-BFGS-B with an analytic
 gradient and a method-of-moments initialization (Minka / Ronning); fit quality
-is checked with ternary KDE plots, per-CS Beta marginals, and KS goodness-of-fit.
+is checked against the Multinomial model with ternary KDE plots (2-D and 3-D),
+per-CS marginals, and KS goodness-of-fit.
 
 ## Results
 
-**Headline benchmark (paper, Table 8).** The interpretable RL-derived oblique
-decision tree is compared against two conventional policies over **1,000
-validation episodes** under identical deterioration and cost models. Life-cycle
-cost is reported per element (lower is better):
+All figures below are produced directly by the scripts in this repository.
 
-| Policy | Avg. LCC | StD | vs. oblique tree |
-|---|---:|---:|---:|
-| **Oblique decision tree (RL, this framework)** | **1590.86** | 740.31 | — |
-| Condition-based policy (Dynamic Programming) | 2133.42 | 1178.30 | **≈ 25% higher** |
-| Reliability-based policy (Genetic Algorithm) | 1758.91 | 918.04 | **≈ 10% higher** |
+### Goal 1 — Which distribution fits the real data?
 
-The oblique-tree policy matches neural-network PPO performance while remaining
-**fully auditable** — after regularization-based pruning it collapses to just a
-few nodes. In the supervised study, temperature-annealed distillation (T: 1 →
-0.01) was **essentially lossless** (91.85% soft-tree vs. 91.80% oblique-tree
-test accuracy), far exceeding classical CART trees (~57–60%).
+`Dir_MLE_MOM_MultiNomin.py` fits a Dirichlet and a Multinomial model to the real
+inspection data and compares all three on the same footing. Reducing the four
+condition states to three (`CS3_new = CS3 + CS4`) lets the compositions be drawn
+on the probability simplex.
 
-**Data-fit diagnostics.** Fitted **per-condition-state marginals** (real data
-vs. the Beta marginal implied by `Dirichlet(α̂)`) are produced by
-`Dir_MLE_MOM_MultiNomin.py`:
+**3-D density surfaces (real vs. Dirichlet vs. Multinomial).** The real data
+piles up near the CS1 corner and along the CS1–CS2 edge. The **Dirichlet**
+reproduces this boundary-concentrated shape, whereas the **Multinomial**
+collapses to a single narrow spike — visibly too concentrated.
+
+<p align="left">
+  <img src="plot/ternary_kde_3d_comparison.png" width="100%">
+</p>
+
+**Ternary views (scatter and 2-D KDE, local density scale).**
+
+<p align="left">
+  <img src="plot/ternary_scatter_comparison.png" width="49%">
+  <img src="plot/ternary_kde_2d_comparison.png" width="49%">
+</p>
+
+**1-D marginals per condition state.** Each panel overlays the real data
+(red), the Dirichlet samples (blue), and the Multinomial samples (green). The
+real marginals are **U-shaped** (mass at 0 and 1); the Dirichlet tracks this,
+while the Multinomial forms an incorrect central bump.
+
+<p align="left">
+  <img src="plot/marginal_compare_CS1.png" width="24%">
+  <img src="plot/marginal_compare_CS2.png" width="24%">
+  <img src="plot/marginal_compare_CS3.png" width="24%">
+  <img src="plot/marginal_compare_CS4.png" width="24%">
+</p>
+
+**Conclusion:** the **Dirichlet** is the better model, so its fitted
+concentration vector **α̂** is adopted as the environment's initial
+condition-state distribution. The Dirichlet-implied Beta marginal for each
+condition state (orange) against the real data (blue):
 
 <p align="left">
   <img src="plot/beta_marginal_CS1.png" width="24%">
@@ -250,10 +269,25 @@ vs. the Beta marginal implied by `Dirichlet(α̂)`) are produced by
   <img src="plot/beta_marginal_CS4.png" width="24%">
 </p>
 
-`DPvsPPO.py` additionally reports the **initial reliability index β vs. episode
-LCC** relationship, the action distribution, and a color-coded action timeline
-for representative episodes; `convergence.py` shows how the return estimate
-tightens as the evaluation-episode count grows.
+### Goal 2 — Dynamic Programming vs. PPO in the same environment
+
+`DPvsPPO.py` solves the MDP with value iteration and evaluates the resulting
+policy in the **same** `SingleElement` environment that PPO trains and is
+evaluated in, so both methods see identical dynamics, costs, and (Dirichlet-
+sampled) initial conditions. Below, each point is one of **1,000 validation
+episodes**: as the initial reliability index **β** increases (a healthier
+starting element), the episode **life-cycle cost** drops sharply — the DP policy
+spends less on interventions when the element starts in good condition.
+
+<p align="left">
+  <img src="plot/dp_initial_beta_vs_LCC.png" width="60%">
+</p>
+
+`DPvsPPO.py` also reports the mean episode return with a 95% confidence
+interval, the action distribution, and a color-coded action timeline;
+`convergence.py` shows how the return estimate tightens as the evaluation-episode
+count grows. The head-to-head DP-vs-PPO comparison under this shared environment
+is presented in the accompanying paper.
 
 ## Roadmap
 
