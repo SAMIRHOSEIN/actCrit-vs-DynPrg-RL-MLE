@@ -225,42 +225,42 @@ All figures below are produced directly by the scripts in this repository.
 ### Goal 1 — Which distribution fits the real data?
 
 `Dir_MLE_MOM_MultiNomin.py` fits a Dirichlet and a Multinomial model to the real
-inspection data and compares all three on the same footing. Reducing the four
-condition states to three (`CS3_new = CS3 + CS4`) lets the compositions be drawn
-on the probability simplex.
+inspection data and compares them against the data. Two views make the
+difference clear (reducing the four condition states to three,
+`CS3_new = CS3 + CS4`, lets the compositions be drawn on the probability
+simplex):
 
-**3-D density surfaces (real vs. Dirichlet vs. Multinomial).** The real data
-piles up near the CS1 corner and along the CS1–CS2 edge. The **Dirichlet**
-reproduces this boundary-concentrated shape, whereas the **Multinomial**
-collapses to a single narrow spike — visibly too concentrated.
+**3-D density on the simplex — real vs. Dirichlet vs. Multinomial.** The real
+data piles up near the CS1 corner and along the CS1–CS2 edge. The Dirichlet
+reproduces this boundary-concentrated shape; the Multinomial collapses to a
+single narrow spike.
 
 <p align="left">
   <img src="plot/ternary_kde_3d_comparison.png" width="100%">
 </p>
 
-**Ternary views (scatter and 2-D KDE, local density scale).**
+**1-D marginal for CS1 — real (red) vs. Dirichlet (blue) vs. Multinomial
+(green).** The real marginal is U-shaped (mass at 0 and 1); the Dirichlet tracks
+it, while the Multinomial forms an incorrect central bump.
 
 <p align="left">
-  <img src="plot/ternary_scatter_comparison.png" width="49%">
-  <img src="plot/ternary_kde_2d_comparison.png" width="49%">
+  <img src="plot/marginal_compare_CS1.png" width="55%">
 </p>
 
-**1-D marginals per condition state.** Each panel overlays the real data
-(red), the Dirichlet samples (blue), and the Multinomial samples (green). The
-real marginals are **U-shaped** (mass at 0 and 1); the Dirichlet tracks this,
-while the Multinomial forms an incorrect central bump.
+**Why the Dirichlet is chosen.** A bridge element's condition is a vector of four
+condition-state *proportions that sum to one* — a composition on the probability
+simplex — and the Dirichlet is the natural distribution over such compositions.
+The Multinomial instead models integer counts and, for a fixed number of cells,
+is far too concentrated to represent the true diversity of bridge conditions.
+This diversity matters for training: a policy trained only from a brand-new
+element (`s = [1, 0, 0, 0]`) leaves most of the state space unexplored, so each
+training episode is instead restarted from a Dirichlet-sampled condition, which
+exposes the policy to the full range of realistic (and worse-than-average)
+conditions. The fitted concentration vector **α̂** is therefore adopted as the
+environment's initial condition-state distribution.
 
-<p align="left">
-  <img src="plot/marginal_compare_CS1.png" width="24%">
-  <img src="plot/marginal_compare_CS2.png" width="24%">
-  <img src="plot/marginal_compare_CS3.png" width="24%">
-  <img src="plot/marginal_compare_CS4.png" width="24%">
-</p>
-
-**Conclusion:** the **Dirichlet** is the better model, so its fitted
-concentration vector **α̂** is adopted as the environment's initial
-condition-state distribution. The Dirichlet-implied Beta marginal for each
-condition state (orange) against the real data (blue):
+The Dirichlet-implied Beta marginal for each condition state (orange) against
+the real data (blue):
 
 <p align="left">
   <img src="plot/beta_marginal_CS1.png" width="24%">
