@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite both the software and the accompanying paper."
+title: "Interpretable Deep Reinforcement Learning for Element-level Bridge Life-cycle Optimization (code)"
+abstract: >-
+  Research code accompanying Moayyedi & Yang (2026). An interpretable deep
+  reinforcement learning framework for risk-based, element-level bridge
+  life-cycle optimization under the 2022 SNBI element-level condition-state
+  specification. Includes a custom Gymnasium/TorchRL bridge-management
+  environment, PPO actor-critic training with differentiable soft-tree actors
+  distilled into compact oblique decision trees via temperature annealing and
+  regularization-based pruning, dynamic-programming baselines, and MLE/method-of-
+  moments fitting of the initial condition-state distribution from FHWA
+  InfoBridge inspection data.
+type: software
+authors:
+  - family-names: Moayyedi
+    given-names: Seyyed Amirhossein
+    email: amirm@pdx.edu
+    affiliation: "Portland State University"
+  - family-names: Yang
+    given-names: David Y.
+    email: david.yang@pdx.edu
+    affiliation: "Portland State University"
+license: MIT
+repository-code: "https://github.com/SAMIRHOSEIN/actCrit-vs-DynPrg-RL-MLE"
+keywords:
+  - interpretable machine learning
+  - reinforcement learning
+  - proximal policy optimization
+  - dynamic programming
+  - oblique decision trees
+  - bridge management
+  - life-cycle optimization
+  - SNBI
+  - Markov decision process
+preferred-citation:
+  type: article
+  title: "Interpretable Deep Reinforcement Learning for Element-level Bridge Life-cycle Optimization"
+  authors:
+    - family-names: Moayyedi
+      given-names: Seyyed Amirhossein
+      affiliation: "Portland State University"
+    - family-names: Yang
+      given-names: David Y.
+      affiliation: "Portland State University"
+  year: 2026
+  # Preprint (under review). Update the identifier/DOI if it changes.
+  url: "https://arxiv.org/abs/2604.02528"
+  notes: "arXiv:2604.02528 (under review)"
