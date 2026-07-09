@@ -11,8 +11,14 @@
   <img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-blue.svg">
   <img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-TorchRL-ee4c2c.svg">
   <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg">
+  <a href="https://arxiv.org/abs/2604.02528"><img alt="Paper" src="https://img.shields.io/badge/paper-arXiv%3A2604.02528-b31b1b.svg"></a>
   <img alt="Status" src="https://img.shields.io/badge/status-research-orange.svg">
 </p>
+
+> 📄 **Companion code for:** S. A. Moayyedi and D. Y. Yang, *"Interpretable Deep
+> Reinforcement Learning for Element-level Bridge Life-cycle Optimization,"*
+> Portland State University, 2026 — **arXiv:2604.02528** (under review).
+> See [Citation](#citation).
 
 ---
 
@@ -34,22 +40,33 @@
 
 ## Motivation
 
-Bridge owners must decide **when and how** to intervene on aging elements —
-*do nothing*, *maintain*, *repair*, *rehabilitate*, or *replace* — under
-uncertainty about how the element deteriorates. Choosing well minimizes the
-**life-cycle cost (LCC)**: the discounted sum of intervention costs plus the
-expected cost of failure.
+The 2022 **Specifications for the National Bridge Inventory (SNBI)** represent a
+bridge element's condition as a **four-dimensional array of condition-state (CS)
+proportions** rather than a single categorical rating. This granularity is
+valuable, but it dramatically expands the state space over which owners must
+decide **when and how** to intervene — *do nothing*, *maintain*, *repair*,
+*rehabilitate*, or *replace* — to minimize the **risk-included life-cycle cost
+(LCC)**: the discounted sum of intervention costs plus the expected cost of
+failure.
 
 This project treats that decision problem as a **Markov Decision Process (MDP)**
-and asks a practical research question:
+and pursues the paper's central goal:
 
-> Can a learned **actor-critic RL policy (PPO)** match the **provably optimal
-> dynamic-programming policy** on this problem — and can we distill the learned
-> policy into a **small, interpretable decision tree** an engineer would trust?
+> Learn a near-optimal life-cycle policy with **actor-critic RL (PPO)**, then
+> distill it into a **small, human-readable oblique decision tree** that an
+> engineer can audit and drop into a bridge-management system — while
+> benchmarking it against a dynamic-programming (condition-based) policy and a
+> genetic-algorithm (reliability-based) policy.
 
-To make the study realistic, the *initial* condition of an element is not
-assumed; it is **estimated from real inspection data** by fitting Dirichlet and
-Multinomial models via Maximum Likelihood and the Method of Moments.
+To keep the study realistic, the *initial* condition of an element is not
+assumed; it is **estimated from real FHWA InfoBridge inspection data** (Oregon
+state-highway steel-girder bridges) by fitting Dirichlet and Multinomial models
+via Maximum Likelihood and the Method of Moments.
+
+> **Scope of this repository.** This code covers the dynamic-programming
+> baseline, the Gymnasium/TorchRL environment, the soft-/oblique-tree machinery,
+> the PPO trainer, and the data-fitting pipeline. It is one part of the broader
+> framework described in the paper.
 
 ## What this repository does
 
@@ -193,7 +210,11 @@ training so the policy sharpens toward hard, interpretable splits.
 
 **Interpretable policies.** A trained soft decision tree is pruned and converted
 into a compact **oblique decision tree** whose splits are linear rules on the
-condition-state vector — small enough to read and audit.
+condition-state vector — small enough to read and audit. In the full study the
+resulting policy is benchmarked against neural-network PPO, dynamic programming
+(condition-based), and a PyGAD genetic-algorithm (reliability-based) baseline,
+and the soft-tree approach is additionally validated on the CartPole control
+benchmark, whose discrete action space mirrors the bridge-management problem.
 
 **Data modeling (MLE / MoM).** The Dirichlet fit uses L-BFGS-B with an analytic
 gradient and a method-of-moments initialization (Minka / Ronning); fit quality
@@ -201,8 +222,26 @@ is checked with ternary KDE plots, per-CS Beta marginals, and KS goodness-of-fit
 
 ## Results
 
-Fitted **per-condition-state marginals** (real data vs. the Beta marginal
-implied by `Dirichlet(α̂)`) are produced by `Dir_MLE_MOM_MultiNomin.py`:
+**Headline benchmark (paper, Table 8).** The interpretable RL-derived oblique
+decision tree is compared against two conventional policies over **1,000
+validation episodes** under identical deterioration and cost models. Life-cycle
+cost is reported per element (lower is better):
+
+| Policy | Avg. LCC | StD | vs. oblique tree |
+|---|---:|---:|---:|
+| **Oblique decision tree (RL, this framework)** | **1590.86** | 740.31 | — |
+| Condition-based policy (Dynamic Programming) | 2133.42 | 1178.30 | **≈ 25% higher** |
+| Reliability-based policy (Genetic Algorithm) | 1758.91 | 918.04 | **≈ 10% higher** |
+
+The oblique-tree policy matches neural-network PPO performance while remaining
+**fully auditable** — after regularization-based pruning it collapses to just a
+few nodes. In the supervised study, temperature-annealed distillation (T: 1 →
+0.01) was **essentially lossless** (91.85% soft-tree vs. 91.80% oblique-tree
+test accuracy), far exceeding classical CART trees (~57–60%).
+
+**Data-fit diagnostics.** Fitted **per-condition-state marginals** (real data
+vs. the Beta marginal implied by `Dirichlet(α̂)`) are produced by
+`Dir_MLE_MOM_MultiNomin.py`:
 
 <p align="left">
   <img src="plot/beta_marginal_CS1.png" width="24%">
@@ -216,9 +255,6 @@ LCC** relationship, the action distribution, and a color-coded action timeline
 for representative episodes; `convergence.py` shows how the return estimate
 tightens as the evaluation-episode count grows.
 
-> Quantitative DP-vs-PPO comparison tables are part of the ongoing study and
-> will be summarized here as they are finalized.
-
 ## Roadmap
 
 - [ ] Add a runnable PPO training entry-point script (train → evaluate →
@@ -229,9 +265,22 @@ tightens as the evaluation-episode count grows.
 
 ## Citation
 
-If you use this code or its results, please cite it via
-[`CITATION.cff`](CITATION.cff). A citable publication reference will be added
-here once available.
+If you use this code or its results, please cite the accompanying paper (see
+also [`CITATION.cff`](CITATION.cff)):
+
+> S. A. Moayyedi and D. Y. Yang, "Interpretable Deep Reinforcement Learning for
+> Element-level Bridge Life-cycle Optimization," Portland State University, 2026.
+> arXiv:2604.02528 (under review).
+
+```bibtex
+@article{moayyedi2026interpretable,
+  title   = {Interpretable Deep Reinforcement Learning for Element-level Bridge Life-cycle Optimization},
+  author  = {Moayyedi, Seyyed Amirhossein and Yang, David Y.},
+  journal = {arXiv preprint arXiv:2604.02528},
+  year    = {2026},
+  note    = {Under review}
+}
+```
 
 ## License
 
