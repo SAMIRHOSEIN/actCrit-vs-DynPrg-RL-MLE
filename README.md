@@ -272,15 +272,7 @@ also [`CITATION.cff`](CITATION.cff)):
 > Element-level Bridge Life-cycle Optimization," Portland State University, 2026.
 > arXiv:2604.02528 (under review).
 
-```bibtex
-@article{moayyedi2026interpretable,
-  title   = {Interpretable Deep Reinforcement Learning for Element-level Bridge Life-cycle Optimization},
-  author  = {Moayyedi, Seyyed Amirhossein and Yang, David Y.},
-  journal = {arXiv preprint arXiv:2604.02528},
-  year    = {2026},
-  note    = {Under review}
-}
-```
+
 
 ## License
 
