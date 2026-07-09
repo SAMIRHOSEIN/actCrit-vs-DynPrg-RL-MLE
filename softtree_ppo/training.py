@@ -56,7 +56,7 @@ class PPOTrainer:
         self.collector = self._setup_collector()
         self.replay_buffer = self._setup_replay_buffer()
 
-        # estbalish PPO loss
+        # establish PPO loss
         self.loss_module = self._setup_loss()
 
         # prepare Adam optimizer and learning schedule
@@ -188,7 +188,7 @@ class PPOTrainer:
         return eval_log
 
     def save_checkpoint(self, filepath):
-        """Save checkpint to pickup training.
+        """Save checkpoint to pick up training.
            
            Do not use it to save policy. Use `save_actor` instead.
         """
@@ -226,7 +226,7 @@ class PPOTrainer:
         self.critic.load_state_dict(checkpoint['critic_state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         
-        # sestore scheduler if applicable
+        # restore scheduler if applicable
         if self.scheduler is not None and 'scheduler_state_dict' in checkpoint:
             self.scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
         
@@ -448,7 +448,7 @@ class SofttreePPOTrainer(PPOTrainer):
 
         odt_module = ObliqueTreePolicy(odt_model)
 
-        # wrap to torchrl (_setup_actor not applicable sine odt doesn't give logits)
+        # wrap to torchrl (_setup_actor not applicable since odt doesn't give logits)
         odt_actor = TensorDictModule(
             odt_module, in_keys=['observation'], out_keys=['action']
         )

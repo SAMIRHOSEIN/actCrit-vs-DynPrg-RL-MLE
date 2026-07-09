@@ -1,15 +1,15 @@
 """
-Parameters of NBE 107 deterioation and maintanance
+Parameters of NBE 107 deterioration and maintenance.
 
 The variables are based on the following assumptions:
 1. Deterioration transition matrix is from Thompson et al. (1998) Table 2 (CoRe element 107)
-2. ASHTO Bridge Element Inspection Guide Manual (2010) provides migration from CoRe to MBE.
+2. AASHTO Bridge Element Inspection Guide Manual (2010) provides migration from CoRe to MBE.
    Based on Section D.2.1 (page 167), we merge CS2 and CS3 of CoRe to CS2 of NBE.
 3. When merging Markov states, assume CoRe CS2 and CS3 have equal weights
    (i.e., equal likelihood of occurring).
 4. The transition probabilities in CoRe 107 are combined with the following equation:
    p(nbe2->nbe3) = q(core2->core4) * 0.5 + q(core3->core4) * 0.5 = q(core3->core4) * 0.5
-5. Failure probablities given all elements are in a CS are assumed from common target reliability indexes.
+5. Failure probabilities given all elements are in a CS are assumed from common target reliability indexes.
 6. Cost data are assumed: unit_prices are per element cost. They can be tied to CS before action.
 """
 import numpy as np
@@ -78,7 +78,7 @@ action4 = np.array([
     [1.0, 0, 0, 0],
     [1.0, 0, 0, 0]
 ])
-unit_price4 = np.array([2*cost_base**3]*NCS)  # drop CS5
+unit_price4 = np.array([2*cost_base**3]*NCS)
 
 # Pack into final arrays
 ACTION_MODEL = np.array([action0, action1, action2, action3, action4])

@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "Actor-Critic vs. Dynamic Programming for Bridge-Element Maintenance Planning"
+abstract: >-
+  Reinforcement learning (PPO actor-critic) and dynamic programming baselines
+  for life-cycle-cost-optimal maintenance of deteriorating bridge elements
+  modeled as a Markov decision process, with interpretable soft/oblique
+  decision-tree policies and MLE/method-of-moments fitting of the initial
+  condition-state distribution from National Bridge Element inspection data.
+type: software
+authors:
+  - family-names: Moayyedi
+    given-names: Amir
+    email: s.amir.h.moayyedi@gmail.com
+license: MIT
+repository-code: "https://github.com/SAMIRHOSEIN/actCrit-vs-DynPrg-RL-MLE"
+keywords:
+  - reinforcement learning
+  - dynamic programming
+  - proximal policy optimization
+  - bridge maintenance
+  - infrastructure asset management
+  - life-cycle cost
+  - Markov decision process
+  - interpretable machine learning
+# TODO: If/when an associated paper, thesis, or technical report is available,
+#       add it below as a `preferred-citation:` block (type: article/thesis)
+#       with authors, title, year, journal/venue, doi, and url.
