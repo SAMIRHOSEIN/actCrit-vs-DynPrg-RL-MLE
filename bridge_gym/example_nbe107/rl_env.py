@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from jaxtyping import Float32
 
-# gynasium imports
+# gymnasium imports
 import gymnasium as gym
 from gymnasium import spaces
 
@@ -70,7 +70,7 @@ class SingleElement(gym.Env):
         self.render_mode = render_mode
 
         self._seed = seed
-        self._first_rest = True
+        self._first_reset = True
 
         # plotting parameters
         self.fig, self.ax, self.colors = None, None, None
@@ -81,10 +81,10 @@ class SingleElement(gym.Env):
         # set seed
         if seed is not None:
             super().reset(seed=seed)
-        elif self._first_rest:
+        elif self._first_reset:
             # only initialize if needed
             super().reset(seed=self._seed)
-            self._first_rest = False
+            self._first_reset = False
 
         self._time = 0
         if self.reset_prob is not None:

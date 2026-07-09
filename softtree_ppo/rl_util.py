@@ -12,10 +12,11 @@ class CriticNet(nn.Module):
         critic_cells, critic_layers,
         device=torch.device("cpu")
     ):
-        # no need for input_dim due to LazyLinear
         super().__init__()
+        # build each hidden block as a fresh module so layers do not share weights
         layers = [nn.Linear(input_dim, critic_cells, device=device), nn.ELU()]
-        layers = layers + [nn.Linear(critic_cells, critic_cells, device=device), nn.ELU()] * critic_layers
+        for _ in range(critic_layers):
+            layers += [nn.Linear(critic_cells, critic_cells, device=device), nn.ELU()]
         layers.append(nn.Linear(critic_cells, 1, device=device))
         self.layers = nn.ModuleList(layers)
 
@@ -33,10 +34,11 @@ class ActorNetLogit(nn.Module):
         actor_cells, actor_layers,
         device=torch.device("cpu")
     ):
-        # Change LazyLinear to Linear
         super().__init__()
+        # build each hidden block as a fresh module so layers do not share weights
         layers = [nn.Linear(input_dim, actor_cells, device=device), nn.ELU()]
-        layers = layers + [nn.Linear(actor_cells, actor_cells, device=device), nn.ELU()] * actor_layers
+        for _ in range(actor_layers):
+            layers += [nn.Linear(actor_cells, actor_cells, device=device), nn.ELU()]
         layers.append(nn.Linear(actor_cells, output_dim, device=device))
         self.layers = nn.ModuleList(layers)
 

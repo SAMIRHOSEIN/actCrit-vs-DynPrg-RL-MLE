@@ -59,7 +59,7 @@ class SoftTreeClassifier(nn.Module):
         a full binary tree, setting `depth` to a large value will drastically
         increases the training and evaluating cost.
     beta : float, default = 1
-        beta = 1/Tempeture, p(x) = sigmoid(beta * (w_T@x + b)).
+        beta = 1/Temperature, p(x) = sigmoid(beta * (w_T@x + b)).
 
     Attributes
     ----------
